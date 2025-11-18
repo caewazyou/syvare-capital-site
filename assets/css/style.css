@@ -1,0 +1,492 @@
+/* =============== RESET =============== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  background: #ffffff;
+  color: #222222;
+  line-height: 1.75;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =============== SITE HEADER / BRAND =============== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background: #ffffff;
+  text-align: center;
+  padding: 22px 16px 26px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #111111; /* keep header text dark on all pages */
+}
+
+.brand {
+  display: inline-block;
+}
+
+.brand .site-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  letter-spacing: 0.03em;
+  color: #111111;
+}
+
+.brand .site-subtitle {
+  font-size: 0.83rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 3px;
+  color: #666666;
+}
+
+/* =============== HAMBURGER NAV =============== */
+
+.nav-toggle {
+  display: none;
+}
+
+.hamburger {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background: #222222;
+  transition: 0.3s;
+}
+
+/* x animation */
+.nav-toggle:checked + .hamburger span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.nav-toggle:checked + .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle:checked + .hamburger span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* dropdown menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 76px;
+  right: 20px;
+  width: 220px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.nav-toggle:checked ~ .mobile-menu {
+  display: block;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 10px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.83rem;
+  color: #222222;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.mobile-menu a:last-child {
+  border-bottom: none;
+}
+
+/* =============== HERO (HOME) =============== */
+
+.hero-full {
+  position: relative;
+  height: 90vh;
+  min-height: 520px;
+  max-height: 780px;
+  overflow: hidden;
+}
+
+.hero-full img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%; /* keep rider head visible */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.52), transparent 70%);
+}
+
+.hero-content {
+  position: absolute;
+  left: 8%;
+  bottom: 16%;
+  max-width: 520px;
+  color: #ffffff;
+}
+
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.hero-content p {
+  font-size: 0.98rem;
+  color: #e9edf5;
+  max-width: 460px;
+}
+
+/* hero button */
+.btn-hero {
+  margin-top: 18px;
+  display: inline-block;
+  padding: 9px 32px;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+.btn-hero:hover {
+  background: #ffffff;
+  color: #111111;
+}
+
+/* =============== HOME – ABOUT PREVIEW CARD =============== */
+
+.hero-text-wrapper {
+  padding: 60px 20px 20px;
+}
+
+.hero-text {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.hero-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  color: #555555;
+}
+
+/* =============== GENERIC CENTERED SECTIONS =============== */
+
+.section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 25px;
+  text-align: center;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+}
+
+.section p {
+  color: #555555;
+}
+
+/* =============== HOME – OUR WORK INTRO =============== */
+
+.home-services-intro {
+  max-width: 820px;
+  margin: 70px auto 30px;
+  padding: 0 25px;
+  text-align: center;
+}
+
+.home-services-intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+}
+
+.home-services-intro p {
+  color: #555555;
+}
+
+/* =============== HOME – THREE SERVICE BANDS =============== */
+
+.home-service-band {
+  position: relative;
+  height: 72vh;
+  min-height: 420px;
+  overflow: hidden;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.home-service-band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark overlay */
+.home-service-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(150deg, rgba(3, 6, 27, 0.78), rgba(7, 13, 38, 0.45));
+}
+
+/* glass panel with text – NOW CENTERED */
+.home-service-content {
+  position: absolute;
+  z-index: 2;
+  max-width: 620px;
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px 26px;
+  border-radius: 18px;
+
+  background: rgba(5, 9, 30, 0.24);          /* more transparent but still readable */
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #eef1ff;
+}
+
+.home-service-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.home-service-content p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+/* small glass button */
+.btn {
+  display: inline-block;
+  padding: 7px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(10px);
+}
+.btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #111111;
+}
+
+/* =============== INNER PAGES BACKGROUND (POLO STILL LIFE) =============== */
+
+.page-bg {
+  min-height: 100vh;
+  background:
+    linear-gradient(190deg, rgba(5, 8, 20, 0.4), rgba(3, 6, 14, 0.75)),
+    url('../images/bg-polo-stilllife.jpg') center/cover no-repeat fixed;
+  color: #f5f7ff;
+}
+
+/* white content card – NOW GLASSY */
+.content-card {
+  max-width: 900px;
+  margin: 90px auto;
+  padding: 38px 36px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.12);    /* semi-transparent glass */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+
+  color: #f5f7ff;
+}
+
+.content-card h1,
+.content-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.content-card p {
+  margin-bottom: 12px;
+  color: #e2e7f5;
+}
+
+/* =============== SERVICES PAGE – 3 BANDS =============== */
+
+.service-band {
+  position: relative;
+  padding: 90px 24px;
+  text-align: center;
+  color: #ffffff;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.service-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(150deg, rgba(0, 0, 0, 0.55), transparent 60%);
+  z-index: 1;
+}
+
+.service-band-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.service-band h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+}
+
+.service-band p {
+  margin-bottom: 14px;
+}
+
+.service-list {
+  list-style: none;
+  text-align: left;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.service-list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  font-size: 0.97rem;
+}
+
+.service-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* background images for each band */
+.service-band.business {
+  background: url('../images/service-business.jpg') center/cover no-repeat;
+}
+.service-band.portfolio {
+  background: url('../images/service-portfolio.jpg') center/cover no-repeat;
+}
+.service-band.investment {
+  background: url('../images/service-investment.jpg') center/cover no-repeat;
+}
+
+/* =============== TEAM & CONTACT UTILITIES =============== */
+
+.team-member {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.team-member h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.team-member p {
+  margin-bottom: 6px;
+}
+
+.contact-details p {
+  margin-bottom: 10px;
+}
+
+.contact-details a {
+  text-decoration: underline;
+}
+
+/* =============== FOOTER =============== */
+
+footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 0.85rem;
+  color: #777777;
+}
+
+/* =============== RESPONSIVE =============== */
+
+@media (max-width: 900px) {
+  .hero-content {
+    left: 8%;
+    right: 8%;
+    bottom: 18%;
+    max-width: none;
+  }
+
+  .hero-content h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero-text-wrapper {
+    padding: 40px 16px 10px;
+  }
+
+  .hero-text {
+    padding: 24px 20px;
+  }
+
+  .home-service-content {
+    width: 88%;
+  }
+
+  .content-card {
+    margin: 80px 16px;
+    padding: 30px 22px;
+  }
+}
