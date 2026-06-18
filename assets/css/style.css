@@ -77,18 +77,18 @@ a {
   transition: 0.3s;
 }
 
-/* x animation */
 .nav-toggle:checked + .hamburger span:nth-child(1) {
   transform: translateY(9px) rotate(45deg);
 }
+
 .nav-toggle:checked + .hamburger span:nth-child(2) {
   opacity: 0;
 }
+
 .nav-toggle:checked + .hamburger span:nth-child(3) {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* dropdown menu */
 .mobile-menu {
   display: none;
   position: fixed;
@@ -164,7 +164,6 @@ a {
   max-width: 460px;
 }
 
-/* hero button */
 .btn-hero {
   margin-top: 18px;
   display: inline-block;
@@ -178,6 +177,7 @@ a {
   color: #ffffff;
   backdrop-filter: blur(10px);
 }
+
 .btn-hero:hover {
   background: #ffffff;
   color: #111111;
@@ -264,7 +264,6 @@ a {
   object-fit: cover;
 }
 
-/* dark overlay */
 .home-service-band::before {
   content: '';
   position: absolute;
@@ -272,7 +271,6 @@ a {
   background: linear-gradient(150deg, rgba(3, 6, 27, 0.78), rgba(7, 13, 38, 0.45));
 }
 
-/* glass panel with text – centered */
 .home-service-content {
   position: absolute;
   z-index: 2;
@@ -283,7 +281,6 @@ a {
   transform: translate(-50%, -50%);
   padding: 24px 26px;
   border-radius: 18px;
-
   background: rgba(5, 9, 30, 0.24);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -301,7 +298,8 @@ a {
   margin-bottom: 10px;
 }
 
-/* universal button */
+/* =============== BUTTONS =============== */
+
 .btn {
   display: inline-block;
   padding: 7px 20px;
@@ -314,9 +312,49 @@ a {
   letter-spacing: 0.12em;
   backdrop-filter: blur(10px);
 }
+
 .btn:hover {
   background: rgba(255, 255, 255, 0.30);
   color: #111111;
+}
+
+.hero-text .btn,
+.section .btn {
+  background: rgba(17, 17, 17, 0.08);
+  border: 1px solid rgba(17, 17, 17, 0.25);
+  color: #111111;
+  backdrop-filter: blur(10px);
+}
+
+.hero-text .btn:hover,
+.section .btn:hover {
+  background: rgba(17, 17, 17, 0.85);
+  color: #ffffff;
+  border-color: rgba(17, 17, 17, 0.85);
+}
+
+/* Closed role button */
+.closed-role-btn {
+  display: inline-block;
+  padding: 7px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  color: #ffffff;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(10px);
+  cursor: default;
+  pointer-events: none;
+}
+
+.role-status {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* =============== INNER PAGES BACKGROUND =============== */
@@ -329,18 +367,17 @@ a {
   color: #f5f7ff;
 }
 
-/* glass content card */
+/* =============== GLASS CONTENT CARD =============== */
+
 .content-card {
   max-width: 900px;
   margin: 90px auto;
   padding: 38px 36px;
   border-radius: 18px;
-
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-
   color: #f5f7ff;
 }
 
@@ -362,7 +399,6 @@ a {
 .service-band {
   position: relative;
   padding: 90px 24px;
-  text-align: center;
   color: #ffffff;
   overflow: hidden;
   min-height: 480px;
@@ -379,63 +415,88 @@ a {
 .service-band-inner {
   position: relative;
   z-index: 2;
-  max-width: 820px;
+  max-width: 900px;
   margin: 0 auto;
 
-  /* ✅ glass panel for OUR WORK text */
   background: rgba(5, 9, 30, 0.22);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 18px;
-  padding: 26px 24px;
+
+  padding: 32px 38px;
 }
 
 .service-band h2 {
   font-family: 'Playfair Display', serif;
   font-size: 1.9rem;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
 .service-band p {
-  margin-bottom: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* background images for each band */
 .service-band.business {
   background: url('../images/service-business.jpg') center/cover no-repeat;
 }
+
 .service-band.portfolio {
   background: url('../images/service-portfolio.jpg') center/cover no-repeat;
 }
+
 .service-band.investment {
   background: url('../images/service-investment.jpg') center/cover no-repeat;
 }
 
-/* =============== BULLETS FIX (GLOBAL) =============== */
-/* ✅ removes any dash pseudo-element and uses real bullets */
+/* =============== PROFESSIONAL LIST ALIGNMENT =============== */
 
-.careers-list,
-.service-list,
-.opportunity-list {
-  list-style: disc;
-  list-style-position: inside;
-  padding-left: 0;
-  margin: 12px 0;
+/* =============== OUR WORK ONLY: REMOVE BULLETS =============== */
+
+.service-list {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 18px auto 0;
+  max-width: 720px;
+  text-align: left;
+}
+
+.service-list li {
+  list-style: none !important;
+  margin-bottom: 10px;
+  padding-left: 0 !important;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.service-list li::before {
+  content: none !important;
+  display: none !important;
 }
 
 .careers-list li,
 .service-list li,
 .opportunity-list li {
+  list-style: none !important;
   position: static;
-  padding-left: 0;
-  margin-bottom: 8px;
+  padding-left: 0 !important;
+  margin-bottom: 10px;
   font-size: 0.97rem;
+  line-height: 1.7;
+  text-align: left;
 }
 
 .careers-list li::before,
 .service-list li::before,
 .opportunity-list li::before {
   content: none !important;
+  display: none !important;
 }
 
 /* =============== TEAM & CONTACT UTILITIES =============== */
@@ -463,6 +524,19 @@ a {
   text-decoration: underline;
 }
 
+/* =============== REVEAL ANIMATION =============== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* =============== FOOTER =============== */
 
 footer {
@@ -470,24 +544,6 @@ footer {
   padding: 40px;
   font-size: 0.85rem;
   color: #777777;
-}
-
-/* =============== BUTTON VISIBILITY ON LIGHT SECTIONS =============== */
-/* ✅ Fixes invisible “Find out more” buttons on white sections */
-
-.hero-text .btn,
-.section .btn {
-  background: rgba(17, 17, 17, 0.08);
-  border: 1px solid rgba(17, 17, 17, 0.25);
-  color: #111111;
-  backdrop-filter: blur(10px);
-}
-
-.hero-text .btn:hover,
-.section .btn:hover {
-  background: rgba(17, 17, 17, 0.85);
-  color: #ffffff;
-  border-color: rgba(17, 17, 17, 0.85);
 }
 
 /* =============== RESPONSIVE =============== */
@@ -522,6 +578,169 @@ footer {
   }
 
   .service-band-inner {
-    padding: 22px 18px;
+    padding: 24px 22px;
   }
+
+  .careers-list,
+  .service-list,
+  .opportunity-list {
+    max-width: 100%;
+    padding-left: 1.15rem;
+  }
+}
+/* =============== NOTICEABLE SCROLL / PARALLAX EFFECT =============== */
+
+.home-service-band,
+.service-band {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.home-service-band img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 115%;
+  object-fit: cover;
+  transform: translateY(0);
+  animation: slowImageDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes slowImageDrift {
+  from {
+    transform: scale(1.04) translateY(-18px);
+  }
+  to {
+    transform: scale(1.1) translateY(18px);
+  }
+}
+
+/* keeps text stable above moving background */
+.home-service-content,
+.service-band-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* prevents overlay blocking clicks */
+.home-service-band::before,
+.service-band::before {
+  pointer-events: none;
+}
+/* =============== HERO SLIDER + SCROLL FEEL =============== */
+
+.hero-slider {
+  position: relative;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide img,
+.hero-full img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+.hero-full {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-parallax {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+}
+
+.hero-parallax img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+/* =============== APPLE-STYLE SCROLL IMAGE MOVEMENT =============== */
+
+/* HERO - keeps full image visible */
+.hero-full {
+  position: relative;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #061323;
+}
+
+.hero-parallax {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.hero-parallax img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* stops image cutting */
+  object-position: center center;
+}
+
+/* keep text above hero image */
+.hero-overlay,
+.hero-content {
+  position: absolute;
+  z-index: 2;
+}
+
+.hero-overlay {
+  inset: 0;
+  background: linear-gradient(145deg, rgba(0,0,0,0.58), rgba(0,0,0,0.18));
+}
+
+/* HOME service images move with scroll */
+.home-service-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-service-band img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: center center;
+  will-change: transform;
+}
+
+/* SERVICES page backgrounds move with scroll */
+.service-band {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center;
+  will-change: background-position;
+}
+
+/* text stays stable */
+.home-service-content,
+.service-band-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.home-service-band::before,
+.service-band::before {
+  pointer-events: none;
 }
