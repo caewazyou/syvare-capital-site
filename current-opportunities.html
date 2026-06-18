@@ -69,6 +69,14 @@
       margin-bottom: 14px;
     }
 
+    .role-status {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
     .job-detail {
       max-width: 900px;
       margin: 90px auto;
@@ -127,16 +135,38 @@
       color: #111111;
     }
 
+    .closed-role-btn {
+      display: inline-block;
+      padding: 7px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      color: #ffffff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      backdrop-filter: blur(10px);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .closed-role-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
+      color: #ffffff;
+    }
+
     .spacer { height: 12px; }
 
-    /* bullet styling (matches your global bullet fix) */
     .opportunity-list {
       list-style: disc;
       list-style-position: inside;
       padding-left: 0;
       margin: 12px 0;
     }
-    .opportunity-list li { margin-bottom: 8px; }
+
+    .opportunity-list li {
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 
@@ -171,12 +201,12 @@
     <section id="jobs-view" class="jobs-wrap">
       <div class="jobs-title">
         <h1>Current Opportunities</h1>
-        <p>View open roles and apply online.</p>
+        <p>View previous role details below.</p>
       </div>
 
       <div class="job-tiles">
 
-        <!-- Research Analyst tile (kept same internal ID so nothing breaks) -->
+        <!-- Research Analyst tile -->
         <div class="job-tile">
           <h2>Research Analyst</h2>
           <div class="job-meta">Advisory Research • Deadline: 13 March 2026</div>
@@ -184,6 +214,7 @@
             Analytical support across live and developing mandates covering SMEs, real estate and investment-related themes.
           </p>
           <button class="btn" type="button" onclick="openRole('senior')">View more</button>
+          <div class="role-status">Position Closed</div>
         </div>
 
         <!-- Senior Accountant tile -->
@@ -194,12 +225,13 @@
             Senior compliance role for a qualified accountant authorised to submit statutory accounts and tax filings to HMRC.
           </p>
           <button class="btn" type="button" onclick="openRole('accountant')">View more</button>
+          <div class="role-status">Position Closed</div>
         </div>
 
       </div>
     </section>
 
-    <!-- RESEARCH ANALYST DETAIL (UPDATED FULL CONTENT PROVIDED BY YOU) -->
+    <!-- RESEARCH ANALYST DETAIL -->
     <section id="role-senior" class="job-detail">
       <h1>Current Opportunity</h1>
 
@@ -298,7 +330,6 @@
         <li>Contact details</li>
       </ul>
 
-
       <h2>Application Deadline</h2>
       <p><strong>13 March 2026</strong></p>
 
@@ -308,11 +339,11 @@
 
       <div class="job-actions">
         <button class="btn" type="button" onclick="goBack()">Back</button>
-        <a class="btn" href="https://forms.gle/V3R1KwyynVA5wtDK7" target="_blank" rel="noopener">Apply now</a>
+        <button class="closed-role-btn" type="button">No Longer Available</button>
       </div>
     </section>
 
-    <!-- SENIOR ACCOUNTANT DETAIL (UNCHANGED) -->
+    <!-- SENIOR ACCOUNTANT DETAIL -->
     <section id="role-accountant" class="job-detail">
       <h1>Current Opportunity</h1>
 
@@ -395,7 +426,7 @@
 
       <div class="job-actions">
         <button class="btn" type="button" onclick="goBack()">Back</button>
-        <a class="btn" href="https://forms.gle/nx84VmWPCFPYSH4J6" target="_blank" rel="noopener">Apply now</a>
+        <button class="closed-role-btn" type="button">No Longer Available</button>
       </div>
     </section>
 
