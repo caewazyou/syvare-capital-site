@@ -911,3 +911,30 @@ footer {
 .directions-btn:hover {
   background: #333;
 }
+.map-card {
+  margin-top: 20px;
+  max-width: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  background: #fff;
+}
+
+.map-card iframe {
+  display: block;
+  border-radius: 16px 16px 0 0;
+}
+
+.directions-btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.directions-btn:hover {
+  background: #333;
+}
