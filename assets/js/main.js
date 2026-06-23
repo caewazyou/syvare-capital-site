@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sliderTimer = setInterval(function () {
       nextSlide();
-    }, 9000);
+    }, 6000);
   }
 
   dots.forEach(function (dot) {
