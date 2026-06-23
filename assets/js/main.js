@@ -148,4 +148,75 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", updateServiceScrollEffects);
 
   updateServiceScrollEffects();
+});    }, 9000);
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      showSlide(Number(dot.dataset.slide));
+    });
+  });
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      const next = (current + 1) % slides.length;
+      showSlide(next);
+    });
+  }
+
+  playActiveVideo();
+  startAutoSlider();
+
+  /* ==========================
+     APPLE-STYLE HERO SCROLL
+  ========================== */
+
+  function updateHeroScroll() {
+    const hero = document.querySelector(".hero-slider");
+
+    if (!hero || !slides.length) return;
+
+    const rect = hero.getBoundingClientRect();
+    const movement = rect.top * -1.2;
+
+    slides.forEach(function (slide) {
+      slide.style.setProperty("--hero-scroll", movement + "px");
+    });
+  }
+
+  window.addEventListener("scroll", updateHeroScroll, { passive: true });
+  window.addEventListener("resize", updateHeroScroll);
+
+  updateHeroScroll();
+
+  /* ==========================
+     APPLE-STYLE SERVICE IMAGE SCROLL
+  ========================== */
+
+  const homeImages = document.querySelectorAll(".home-service-band img");
+  const serviceBands = document.querySelectorAll(".service-band");
+
+  function updateServiceScrollEffects() {
+    homeImages.forEach(function (img) {
+      const section = img.closest(".home-service-band");
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const movement = rect.top * -1.2;
+
+      img.style.transform = "translateY(" + movement + "px)";
+    });
+
+    serviceBands.forEach(function (section) {
+      const rect = section.getBoundingClientRect();
+      const movement = rect.top * -1.2;
+
+      section.style.backgroundPosition = "center calc(50% + " + movement + "px)";
+    });
+  }
+
+  window.addEventListener("scroll", updateServiceScrollEffects, { passive: true });
+  window.addEventListener("resize", updateServiceScrollEffects);
+
+  updateServiceScrollEffects();
 });
