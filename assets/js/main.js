@@ -114,57 +114,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ==========================
-     SWIPE + DRAG SUPPORT
-  ========================== */
+   SWIPE + DRAG SUPPORT
+========================== */
 
-  let startX = 0;
-  let startY = 0;
-  let endX = 0;
-  let isDragging = false;
+let swipeStartX = 0;
 
-  function handleSwipe() {
-    const diffX = startX - endX;
-    const diffY = Math.abs(startY);
+if (slider) {
+  slider.addEventListener("pointerdown", function (e) {
+    swipeStartX = e.clientX;
+  });
 
-    if (Math.abs(diffX) < 45) return;
+  slider.addEventListener("pointerup", function (e) {
+    const swipeEndX = e.clientX;
+    const diff = swipeStartX - swipeEndX;
 
-    if (diffX > 0) {
+    if (Math.abs(diff) < 50) return;
+
+    if (diff > 0) {
       nextSlide();
     } else {
       previousSlide();
     }
-  }
+  });
+}
 
-  if (slider) {
-    slider.addEventListener("touchstart", function (e) {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    }, { passive: true });
-
-    slider.addEventListener("touchend", function (e) {
-      endX = e.changedTouches[0].clientX;
-      handleSwipe();
-    }, { passive: true });
-
-    slider.addEventListener("mousedown", function (e) {
-      isDragging = true;
-      startX = e.clientX;
-    });
-
-    slider.addEventListener("mouseup", function (e) {
-      if (!isDragging) return;
-      isDragging = false;
-      endX = e.clientX;
-      handleSwipe();
-    });
-
-    slider.addEventListener("mouseleave", function () {
-      isDragging = false;
-    });
-  }
-
-  playActiveVideo();
-  startAutoSlider();
+playActiveVideo();
+startAutoSlider();
 
   /* ==========================
      APPLE-STYLE HERO SCROLL
