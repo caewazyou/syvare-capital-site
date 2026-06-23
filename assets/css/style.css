@@ -734,3 +734,41 @@ footer {
   opacity: 1 !important;
   transform: none !important;
 }
+/* Careers page opportunity section */
+
+.careers-opportunities{
+    margin:40px auto 0;
+    padding:40px;
+    text-align:center;
+
+    background:rgba(5,9,30,0.35);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:none;
+    border-radius:24px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.22);
+}
+
+.careers-opportunities h2{
+    color:#ffffff;
+    font-family:'Playfair Display', serif;
+    margin-bottom:10px;
+}
+
+.careers-opportunities p{
+    color:#e2e7f5;
+    margin-bottom:18px;
+}
+
+.careers-opportunities .btn{
+    background:rgba(255,255,255,0.14);
+    color:#ffffff;
+    border:none;
+}
+
+.careers-opportunities .btn:hover{
+    background:rgba(255,255,255,0.28);
+    color:#111111;
+}
