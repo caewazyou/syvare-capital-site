@@ -3,19 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
-html,
 body {
 
-  font-family: 'Source Sans 3', system-ui, -apple-system, BlinkMacSystemFont,
+  font-family: 'Source Sans 3', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-    sans-serif;
+  background:
 
+    linear-gradient(190deg, rgba(255,255,255,0.88), rgba(255,255,255,0.82)),
+
+    url('../images/bg-polo-stilllife.jpg') center/cover fixed no-repeat;
 }
 body {
   font-family: 'Source Sans 3', system-ui, -apple-system, BlinkMacSystemFont,still Cambria, Cochin, Georgia, Times, 'Times New Roman', serif sans-serif;
-  background:
-    linear-gradient(190deg, rgba(255,255,255,0.88), rgba(255,255,255,0.82)),
-    url('../images/bg-polo-stilllife.jpg') center/cover fixed no-repeat;
+  background:#ffffff;
   color: #222222;
   line-height: 1.75;
   scroll-behavior: smooth;
@@ -701,4 +701,36 @@ footer {
     padding: 12px 26px;
     font-size: 0.78rem;
   }
+}
+/* FINAL HERO FIX */
+.hero-full.hero-slider {
+  width: 100%;
+  height: calc(100vh - 82px);
+  min-height: 620px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide img,
+.hero-slide video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.hero-text-wrapper {
+  background: #ffffff;
 }
