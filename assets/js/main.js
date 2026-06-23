@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ==========================
+/* ==========================
    SWIPE + DRAG SUPPORT
 ========================== */
 
