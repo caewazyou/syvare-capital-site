@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
      HERO IMAGE / VIDEO SLIDER
   ========================== */
 
+  const slider = document.querySelector(".hero-slider");
   const slides = document.querySelectorAll(".hero-slide");
   const dots = document.querySelectorAll(".hero-dot");
   const nextBtn = document.querySelector(".hero-next");
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     stopVideos();
 
-    current = index;
+    current = (index + slides.length) % slides.length;
 
     slides[current].classList.add("active");
     dots[current].classList.add("active");
@@ -72,84 +73,95 @@ document.addEventListener("DOMContentLoaded", function () {
     startAutoSlider();
   }
 
+  function nextSlide() {
+    showSlide(current + 1);
+  }
+
+  function previousSlide() {
+    showSlide(current - 1);
+  }
+
   function startAutoSlider() {
     if (slides.length <= 1) return;
 
     clearInterval(sliderTimer);
 
     sliderTimer = setInterval(function () {
-      const next = (current + 1) % slides.length;
-      showSlide(next);
-    }, 12000);
+      nextSlide();
+    }, 9000);
   }
 
   dots.forEach(function (dot) {
+    const targetSlide = Number(dot.dataset.slide);
+
     dot.addEventListener("click", function () {
-      showSlide(Number(dot.dataset.slide));
+      showSlide(targetSlide);
     });
+
+    dot.addEventListener("mouseenter", function () {
+      showSlide(targetSlide);
+    });
+
+    dot.addEventListener("touchstart", function () {
+      showSlide(targetSlide);
+    }, { passive: true });
   });
 
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
-      const next = (current + 1) % slides.length;
-      showSlide(next);
+      nextSlide();
     });
   }
+
   /* ==========================
+     SWIPE + DRAG SUPPORT
+  ========================== */
 
-   SWIPE SUPPORT
+  let startX = 0;
+  let startY = 0;
+  let endX = 0;
+  let isDragging = false;
 
-========================== */
+  function handleSwipe() {
+    const diffX = startX - endX;
+    const diffY = Math.abs(startY);
 
-const heroSlider = document.querySelector(".hero-slider");
+    if (Math.abs(diffX) < 45) return;
 
-let touchStartX = 0;
-
-let touchEndX = 0;
-
-function handleSwipe() {
-
-  const swipeDistance = touchStartX - touchEndX;
-
-  if (Math.abs(swipeDistance) < 50) return;
-
-  if (swipeDistance > 0) {
-
-    const next = (current + 1) % slides.length;
-
-    showSlide(next);
-
-  } else {
-
-    const previous = (current - 1 + slides.length) % slides.length;
-
-    showSlide(previous);
-
+    if (diffX > 0) {
+      nextSlide();
+    } else {
+      previousSlide();
+    }
   }
 
-}
+  if (slider) {
+    slider.addEventListener("touchstart", function (e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
 
-  if (heroSlider) {
+    slider.addEventListener("touchend", function (e) {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    }, { passive: true });
 
-  heroSlider.addEventListener("touchstart", function (e) {
+    slider.addEventListener("mousedown", function (e) {
+      isDragging = true;
+      startX = e.clientX;
+    });
 
-    touchStartX = e.changedTouches[0].screenX;
+    slider.addEventListener("mouseup", function (e) {
+      if (!isDragging) return;
+      isDragging = false;
+      endX = e.clientX;
+      handleSwipe();
+    });
 
-  });
-
-  heroSlider.addEventListener("touchend", function (e) {
-
-    touchEndX = e.changedTouches[0].screenX;
-
-    handleSwipe();
-
-  });
-
-}
-
-  playActiveVideo();
-  
-  startAutoSlider();
+    slider.addEventListener("mouseleave", function () {
+      isDragging = false;
+    });
+  }
 
   playActiveVideo();
   startAutoSlider();
@@ -159,11 +171,9 @@ function handleSwipe() {
   ========================== */
 
   function updateHeroScroll() {
-    const hero = document.querySelector(".hero-slider");
+    if (!slider || !slides.length) return;
 
-    if (!hero || !slides.length) return;
-
-    const rect = hero.getBoundingClientRect();
+    const rect = slider.getBoundingClientRect();
     const movement = rect.top * -0.45;
 
     slides.forEach(function (slide) {
