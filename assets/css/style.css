@@ -938,3 +938,61 @@ footer {
 .directions-btn:hover {
   background: #333;
 }
+.mini-map-box {
+  width: 150px;
+  height: 150px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 18px 0;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.mini-map-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.contact-links {
+  margin-top: 18px;
+}
+
+.theme-btn {
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+  padding: 12px 22px;
+  border-radius: 40px;
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease;
+}
+
+.theme-btn:hover {
+  background: rgba(255,255,255,0.24);
+  transform: translateY(-2px);
+}
+
+.map-title {
+  margin-top: 22px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.map-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.small-btn {
+  min-width: 160px;
+  text-align: center;
+}
