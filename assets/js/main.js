@@ -95,6 +95,61 @@ document.addEventListener("DOMContentLoaded", function () {
       showSlide(next);
     });
   }
+  /* ==========================
+
+   SWIPE SUPPORT
+
+========================== */
+
+const heroSlider = document.querySelector(".hero-slider");
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+function handleSwipe() {
+
+  const swipeDistance = touchStartX - touchEndX;
+
+  if (Math.abs(swipeDistance) < 50) return;
+
+  if (swipeDistance > 0) {
+
+    const next = (current + 1) % slides.length;
+
+    showSlide(next);
+
+  } else {
+
+    const previous = (current - 1 + slides.length) % slides.length;
+
+    showSlide(previous);
+
+  }
+
+}
+
+  if (heroSlider) {
+
+  heroSlider.addEventListener("touchstart", function (e) {
+
+    touchStartX = e.changedTouches[0].screenX;
+
+  });
+
+  heroSlider.addEventListener("touchend", function (e) {
+
+    touchEndX = e.changedTouches[0].screenX;
+
+    handleSwipe();
+
+  });
+
+}
+
+  playActiveVideo();
+  
+  startAutoSlider();
 
   playActiveVideo();
   startAutoSlider();
