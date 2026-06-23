@@ -857,3 +857,30 @@ footer {
 .hero-slider:active {
   cursor: grabbing;
 }
+/* Contact page map buttons */
+
+.map-actions {
+  margin-top: 22px;
+}
+
+.map-actions p {
+  margin-bottom: 12px;
+}
+
+.map-btn {
+  display: inline-block;
+  margin: 6px 8px 6px 0;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.map-btn:hover {
+  background: rgba(255,255,255,0.28);
+  color: #111111;
+}
