@@ -132,6 +132,27 @@ if (slider) {
       previousSlide();
     }
   });
+
+  /* MacBook / laptop trackpad horizontal swipe */
+  let wheelLock = false;
+
+  slider.addEventListener("wheel", function (e) {
+    if (wheelLock) return;
+
+    if (Math.abs(e.deltaX) > 40) {
+      wheelLock = true;
+
+      if (e.deltaX > 0) {
+        nextSlide();
+      } else {
+        previousSlide();
+      }
+
+      setTimeout(function () {
+        wheelLock = false;
+      }, 700);
+    }
+  }, { passive: true });
 }
 
 playActiveVideo();
