@@ -784,3 +784,22 @@ footer {
 .hero-dots {
   cursor: pointer;
 }
+/* HERO INTERACTION FIX */
+.hero-slide,
+.hero-slide img,
+.hero-slide video,
+.hero-overlay {
+  pointer-events: none !important;
+}
+
+.hero-controls,
+.hero-dots,
+.hero-dot,
+.hero-next {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+.hero-slider {
+  touch-action: pan-y;
+}
