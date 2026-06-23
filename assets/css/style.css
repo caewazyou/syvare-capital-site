@@ -772,3 +772,15 @@ footer {
     background:rgba(255,255,255,0.28);
     color:#111111;
 }
+.hero-dot {
+  transition: width 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.hero-dot:hover {
+  transform: scale(1.25);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.hero-dots {
+  cursor: pointer;
+}
