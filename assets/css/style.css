@@ -935,3 +935,17 @@ footer {
   gap: 8px;
   text-decoration: none !important;
 }
+/* ===== Footer ===== */
+.site-footer {
+    text-align: center;
+    padding: 40px 20px 50px;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+.site-footer p {
+    margin: 0;
+}
+.site-footer p:last-child {
+    margin-top: 4px;
+}
