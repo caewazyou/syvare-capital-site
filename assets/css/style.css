@@ -702,3 +702,35 @@ footer {
     font-size: 0.78rem;
   }
 }
+/* FIX IMAGE FLICKER / DISAPPEAR ON SCROLL */
+
+.home-service-band,
+.service-band,
+.hero-slide {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.home-service-band img,
+.hero-slide img,
+.hero-slide video {
+  opacity: 1 !important;
+  visibility: visible !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Do not reveal-animate heavy image sections */
+.home-service-band.reveal,
+.service-band.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.home-service-band.reveal.visible,
+.service-band.reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
