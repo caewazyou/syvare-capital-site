@@ -744,3 +744,29 @@ footer {
     gap: 12px;
   }
 }
+/* Contact link line fix */
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 22px 0 28px;
+}
+
+.contact-links a {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+
+.map-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
