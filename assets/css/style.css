@@ -849,3 +849,11 @@ footer {
   transform: scale(1.25);
   background: rgba(255, 255, 255, 0.9);
 }
+.hero-slider {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.hero-slider:active {
+  cursor: grabbing;
+}
