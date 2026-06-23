@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-  /* Reveal animation */
-  const els = document.querySelectorAll(".reveal");
+  /* ==========================
+     REVEAL ANIMATION
+  ========================== */
+
+  const revealElements = document.querySelectorAll(".reveal");
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(function (entries) {
@@ -12,45 +15,137 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }, { threshold: 0.12 });
 
-    els.forEach(function (el) {
+    revealElements.forEach(function (el) {
       observer.observe(el);
     });
   } else {
-    els.forEach(function (el) {
+    revealElements.forEach(function (el) {
       el.classList.add("visible");
     });
   }
 
-  /* Apple-style scroll movement */
-  const heroParallax = document.querySelector(".hero-parallax");
-  const homeImages = document.querySelectorAll(".home-service-band img");
-  const serviceBands = document.querySelectorAll(".service-band");
+  /* ==========================
+     HERO IMAGE / VIDEO SLIDER
+  ========================== */
 
-  function updateScrollEffects() {
-    const scrollY = window.scrollY;
+  const slides = document.querySelectorAll(".hero-slide");
+  const dots = document.querySelectorAll(".hero-dot");
+  const nextBtn = document.querySelector(".hero-next");
 
-    /* Hero image scroll movement */
-    if (heroParallax) {
-      heroParallax.style.transform = `translateY(${scrollY * 0.22}px)`;
-    }
+  let current = 0;
+  let sliderTimer;
 
-    /* Home page service image movement */
-    homeImages.forEach(function (img) {
-      const parent = img.closest(".home-service-band");
-      const rect = parent.getBoundingClientRect();
-      const movement = rect.top * -0.12;
-      img.style.transform = `translateY(${movement}px)`;
-    });
-
-    /* Our Work page background movement */
-    serviceBands.forEach(function (section) {
-      const rect = section.getBoundingClientRect();
-      const movement = rect.top * -0.10;
-      section.style.backgroundPosition = `center calc(50% + ${movement}px)`;
+  function stopVideos() {
+    document.querySelectorAll(".hero-slide video").forEach(function (video) {
+      video.pause();
+      video.currentTime = 0;
     });
   }
 
-  window.addEventListener("scroll", updateScrollEffects, { passive: true });
-  window.addEventListener("resize", updateScrollEffects);
-  updateScrollEffects();
+  function playActiveVideo() {
+    if (!slides.length) return;
+
+    const activeVideo = slides[current].querySelector("video");
+
+    if (activeVideo) {
+      activeVideo.play().catch(function () {});
+    }
+  }
+
+  function showSlide(index) {
+    if (!slides.length || !dots.length) return;
+
+    slides[current].classList.remove("active");
+    dots[current].classList.remove("active");
+
+    stopVideos();
+
+    current = index;
+
+    slides[current].classList.add("active");
+    dots[current].classList.add("active");
+
+    playActiveVideo();
+    startAutoSlider();
+  }
+
+  function startAutoSlider() {
+    if (slides.length <= 1) return;
+
+    clearInterval(sliderTimer);
+
+    sliderTimer = setInterval(function () {
+      const next = (current + 1) % slides.length;
+      showSlide(next);
+    }, 9000);
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      showSlide(Number(dot.dataset.slide));
+    });
+  });
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      const next = (current + 1) % slides.length;
+      showSlide(next);
+    });
+  }
+
+  playActiveVideo();
+  startAutoSlider();
+
+  /* ==========================
+     APPLE-STYLE HERO SCROLL
+  ========================== */
+
+  function updateHeroScroll() {
+    const hero = document.querySelector(".hero-slider");
+
+    if (!hero || !slides.length) return;
+
+    const rect = hero.getBoundingClientRect();
+    const movement = rect.top * -1.2;
+
+    slides.forEach(function (slide) {
+      slide.style.setProperty("--hero-scroll", movement + "px");
+    });
+  }
+
+  window.addEventListener("scroll", updateHeroScroll, { passive: true });
+  window.addEventListener("resize", updateHeroScroll);
+
+  updateHeroScroll();
+
+  /* ==========================
+     APPLE-STYLE SERVICE IMAGE SCROLL
+  ========================== */
+
+  const homeImages = document.querySelectorAll(".home-service-band img");
+  const serviceBands = document.querySelectorAll(".service-band");
+
+  function updateServiceScrollEffects() {
+    homeImages.forEach(function (img) {
+      const section = img.closest(".home-service-band");
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const movement = rect.top * -1.2;
+
+      img.style.transform = "translateY(" + movement + "px)";
+    });
+
+    serviceBands.forEach(function (section) {
+      const rect = section.getBoundingClientRect();
+      const movement = rect.top * -1.2;
+
+      section.style.backgroundPosition = "center calc(50% + " + movement + "px)";
+    });
+  }
+
+  window.addEventListener("scroll", updateServiceScrollEffects, { passive: true });
+  window.addEventListener("resize", updateServiceScrollEffects);
+
+  updateServiceScrollEffects();
 });
