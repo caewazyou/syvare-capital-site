@@ -821,3 +821,31 @@ footer {
 .hero-slider {
   touch-action: pan-y;
 }
+/* HERO INTERACTION FIX */
+.hero-slide,
+.hero-slide img,
+.hero-slide video,
+.hero-overlay {
+  pointer-events: none !important;
+}
+
+.hero-controls,
+.hero-dots,
+.hero-dot,
+.hero-next {
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+.hero-slider {
+  touch-action: pan-y;
+}
+
+.hero-dot {
+  transition: width 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.hero-dot:hover {
+  transform: scale(1.25);
+  background: rgba(255, 255, 255, 0.9);
+}
