@@ -92,21 +92,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   dots.forEach(function (dot) {
-    const targetSlide = Number(dot.dataset.slide);
+  const targetSlide = Number(dot.dataset.slide);
 
-    dot.addEventListener("click", function () {
-      showSlide(targetSlide);
-    });
-
-    dot.addEventListener("mouseenter", function () {
-      showSlide(targetSlide);
-    });
-
-    dot.addEventListener("touchstart", function () {
-      showSlide(targetSlide);
-    }, { passive: true });
+  dot.addEventListener("click", function () {
+    showSlide(targetSlide);
   });
 
+  dot.addEventListener("mouseenter", function () {
+    showSlide(targetSlide);
+  });
+});
+  
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
       nextSlide();
