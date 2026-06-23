@@ -110,48 +110,65 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 /* ==========================
-   SWIPE + DRAG SUPPORT
+   SWIPE / DRAG / TRACKPAD SUPPORT
 ========================== */
 
 let swipeStartX = 0;
+let swipeStartY = 0;
+let isPointerDown = false;
+let wheelLock = false;
 
 if (slider) {
   slider.addEventListener("pointerdown", function (e) {
+    isPointerDown = true;
     swipeStartX = e.clientX;
+    swipeStartY = e.clientY;
   });
 
   slider.addEventListener("pointerup", function (e) {
-    const swipeEndX = e.clientX;
-    const diff = swipeStartX - swipeEndX;
+    if (!isPointerDown) return;
+    isPointerDown = false;
 
-    if (Math.abs(diff) < 50) return;
+    const diffX = swipeStartX - e.clientX;
+    const diffY = swipeStartY - e.clientY;
 
-    if (diff > 0) {
+    if (Math.abs(diffX) < 45) return;
+    if (Math.abs(diffX) < Math.abs(diffY)) return;
+
+    if (diffX > 0) {
       nextSlide();
     } else {
       previousSlide();
     }
   });
 
-  /* MacBook / laptop trackpad horizontal swipe */
-  let wheelLock = false;
+  slider.addEventListener("pointerleave", function () {
+    isPointerDown = false;
+  });
 
   slider.addEventListener("wheel", function (e) {
     if (wheelLock) return;
 
-    if (Math.abs(e.deltaX) > 40) {
-      wheelLock = true;
+    const horizontalMove =
+      Math.abs(e.deltaX) > Math.abs(e.deltaY)
+        ? e.deltaX
+        : e.shiftKey
+          ? e.deltaY
+          : 0;
 
-      if (e.deltaX > 0) {
-        nextSlide();
-      } else {
-        previousSlide();
-      }
+    if (Math.abs(horizontalMove) < 25) return;
 
-      setTimeout(function () {
-        wheelLock = false;
-      }, 700);
+    wheelLock = true;
+
+    if (horizontalMove > 0) {
+      nextSlide();
+    } else {
+      previousSlide();
     }
+
+    setTimeout(function () {
+      wheelLock = false;
+    }, 850);
   }, { passive: true });
 }
 
