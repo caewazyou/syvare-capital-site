@@ -981,3 +981,36 @@ footer {
 .luxury-link span {
   display: inline-block !important;
 }
+/* Smooth GPU accelerated movement */
+
+.hero-slide {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero-slide img,
+.hero-slide video {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.home-service-band {
+  overflow: hidden;
+}
+
+.home-service-band img {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.service-band {
+  will-change: background-position;
+}
+
+.hero-overlay,
+.hero-content {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
