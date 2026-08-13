@@ -1,517 +1,1096 @@
 document.addEventListener("DOMContentLoaded", function () {
+
   /* =====================================================
-     REVEAL ANIMATION
+     REVEAL
   ===================================================== */
 
-  const revealElements = document.querySelectorAll(".reveal");
+  const revealElements =
+    document.querySelectorAll(".reveal");
+
 
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px",
-      }
-    );
+
+    const observer =
+      new IntersectionObserver(
+        function (entries) {
+
+          entries.forEach(function (entry) {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.08,
+          rootMargin: "0px 0px -30px 0px"
+        }
+      );
+
 
     revealElements.forEach(function (element) {
+
       observer.observe(element);
+
     });
+
   } else {
+
     revealElements.forEach(function (element) {
+
       element.classList.add("visible");
+
     });
+
   }
+
+
 
   /* =====================================================
-     HERO SLIDER
+     HERO
   ===================================================== */
 
-  const slider = document.querySelector(".hero-slider");
-  const slides = Array.from(document.querySelectorAll(".hero-slide"));
-  const dots = Array.from(document.querySelectorAll(".hero-dot"));
-  const nextButton = document.querySelector(".hero-next");
+  const slider =
+    document.querySelector(".hero-slider");
+
+
+  if (!slider) return;
+
+
+  const slides =
+    Array.from(
+      slider.querySelectorAll(".hero-slide")
+    );
+
+
+  const dots =
+    Array.from(
+      slider.querySelectorAll(".hero-dot")
+    );
+
+
+  const dotsContainer =
+    slider.querySelector(".hero-dots");
+
+
+  const nextButton =
+    slider.querySelector(".hero-next");
+
+
+  const heroMedia =
+    Array.from(
+      slider.querySelectorAll(".hero-media")
+    );
+
+
+  const serviceImages =
+    Array.from(
+      document.querySelectorAll(
+        ".home-service-band > img"
+      )
+    );
+
+
+  if (!slides.length) return;
+
+
+
+  /* =====================================================
+     SETTINGS
+  ===================================================== */
+
+  const SLIDE_DURATION = 9000;
+
+  const SWIPE_THRESHOLD = 45;
+
+  const TRACKPAD_THRESHOLD = 50;
+
 
   let currentSlide = 0;
-  let sliderTimer = null;
 
-  const SLIDE_TIME = 9000;
+  let autoTimer = null;
 
-  /* -----------------------------------------------------
-     VIDEO MANAGEMENT
-  ----------------------------------------------------- */
+  let pageVisible = true;
 
-  function pauseAllVideos() {
-    slides.forEach(function (slide) {
-      const video = slide.querySelector("video");
 
-      if (video) {
-        video.pause();
-      }
-    });
+
+  /* =====================================================
+     VIDEO
+  ===================================================== */
+
+  function getVideo(index) {
+
+    if (!slides[index]) return null;
+
+    return slides[index].querySelector("video");
+
   }
 
-  function playCurrentVideo() {
-    if (!slides.length) return;
 
-    const video = slides[currentSlide].querySelector("video");
+
+  function pauseVideo(index) {
+
+    const video = getVideo(index);
 
     if (!video) return;
 
+    video.pause();
+
+  }
+
+
+
+  function pauseInactiveVideos() {
+
+    slides.forEach(function (slide, index) {
+
+      if (index === currentSlide) return;
+
+      const video =
+        slide.querySelector("video");
+
+      if (video) {
+
+        video.pause();
+
+      }
+
+    });
+
+  }
+
+
+
+  function playCurrentVideo() {
+
+    const video =
+      getVideo(currentSlide);
+
+
+    if (!video) return;
+
+
     video.muted = true;
+
     video.playsInline = true;
 
+
+    /*
+      Start from beginning when
+      returning to a video.
+    */
+
     try {
+
       video.currentTime = 0;
-    } catch (error) {
-      // Some browsers may not allow seeking before metadata loads.
+
+    } catch (error) {}
+
+
+    const promise =
+      video.play();
+
+
+    if (
+      promise &&
+      typeof promise.catch === "function"
+    ) {
+
+      promise.catch(function () {});
+
     }
 
-    const playPromise = video.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch(function () {
-        // Autoplay can occasionally be blocked.
-      });
-    }
   }
 
-  /* Preload ONLY the next video instead of all videos */
-  function preloadNextVideo() {
-    if (!slides.length) return;
 
-    const nextIndex = (currentSlide + 1) % slides.length;
-    const nextVideo = slides[nextIndex].querySelector("video");
 
-    if (!nextVideo) return;
+  /* =====================================================
+     VIDEO PRELOADING
+  ===================================================== */
 
-    if (nextVideo.preload !== "auto") {
-      nextVideo.preload = "auto";
-      nextVideo.load();
+  function preloadVideo(index) {
+
+    const video =
+      getVideo(index);
+
+
+    if (!video) return;
+
+
+    /*
+      Important:
+      preload actual video data rather
+      than metadata only.
+    */
+
+    if (video.preload !== "auto") {
+
+      video.preload = "auto";
+
+      video.load();
+
     }
+
   }
 
-  /* -----------------------------------------------------
-     AUTO SLIDER
-  ----------------------------------------------------- */
+
+
+  function preloadUpcomingVideos() {
+
+    const next =
+      (currentSlide + 1) %
+      slides.length;
+
+
+    const secondNext =
+      (currentSlide + 2) %
+      slides.length;
+
+
+    setTimeout(function () {
+
+      preloadVideo(next);
+
+    }, 100);
+
+
+    setTimeout(function () {
+
+      preloadVideo(secondNext);
+
+    }, 700);
+
+  }
+
+
+
+  /* =====================================================
+     TIMER
+  ===================================================== */
 
   function stopAutoSlider() {
-    if (sliderTimer) {
-      clearInterval(sliderTimer);
-      sliderTimer = null;
-    }
+
+    if (!autoTimer) return;
+
+
+    clearTimeout(autoTimer);
+
+    autoTimer = null;
+
   }
+
+
 
   function startAutoSlider() {
+
     stopAutoSlider();
 
-    if (slides.length <= 1) return;
 
-    sliderTimer = setInterval(function () {
-      showSlide(currentSlide + 1);
-    }, SLIDE_TIME);
-  }
-
-  /* -----------------------------------------------------
-     CHANGE SLIDE
-  ----------------------------------------------------- */
-
-  function showSlide(index, restartTimer = true) {
-    if (!slides.length) return;
-
-    const newIndex = (index + slides.length) % slides.length;
-
-    if (newIndex === currentSlide && slides[newIndex].classList.contains("active")) {
+    if (
+      !pageVisible ||
+      slides.length <= 1
+    ) {
       return;
     }
 
-    pauseAllVideos();
 
-    slides.forEach(function (slide, slideIndex) {
-      slide.classList.toggle("active", slideIndex === newIndex);
-    });
+    autoTimer =
+      setTimeout(function () {
 
-    dots.forEach(function (dot, dotIndex) {
-      dot.classList.toggle("active", dotIndex === newIndex);
-    });
+        nextSlide();
 
-    currentSlide = newIndex;
+      }, SLIDE_DURATION);
+
+  }
+
+
+
+  /* =====================================================
+     SLIDE CHANGE
+  ===================================================== */
+
+  function showSlide(index) {
+
+    const newIndex =
+      (
+        index +
+        slides.length
+      ) %
+      slides.length;
+
+
+    if (
+      newIndex === currentSlide
+    ) {
+
+      startAutoSlider();
+
+      return;
+
+    }
+
+
+    const oldIndex =
+      currentSlide;
+
+
+    pauseVideo(oldIndex);
+
+
+    slides[oldIndex]
+      .classList
+      .remove("active");
+
+
+    if (dots[oldIndex]) {
+
+      dots[oldIndex]
+        .classList
+        .remove("active");
+
+    }
+
+
+    currentSlide =
+      newIndex;
+
+
+    slides[currentSlide]
+      .classList
+      .add("active");
+
+
+    if (dots[currentSlide]) {
+
+      dots[currentSlide]
+        .classList
+        .add("active");
+
+    }
+
+
+    pauseInactiveVideos();
+
 
     playCurrentVideo();
 
-    window.setTimeout(function () {
-      preloadNextVideo();
-    }, 300);
 
-    if (restartTimer) {
-      startAutoSlider();
-    }
+    preloadUpcomingVideos();
+
+
+    startAutoSlider();
+
   }
+
+
 
   function nextSlide() {
-    showSlide(currentSlide + 1);
+
+    showSlide(
+      currentSlide + 1
+    );
+
   }
+
+
 
   function previousSlide() {
-    showSlide(currentSlide - 1);
+
+    showSlide(
+      currentSlide - 1
+    );
+
   }
 
+
+
   /* =====================================================
-     DOT CONTROLS
+     DOTS
   ===================================================== */
 
   dots.forEach(function (dot, index) {
-    /* Click */
-    dot.addEventListener("click", function (event) {
-      event.stopPropagation();
-      showSlide(index);
-    });
 
-    /* Desktop hover */
-    dot.addEventListener("mouseenter", function () {
-      showSlide(index);
-    });
+    dot.addEventListener(
+      "click",
+      function (event) {
 
-    /* Touch / pen */
-    dot.addEventListener("pointerdown", function (event) {
-      event.stopPropagation();
-      showSlide(index);
-    });
+        event.stopPropagation();
+
+        showSlide(index);
+
+      }
+    );
+
+
+    /*
+      Hover slide changing for
+      laptops/desktops.
+    */
+
+    dot.addEventListener(
+      "mouseenter",
+      function () {
+
+        if (
+          window
+            .matchMedia("(hover: hover)")
+            .matches
+        ) {
+
+          showSlide(index);
+
+        }
+
+      }
+    );
+
   });
 
-  /* -----------------------------------------------------
-     PRESS + DRAG ACROSS DOTS
-     User can hold and slide across the dot controls.
-  ----------------------------------------------------- */
 
-  const dotsContainer = document.querySelector(".hero-dots");
+
+  /* =====================================================
+     PRESS + HOLD + DRAG DOTS
+  ===================================================== */
 
   let draggingDots = false;
 
+
   if (dotsContainer) {
-    dotsContainer.addEventListener("pointerdown", function (event) {
-      draggingDots = true;
 
-      if (dotsContainer.setPointerCapture) {
+    dotsContainer.addEventListener(
+      "pointerdown",
+      function (event) {
+
+        draggingDots = true;
+
+
         try {
-          dotsContainer.setPointerCapture(event.pointerId);
+
+          dotsContainer
+            .setPointerCapture(
+              event.pointerId
+            );
+
         } catch (error) {}
+
       }
-    });
+    );
 
-    dotsContainer.addEventListener("pointermove", function (event) {
-      if (!draggingDots) return;
 
-      const element = document.elementFromPoint(event.clientX, event.clientY);
+    dotsContainer.addEventListener(
+      "pointermove",
+      function (event) {
 
-      if (!element) return;
+        if (!draggingDots) return;
 
-      const dot = element.closest(".hero-dot");
 
-      if (!dot) return;
+        const element =
+          document.elementFromPoint(
+            event.clientX,
+            event.clientY
+          );
 
-      const index = Number(dot.dataset.slide);
 
-      if (!Number.isNaN(index) && index !== currentSlide) {
-        showSlide(index);
+        if (!element) return;
+
+
+        const dot =
+          element.closest(".hero-dot");
+
+
+        if (!dot) return;
+
+
+        const index =
+          Number(
+            dot.dataset.slide
+          );
+
+
+        if (
+          Number.isInteger(index) &&
+          index !== currentSlide
+        ) {
+
+          showSlide(index);
+
+        }
+
       }
-    });
+    );
+
 
     function stopDotDrag() {
+
       draggingDots = false;
+
     }
 
-    dotsContainer.addEventListener("pointerup", stopDotDrag);
-    dotsContainer.addEventListener("pointercancel", stopDotDrag);
+
+    dotsContainer.addEventListener(
+      "pointerup",
+      stopDotDrag
+    );
+
+
+    dotsContainer.addEventListener(
+      "pointercancel",
+      stopDotDrag
+    );
+
   }
 
+
+
   /* =====================================================
-     NEXT ARROW
+     NEXT BUTTON
   ===================================================== */
 
   if (nextButton) {
-    nextButton.addEventListener("click", function (event) {
-      event.stopPropagation();
-      nextSlide();
-    });
+
+    nextButton.addEventListener(
+      "click",
+      function (event) {
+
+        event.stopPropagation();
+
+        nextSlide();
+
+      }
+    );
+
   }
 
+
+
   /* =====================================================
-     PHONE / TABLET / MOUSE DRAG SWIPE
+     TOUCH / MOUSE SWIPE
   ===================================================== */
 
-  let pointerStartX = 0;
-  let pointerStartY = 0;
-  let pointerIsDown = false;
+  let pointerActive = false;
 
-  const SWIPE_DISTANCE = 45;
+  let startX = 0;
 
-  if (slider) {
-    slider.addEventListener("pointerdown", function (event) {
+  let startY = 0;
+
+
+
+  slider.addEventListener(
+    "pointerdown",
+    function (event) {
+
+      if (
+        event.target.closest(
+          ".hero-controls"
+        )
+      ) {
+        return;
+      }
+
+
+      pointerActive = true;
+
+
+      startX =
+        event.clientX;
+
+
+      startY =
+        event.clientY;
+
+    }
+  );
+
+
+
+  slider.addEventListener(
+    "pointerup",
+    function (event) {
+
+      if (!pointerActive) return;
+
+
+      pointerActive = false;
+
+
+      const differenceX =
+        startX -
+        event.clientX;
+
+
+      const differenceY =
+        startY -
+        event.clientY;
+
+
+      if (
+        Math.abs(differenceX) <
+        SWIPE_THRESHOLD
+      ) {
+        return;
+      }
+
+
       /*
-       Do not start hero dragging when the user is
-       interacting with controls.
+        Vertical scroll remains normal.
       */
-      if (event.target.closest(".hero-controls")) return;
 
-      pointerIsDown = true;
-      pointerStartX = event.clientX;
-      pointerStartY = event.clientY;
-    });
+      if (
+        Math.abs(differenceY) >
+        Math.abs(differenceX)
+      ) {
+        return;
+      }
 
-    slider.addEventListener("pointerup", function (event) {
-      if (!pointerIsDown) return;
-
-      pointerIsDown = false;
-
-      const differenceX = pointerStartX - event.clientX;
-      const differenceY = pointerStartY - event.clientY;
-
-      /*
-       Ignore small movements.
-      */
-      if (Math.abs(differenceX) < SWIPE_DISTANCE) return;
-
-      /*
-       Ignore primarily vertical scrolling.
-      */
-      if (Math.abs(differenceY) > Math.abs(differenceX)) return;
 
       if (differenceX > 0) {
+
         nextSlide();
+
       } else {
+
         previousSlide();
-      }
-    });
 
-    slider.addEventListener("pointercancel", function () {
-      pointerIsDown = false;
-    });
-
-    slider.addEventListener("pointerleave", function (event) {
-      if (event.pointerType === "mouse") {
-        pointerIsDown = false;
       }
-    });
-  }
+
+    }
+  );
+
+
+
+  slider.addEventListener(
+    "pointercancel",
+    function () {
+
+      pointerActive = false;
+
+    }
+  );
+
+
 
   /* =====================================================
-     MACBOOK / LAPTOP TRACKPAD HORIZONTAL SWIPE
+     MACBOOK TRACKPAD
   ===================================================== */
+
+  let accumulatedX = 0;
 
   let trackpadLocked = false;
-  let accumulatedDeltaX = 0;
 
-  const TRACKPAD_THRESHOLD = 55;
 
-  if (slider) {
-    slider.addEventListener(
-      "wheel",
-      function (event) {
-        /*
-         Only respond to gestures that are primarily
-         horizontal. Normal vertical page scrolling remains
-         untouched.
-        */
-        const horizontalGesture =
-          Math.abs(event.deltaX) > Math.abs(event.deltaY);
 
-        if (!horizontalGesture) {
-          accumulatedDeltaX = 0;
-          return;
-        }
-
-        if (trackpadLocked) return;
-
-        accumulatedDeltaX += event.deltaX;
-
-        if (Math.abs(accumulatedDeltaX) < TRACKPAD_THRESHOLD) {
-          return;
-        }
-
-        trackpadLocked = true;
-
-        if (accumulatedDeltaX > 0) {
-          nextSlide();
-        } else {
-          previousSlide();
-        }
-
-        accumulatedDeltaX = 0;
-
-        window.setTimeout(function () {
-          trackpadLocked = false;
-        }, 650);
-      },
-      { passive: true }
-    );
-  }
-
-  /* =====================================================
-     OPTIMIZED APPLE-STYLE PARALLAX
-  ===================================================== */
-
-  const homeServiceImages = Array.from(
-    document.querySelectorAll(".home-service-band img")
-  );
-
-  const serviceBands = Array.from(
-    document.querySelectorAll(".service-band")
-  );
-
-  let scrollFrameRequested = false;
-
-  /*
-   One animation-frame handler controls ALL scroll effects.
-
-   This is much smoother than having several independent
-   scroll listeners constantly changing CSS.
-  */
-
-  function updateScrollEffects() {
-    scrollFrameRequested = false;
-
-    /* --------------------------
-       HERO PARALLAX
-    -------------------------- */
-
-    if (slider && slides.length) {
-      const heroRect = slider.getBoundingClientRect();
+  slider.addEventListener(
+    "wheel",
+    function (event) {
 
       /*
-       Limit movement so the browser does not have to
-       render unnecessarily huge transformations.
+        Ignore normal vertical
+        scrolling.
       */
-      let heroMovement = heroRect.top * -0.32;
 
-      heroMovement = Math.max(-160, Math.min(160, heroMovement));
+      if (
+        Math.abs(event.deltaX) <=
+        Math.abs(event.deltaY)
+      ) {
 
-      slides.forEach(function (slide) {
-        slide.style.setProperty(
-          "--hero-scroll",
-          heroMovement.toFixed(2) + "px"
+        accumulatedX = 0;
+
+        return;
+
+      }
+
+
+      if (trackpadLocked) return;
+
+
+      accumulatedX +=
+        event.deltaX;
+
+
+      if (
+        Math.abs(accumulatedX) <
+        TRACKPAD_THRESHOLD
+      ) {
+        return;
+      }
+
+
+      trackpadLocked = true;
+
+
+      if (accumulatedX > 0) {
+
+        nextSlide();
+
+      } else {
+
+        previousSlide();
+
+      }
+
+
+      accumulatedX = 0;
+
+
+      setTimeout(function () {
+
+        trackpadLocked = false;
+
+      }, 600);
+
+    },
+
+    {
+      passive: true
+    }
+  );
+
+
+
+  /* =====================================================
+     SMOOTH PARALLAX + ZOOM
+  ===================================================== */
+
+  let animationFrame = null;
+
+
+
+  function renderScrollEffects() {
+
+    animationFrame = null;
+
+
+    /* =================================================
+       HERO
+    ================================================= */
+
+    const heroRect =
+      slider.getBoundingClientRect();
+
+
+    if (
+      heroRect.bottom > 0 &&
+      heroRect.top <
+      window.innerHeight
+    ) {
+
+      /*
+        Progress from 0 to 1 as
+        hero leaves viewport.
+      */
+
+      let progress =
+        -heroRect.top /
+        heroRect.height;
+
+
+      progress =
+        Math.max(
+          0,
+          Math.min(1, progress)
         );
-      });
-    }
 
-    /* --------------------------
-       HOMEPAGE SERVICE IMAGES
-    -------------------------- */
-
-    homeServiceImages.forEach(function (image) {
-      const section = image.closest(".home-service-band");
-
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
 
       /*
-       Skip sections far outside the viewport.
-       This reduces unnecessary rendering work.
+        Vertical cinematic movement.
       */
-      if (
-        rect.bottom < -300 ||
-        rect.top > window.innerHeight + 300
-      ) {
-        return;
+
+      const movement =
+        progress * 75;
+
+
+      /*
+        Subtle zoom.
+
+        1.00 -> 1.06
+      */
+
+      const scale =
+        1 +
+        progress * 0.06;
+
+
+      heroMedia.forEach(
+        function (media) {
+
+          media.style.transform =
+            "translate3d(0," +
+            movement.toFixed(1) +
+            "px,0) " +
+            "scale(" +
+            scale.toFixed(4) +
+            ")";
+
+        }
+      );
+
+    }
+
+
+
+    /* =================================================
+       SERVICE IMAGE MOVEMENT
+    ================================================= */
+
+    serviceImages.forEach(
+      function (image) {
+
+        const section =
+          image.closest(
+            ".home-service-band"
+          );
+
+
+        if (!section) return;
+
+
+        const rect =
+          section
+            .getBoundingClientRect();
+
+
+        /*
+          Larger buffer means the browser
+          prepares the image before it
+          enters the screen.
+        */
+
+        if (
+          rect.bottom < -600 ||
+          rect.top >
+          window.innerHeight + 600
+        ) {
+          return;
+        }
+
+
+        const totalDistance =
+          window.innerHeight +
+          rect.height;
+
+
+        let progress =
+          (
+            window.innerHeight -
+            rect.top
+          ) /
+          totalDistance;
+
+
+        progress =
+          Math.max(
+            0,
+            Math.min(1, progress)
+          );
+
+
+        /*
+          Parallax movement.
+        */
+
+        const movement =
+          (
+            progress -
+            0.5
+          ) *
+          90;
+
+
+        /*
+          Slow cinematic zoom.
+
+          1.04 -> 1.09
+        */
+
+        const scale =
+          1.04 +
+          progress *
+          0.05;
+
+
+        image.style.transform =
+          "translate3d(0," +
+          movement.toFixed(1) +
+          "px,0) " +
+          "scale(" +
+          scale.toFixed(4) +
+          ")";
+
       }
+    );
 
-      let movement = rect.top * -0.15;
-
-      movement = Math.max(-120, Math.min(120, movement));
-
-      image.style.transform =
-        "translate3d(0, " + movement.toFixed(2) + "px, 0)";
-    });
-
-    /* --------------------------
-       SERVICES PAGE BACKGROUND
-    -------------------------- */
-
-    serviceBands.forEach(function (section) {
-      const rect = section.getBoundingClientRect();
-
-      if (
-        rect.bottom < -300 ||
-        rect.top > window.innerHeight + 300
-      ) {
-        return;
-      }
-
-      let movement = rect.top * -0.10;
-
-      movement = Math.max(-90, Math.min(90, movement));
-
-      section.style.backgroundPosition =
-        "center calc(50% + " +
-        movement.toFixed(2) +
-        "px)";
-    });
   }
 
-  function requestScrollUpdate() {
-    if (scrollFrameRequested) return;
 
-    scrollFrameRequested = true;
 
-    requestAnimationFrame(updateScrollEffects);
+  function requestScrollRender() {
+
+    if (
+      animationFrame !== null
+    ) {
+      return;
+    }
+
+
+    animationFrame =
+      requestAnimationFrame(
+        renderScrollEffects
+      );
+
   }
 
-  window.addEventListener("scroll", requestScrollUpdate, {
-    passive: true,
-  });
 
-  window.addEventListener("resize", requestScrollUpdate, {
-    passive: true,
-  });
+
+  window.addEventListener(
+    "scroll",
+    requestScrollRender,
+    {
+      passive: true
+    }
+  );
+
+
+  window.addEventListener(
+    "resize",
+    requestScrollRender,
+    {
+      passive: true
+    }
+  );
+
+
+
+  /* =====================================================
+     PAGE VISIBILITY
+  ===================================================== */
+
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      pageVisible =
+        !document.hidden;
+
+
+      if (!pageVisible) {
+
+        stopAutoSlider();
+
+
+        slides.forEach(
+          function (slide) {
+
+            const video =
+              slide.querySelector(
+                "video"
+              );
+
+
+            if (video) {
+
+              video.pause();
+
+            }
+
+          }
+        );
+
+      } else {
+
+        playCurrentVideo();
+
+        startAutoSlider();
+
+        requestScrollRender();
+
+      }
+
+    }
+  );
+
+
+
+  /* =====================================================
+     INITIALIZE
+  ===================================================== */
+
+  slides.forEach(
+    function (slide, index) {
+
+      slide.classList.toggle(
+        "active",
+        index === 0
+      );
+
+    }
+  );
+
+
+  dots.forEach(
+    function (dot, index) {
+
+      dot.classList.toggle(
+        "active",
+        index === 0
+      );
+
+    }
+  );
+
+
+  currentSlide = 0;
+
 
   /*
-   Initial render
+    Video 1 begins buffering immediately.
   */
-  requestScrollUpdate();
 
-  /* =====================================================
-     PAGE VISIBILITY / PERFORMANCE
-  ===================================================== */
+  preloadVideo(1);
 
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-      stopAutoSlider();
-      pauseAllVideos();
-    } else {
-      playCurrentVideo();
-      startAutoSlider();
-    }
-  });
 
-  /* =====================================================
-     INITIALIZE HERO
-  ===================================================== */
+  /*
+    Give the browser a moment before
+    starting Video 2.
+  */
 
-  if (slides.length) {
-    slides.forEach(function (slide, index) {
-      slide.classList.toggle("active", index === 0);
-    });
+  setTimeout(function () {
 
-    dots.forEach(function (dot, index) {
-      dot.classList.toggle("active", index === 0);
-    });
+    preloadVideo(2);
 
-    currentSlide = 0;
+  }, 1000);
 
-    playCurrentVideo();
 
-    window.setTimeout(function () {
-      preloadNextVideo();
-    }, 500);
+  /*
+    Start Video 3 shortly afterwards.
+  */
 
-    startAutoSlider();
-  }
+  setTimeout(function () {
+
+    preloadVideo(3);
+
+  }, 3000);
+
+
+  /*
+    Video 4 can load last.
+  */
+
+  setTimeout(function () {
+
+    preloadVideo(4);
+
+  }, 5000);
+
+
+  startAutoSlider();
+
+
+  requestScrollRender();
+
 });
