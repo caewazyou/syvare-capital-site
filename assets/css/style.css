@@ -5,7 +5,7 @@
 
 
 /* =========================================================
-   1. RESET / GLOBAL
+   RESET / GLOBAL
 ========================================================= */
 
 * {
@@ -16,53 +16,55 @@
 
 html {
   scroll-behavior: smooth;
+  background: #050812;
 }
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
 
   font-family:
-    'Source Sans 3',
+    "Source Sans 3",
     -apple-system,
     BlinkMacSystemFont,
-    'Segoe UI',
+    "Segoe UI",
     sans-serif;
 
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.7;
 
-  color: #222222;
+  color: #222;
 
   background:
     linear-gradient(
       190deg,
-      rgba(255, 255, 255, 0.92),
-      rgba(255, 255, 255, 0.86)
+      rgba(255, 255, 255, 0.94),
+      rgba(255, 255, 255, 0.87)
     ),
-    url('../images/bg-polo-stilllife.jpg')
-    center center / cover
-    no-repeat;
+    url("../images/bg-polo-stilllife.jpg")
+    center center / cover fixed no-repeat;
 
-  /*
-    Keep this scroll rather than fixed.
-
-    background-attachment: fixed can cause
-    visible stuttering in Safari when videos
-    and transformed images are also present.
-  */
-  background-attachment: scroll;
-
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-img,
-video {
-  max-width: 100%;
+body.intro-running {
+  overflow: hidden;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+img,
+video {
+  display: block;
+}
+
+img {
+  max-width: 100%;
 }
 
 button,
@@ -76,7 +78,7 @@ button {
 
 
 /* =========================================================
-   2. HEADER
+   HEADER
 ========================================================= */
 
 .site-header {
@@ -87,27 +89,32 @@ button {
 
   width: 100%;
 
-  padding: 22px 16px 25px;
+  padding: 21px 16px 23px;
 
   text-align: center;
 
   background: rgba(255, 255, 255, 0.97);
 
   border-bottom:
-    1px solid rgba(0, 0, 0, 0.055);
+    1px solid rgba(0, 0, 0, 0.05);
 
   box-shadow:
     0 2px 18px rgba(0, 0, 0, 0.025);
+
+  transform: translateZ(0);
 }
 
 .brand {
-  display: inline-block;
   position: relative;
   z-index: 1002;
+
+  display: inline-block;
 }
 
 .site-title {
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-size: 1.9rem;
   font-weight: 500;
@@ -116,31 +123,36 @@ button {
 
   letter-spacing: 0.025em;
 
-  color: #111111;
+  color: #111;
 }
 
 .site-subtitle {
   margin-top: 5px;
 
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 400;
-
-  line-height: 1.2;
 
   letter-spacing: 0.16em;
 
   text-transform: uppercase;
 
-  color: #666666;
+  color: #666;
 }
 
 
 /* =========================================================
-   3. HAMBURGER MENU
+   HAMBURGER
 ========================================================= */
 
 .nav-toggle {
-  display: none;
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+
+  pointer-events: none;
 }
 
 .hamburger {
@@ -151,12 +163,12 @@ button {
 
   z-index: 1003;
 
-  width: 30px;
-  height: 23px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 30px;
+  height: 23px;
 
   cursor: pointer;
 }
@@ -167,7 +179,7 @@ button {
   width: 100%;
   height: 2px;
 
-  background: #222222;
+  background: #222;
 
   transform-origin: center;
 
@@ -194,15 +206,13 @@ button {
 
 
 /* =========================================================
-   4. MOBILE / HAMBURGER NAVIGATION
+   NAVIGATION MENU
 ========================================================= */
 
 .mobile-menu {
-  display: none;
-
   position: fixed;
 
-  top: 83px;
+  top: 84px;
   right: 20px;
 
   z-index: 1001;
@@ -211,7 +221,14 @@ button {
 
   padding: 8px 0;
 
-  background: rgba(255, 255, 255, 0.98);
+  visibility: hidden;
+  opacity: 0;
+
+  transform:
+    translate3d(0, -8px, 0);
+
+  background:
+    rgba(255, 255, 255, 0.98);
 
   border:
     1px solid rgba(0, 0, 0, 0.05);
@@ -219,11 +236,25 @@ button {
   border-radius: 12px;
 
   box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.13);
+    0 18px 45px
+    rgba(0, 0, 0, 0.13);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s;
 }
 
 .nav-toggle:checked ~ .mobile-menu {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+
+  transform:
+    translate3d(0, 0, 0);
+
+  pointer-events: auto;
 }
 
 .mobile-menu a {
@@ -238,7 +269,7 @@ button {
 
   text-transform: uppercase;
 
-  color: #222222;
+  color: #222;
 
   border-bottom:
     1px solid rgba(0, 0, 0, 0.055);
@@ -261,7 +292,514 @@ button {
 
 
 /* =========================================================
-   5. HERO SLIDER
+   CINEMATIC INTRO
+========================================================= */
+
+.syvare-intro {
+  position: fixed;
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #03050a;
+
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transition:
+    opacity 1.25s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 1.25s;
+}
+
+
+/* =========================================================
+   INTRO BACKGROUND
+========================================================= */
+
+.intro-background {
+  position: absolute;
+
+  inset: -40px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 6, 15, 0.50),
+      rgba(3, 6, 15, 0.68)
+    ),
+    url("../images/hero-polo.jpg")
+    center center / cover no-repeat;
+
+  transform:
+    translate3d(0, 0, 0)
+    scale(1.12);
+
+  filter:
+    blur(20px)
+    brightness(0.62);
+
+  transform-origin: center;
+
+  will-change:
+    transform,
+    filter;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  animation:
+    introBackgroundAnimation
+    10s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes introBackgroundAnimation {
+
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.12);
+
+    filter:
+      blur(20px)
+      brightness(0.60);
+  }
+
+  30% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.10);
+
+    filter:
+      blur(18px)
+      brightness(0.64);
+  }
+
+  60% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.075);
+
+    filter:
+      blur(13px)
+      brightness(0.70);
+  }
+
+  82% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.05);
+
+    filter:
+      blur(7px)
+      brightness(0.77);
+  }
+
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.025);
+
+    filter:
+      blur(2px)
+      brightness(0.84);
+  }
+}
+
+
+/* =========================================================
+   INTRO CONTENT
+========================================================= */
+
+.intro-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: 90%;
+  height: 100%;
+
+  text-align: center;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   INTRO BRAND
+   0 — 3.2 seconds
+========================================================= */
+
+.intro-brand {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%);
+
+  animation:
+    introBrandAnimation
+    3.2s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.intro-brand h1 {
+  margin: 0;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(2.8rem, 6vw, 5.5rem);
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.03em;
+
+  color: #fff;
+
+  text-shadow:
+    0 5px 30px
+    rgba(0, 0, 0, 0.28);
+}
+
+.intro-brand span {
+  display: block;
+
+  margin-top: 17px;
+
+  font-family:
+    "Source Sans 3",
+    sans-serif;
+
+  font-size: 0.72rem;
+  font-weight: 400;
+
+  letter-spacing: 0.35em;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(255, 255, 255, 0.76);
+}
+
+@keyframes introBrandAnimation {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -42%)
+      scale(0.97);
+
+    filter: blur(7px);
+  }
+
+  18% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  70% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -57%)
+      scale(1.015);
+
+    filter: blur(2px);
+  }
+}
+
+
+/* =========================================================
+   INTRO MESSAGE BASE
+========================================================= */
+
+.intro-message {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%);
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-weight: 400;
+
+  line-height: 1.15;
+
+  color: #fff;
+
+  text-shadow:
+    0 5px 35px
+    rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+   WELCOME
+   2.8 — 6.2 seconds
+========================================================= */
+
+.intro-welcome {
+  font-size:
+    clamp(2rem, 4.5vw, 4.2rem);
+
+  animation:
+    introWelcomeAnimation
+    3.4s
+    2.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes introWelcomeAnimation {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -42%);
+
+    filter: blur(6px);
+  }
+
+  18% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%);
+
+    filter: blur(0);
+  }
+
+  72% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%);
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -58%);
+
+    filter: blur(2px);
+  }
+}
+
+
+/* =========================================================
+   STRATEGY
+   5.8 — 9.4 seconds
+========================================================= */
+
+.intro-strategy {
+  font-size:
+    clamp(2.1rem, 5vw, 4.8rem);
+
+  animation:
+    introStrategyAnimation
+    3.6s
+    5.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes introStrategyAnimation {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -42%)
+      scale(0.98);
+
+    filter: blur(6px);
+  }
+
+  18% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  75% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -56%)
+      scale(1.01);
+
+    filter: blur(2px);
+  }
+}
+
+
+/* =========================================================
+   INTRO DECORATIVE LINE
+========================================================= */
+
+.intro-line {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  z-index: 4;
+
+  width: 0;
+  height: 1px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(225, 207, 166, 0.95),
+      transparent
+    );
+
+  animation:
+    introLineAnimation
+    8.7s
+    0.5s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes introLineAnimation {
+
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  15% {
+    width: 25%;
+    opacity: 0.7;
+  }
+
+  45% {
+    width: 48%;
+    opacity: 1;
+  }
+
+  75% {
+    width: 72%;
+    opacity: 0.72;
+  }
+
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   INTRO EXIT
+========================================================= */
+
+.syvare-intro.intro-finished {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+body.intro-running main,
+body.intro-running .site-header {
+  opacity: 0;
+
+  transform:
+    translate3d(0, 10px, 0)
+    scale(1.005);
+}
+
+body.intro-ready main,
+body.intro-ready .site-header {
+  opacity: 1;
+
+  transform:
+    translate3d(0, 0, 0)
+    scale(1);
+
+  transition:
+    opacity 1.25s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.45s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   HERO
 ========================================================= */
 
 .hero-full.hero-slider {
@@ -269,36 +807,39 @@ button {
 
   width: 100%;
 
-  height: calc(100vh - 90px);
+  height:
+    calc(100vh - 90px);
+
+  height:
+    calc(100svh - 90px);
+
   min-height: 620px;
 
   overflow: hidden;
 
-  /*
-    Prevent a white flash if a video
-    needs a fraction of a second to decode.
-  */
-  background: #03050a;
+  background: #050812;
 
   isolation: isolate;
 
   touch-action: pan-y;
 
   cursor: grab;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.hero-full.hero-slider:active {
+.hero-full.hero-slider.dragging {
   cursor: grabbing;
 }
 
 
 /* =========================================================
-   6. HERO SLIDES
+   HERO SLIDES
 ========================================================= */
 
 .hero-slide {
   position: absolute;
-
   inset: 0;
 
   z-index: 1;
@@ -308,61 +849,57 @@ button {
 
   opacity: 0;
 
-  visibility: hidden;
-
   pointer-events: none;
 
   transition:
-    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 0.75s;
+    opacity 0.75s
+    cubic-bezier(0.22, 1, 0.36, 1);
 
   will-change: opacity;
+
+  transform: translateZ(0);
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .hero-slide.active {
-  opacity: 1;
-
-  visibility: visible;
-
   z-index: 2;
 
-  transition:
-    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 0s;
+  opacity: 1;
 }
 
 
-/* =========================================================
-   7. HERO IMAGE / VIDEO
+/* IMPORTANT:
+   Keep media permanently rendered.
+   We only fade the slide opacity.
+   This helps prevent blank frames.
+*/
 
-   Oversized slightly so the parallax movement and zoom
-   never expose an empty edge.
-========================================================= */
-
-.hero-media {
+.hero-slide > img,
+.hero-slide > video {
   position: absolute;
 
-  top: -8%;
+  top: -7%;
   left: -4%;
 
   width: 108%;
   max-width: none;
 
-  height: 116%;
-
-  display: block;
+  height: 114%;
 
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
 
   transform:
-    translate3d(0, 0, 0)
-    scale(1);
+    translate3d(
+      0,
+      var(--hero-scroll, 0px),
+      0
+    )
+    scale(1.035);
 
-  transform-origin: center center;
+  transform-origin: center;
 
   will-change: transform;
 
@@ -372,18 +909,17 @@ button {
   pointer-events: none;
 }
 
-video.hero-media {
-  background: #03050a;
+.hero-slide > video {
+  background: #050812;
 }
 
 
 /* =========================================================
-   8. HERO DARK OVERLAY
+   HERO OVERLAY
 ========================================================= */
 
 .hero-overlay {
   position: absolute;
-
   inset: 0;
 
   z-index: 5;
@@ -393,35 +929,39 @@ video.hero-media {
   background:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.72) 0%,
-      rgba(0, 0, 0, 0.50) 34%,
-      rgba(0, 0, 0, 0.16) 70%,
-      rgba(0, 0, 0, 0.06) 100%
+      rgba(0, 0, 0, 0.70) 0%,
+      rgba(0, 0, 0, 0.50) 35%,
+      rgba(0, 0, 0, 0.17) 70%,
+      rgba(0, 0, 0, 0.07) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.05) 0%,
-      rgba(0, 0, 0, 0.08) 55%,
-      rgba(0, 0, 0, 0.36) 100%
+      rgba(0, 0, 0, 0.04),
+      rgba(0, 0, 0, 0.08) 58%,
+      rgba(0, 0, 0, 0.36)
     );
 }
 
 
 /* =========================================================
-   9. HERO CONTENT
+   HERO TEXT
 ========================================================= */
 
 .hero-content {
   position: absolute;
 
-  left: clamp(42px, 7vw, 120px);
-  bottom: clamp(120px, 17vh, 185px);
+  left:
+    clamp(42px, 7vw, 120px);
+
+  bottom:
+    clamp(120px, 17vh, 185px);
 
   z-index: 10;
 
-  width: min(680px, 78vw);
+  width:
+    min(680px, 78vw);
 
-  color: #ffffff;
+  color: #fff;
 
   pointer-events: auto;
 }
@@ -431,7 +971,9 @@ video.hero-media {
 
   margin-bottom: 24px;
 
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-size:
     clamp(3rem, 5.2vw, 5.5rem);
@@ -442,7 +984,7 @@ video.hero-media {
 
   letter-spacing: -0.025em;
 
-  color: #ffffff;
+  color: #fff;
 }
 
 .hero-content p {
@@ -461,7 +1003,7 @@ video.hero-media {
 
 
 /* =========================================================
-   10. HERO BUTTON
+   HERO BUTTON
 ========================================================= */
 
 .btn-hero {
@@ -471,17 +1013,19 @@ video.hero-media {
 
   gap: 14px;
 
-  padding: 11px 27px;
+  padding:
+    11px 27px;
 
   border:
-    1px solid rgba(255, 255, 255, 0.56);
+    1px solid
+    rgba(255, 255, 255, 0.56);
 
   border-radius: 999px;
 
   background:
     rgba(5, 8, 17, 0.58);
 
-  color: #ffffff;
+  color: #fff;
 
   font-size: 0.77rem;
   font-weight: 600;
@@ -493,31 +1037,25 @@ video.hero-media {
   transition:
     background 0.25s ease,
     color 0.25s ease,
-    border-color 0.25s ease,
     transform 0.25s ease;
 }
 
 .btn-hero::after {
   content: "→";
-
-  font-size: 1rem;
-
-  letter-spacing: 0;
 }
 
 .btn-hero:hover {
-  background: #ffffff;
+  background: #fff;
 
-  border-color: #ffffff;
+  color: #111;
 
-  color: #111111;
-
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 }
 
 
 /* =========================================================
-   11. HERO CONTROLS
+   HERO CONTROLS
 ========================================================= */
 
 .hero-controls {
@@ -528,59 +1066,44 @@ video.hero-media {
 
   z-index: 30;
 
-  transform: translateX(-50%);
-
   display: flex;
 
   align-items: center;
 
-  justify-content: center;
-
   gap: 11px;
+
+  transform:
+    translateX(-50%);
 
   pointer-events: auto;
 }
-
-
-/* =========================================================
-   12. HERO DOTS
-========================================================= */
 
 .hero-dots {
   display: flex;
 
   align-items: center;
 
-  justify-content: center;
-
   gap: 9px;
 
   min-height: 39px;
 
-  padding: 9px 14px;
+  padding:
+    9px 14px;
 
   border:
-    1px solid rgba(255, 255, 255, 0.10);
+    1px solid
+    rgba(255, 255, 255, 0.10);
 
   border-radius: 999px;
 
-  /*
-    Avoid backdrop-filter here.
-    Blur + fullscreen video + scroll transforms
-    can become expensive on Safari.
-  */
   background:
     rgba(6, 9, 18, 0.68);
 
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.22);
-
-  user-select: none;
-  -webkit-user-select: none;
+    0 10px 28px
+    rgba(0, 0, 0, 0.22);
 
   touch-action: none;
-
-  pointer-events: auto;
 }
 
 .hero-dot {
@@ -595,8 +1118,6 @@ video.hero-media {
 
   border-radius: 999px;
 
-  outline: none;
-
   background:
     rgba(255, 255, 255, 0.42);
 
@@ -606,34 +1127,26 @@ video.hero-media {
     width 0.22s ease,
     background 0.22s ease,
     transform 0.22s ease;
-
-  pointer-events: auto;
 }
 
 .hero-dot.active {
   width: 25px;
 
-  background:
-    rgba(255, 255, 255, 0.98);
+  background: #fff;
 }
 
 .hero-dot:hover {
   background:
     rgba(255, 255, 255, 0.92);
 
-  transform: scale(1.15);
+  transform:
+    scale(1.15);
 }
-
-
-/* =========================================================
-   13. HERO NEXT BUTTON
-========================================================= */
 
 .hero-next {
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   width: 39px;
@@ -642,47 +1155,48 @@ video.hero-media {
   padding: 0;
 
   border:
-    1px solid rgba(255, 255, 255, 0.10);
+    1px solid
+    rgba(255, 255, 255, 0.10);
 
   border-radius: 50%;
 
   background:
     rgba(6, 9, 18, 0.68);
 
-  color: #ffffff;
+  color: #fff;
 
   font-size: 1.75rem;
-
   line-height: 1;
 
   cursor: pointer;
 
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.22);
+    0 10px 28px
+    rgba(0, 0, 0, 0.22);
 
   transition:
     background 0.2s ease,
     transform 0.2s ease;
-
-  pointer-events: auto;
 }
 
 .hero-next:hover {
   background:
     rgba(255, 255, 255, 0.22);
 
-  transform: translateX(2px);
+  transform:
+    translateX(2px);
 }
 
 
 /* =========================================================
-   14. ABOUT PREVIEW
+   ABOUT PREVIEW
 ========================================================= */
 
 .hero-text-wrapper {
   width: 100%;
 
-  padding: 72px 20px 20px;
+  padding:
+    72px 20px 20px;
 }
 
 .hero-text {
@@ -690,28 +1204,30 @@ video.hero-media {
 
   margin: 0 auto;
 
-  padding: 39px 35px;
+  padding:
+    39px 35px;
 
   text-align: center;
 
   border-radius: 23px;
 
   background:
-    rgba(250, 250, 249, 0.95);
+    rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.07);
+    0 18px 50px
+    rgba(0, 0, 0, 0.07);
 }
 
 .hero-text h2 {
   margin-bottom: 13px;
 
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-size: 1.95rem;
   font-weight: 500;
-
-  line-height: 1.2;
 
   color: #1b1b1b;
 }
@@ -719,36 +1235,41 @@ video.hero-media {
 .hero-text p {
   margin-bottom: 20px;
 
-  color: #555555;
+  color: #555;
 }
 
 
 /* =========================================================
-   15. OUR WORK INTRO
+   OUR WORK INTRO
 ========================================================= */
 
 .home-services-intro {
   max-width: 830px;
 
-  margin: 70px auto 38px;
+  margin:
+    70px auto 38px;
 
-  padding: 35px 31px;
+  padding:
+    35px 31px;
 
   text-align: center;
 
   border-radius: 23px;
 
   background:
-    rgba(250, 250, 249, 0.95);
+    rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 15px 42px rgba(0, 0, 0, 0.065);
+    0 15px 42px
+    rgba(0, 0, 0, 0.065);
 }
 
 .home-services-intro h2 {
   margin-bottom: 9px;
 
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-size: 1.95rem;
   font-weight: 500;
@@ -757,12 +1278,12 @@ video.hero-media {
 }
 
 .home-services-intro p {
-  color: #555555;
+  color: #555;
 }
 
 
 /* =========================================================
-   16. HOME SERVICE BANDS
+   SERVICE BANDS
 ========================================================= */
 
 .home-service-band {
@@ -771,58 +1292,57 @@ video.hero-media {
   width: 100%;
 
   min-height: 100vh;
+  min-height: 100svh;
 
   overflow: hidden;
 
-  /*
-    This remains visible while the image is
-    decoding, so no white/transparent blank area.
-  */
-  background:
-    linear-gradient(
-      180deg,
-      #111725,
-      #050812
-    );
+  background: #080c17;
 
-  color: #ffffff;
+  color: #fff;
 
   cursor: pointer;
 
   isolation: isolate;
+
+  transform: translateZ(0);
 }
 
 
-/* =========================================================
-   17. HOME SERVICE IMAGES
+/*
+  The image is deliberately oversized.
 
-   These images are oversized so JavaScript can move and
-   scale them without exposing the section background.
-========================================================= */
+  This is important because the JS moves it
+  slightly while scrolling. The extra image
+  area prevents empty/blank edges appearing.
+*/
 
 .home-service-band > img {
   position: absolute;
 
-  top: -10%;
-  left: -5%;
+  top: -12%;
+  left: -6%;
 
   z-index: 1;
 
-  width: 110%;
+  width: 112%;
   max-width: none;
 
-  height: 120%;
-
-  display: block;
+  height: 124%;
 
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
 
   transform:
-    translate3d(0, 0, 0)
-    scale(1.04);
+    translate3d(
+      0,
+      var(--service-scroll, 0px),
+      0
+    )
+    scale(
+      var(--service-scale, 1.045)
+    );
 
-  transform-origin: center center;
+  transform-origin: center;
 
   will-change: transform;
 
@@ -832,14 +1352,10 @@ video.hero-media {
   pointer-events: none;
 }
 
+.home-service-band::after {
+  content: "";
 
-/* =========================================================
-   18. SERVICE OVERLAY
-========================================================= */
-
-.home-service-overlay {
   position: absolute;
-
   inset: 0;
 
   z-index: 2;
@@ -847,17 +1363,12 @@ video.hero-media {
   background:
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.34),
-      rgba(0, 0, 0, 0.60)
+      rgba(0, 0, 0, 0.18),
+      rgba(0, 0, 0, 0.54)
     );
 
   pointer-events: none;
 }
-
-
-/* =========================================================
-   19. SERVICE GLASS CONTENT
-========================================================= */
 
 .home-service-content {
   position: absolute;
@@ -867,28 +1378,27 @@ video.hero-media {
 
   z-index: 4;
 
-  transform:
-    translate(-50%, -50%);
-
   width:
     min(620px, 82%);
 
-  padding: 30px 31px;
+  padding:
+    30px 31px;
+
+  transform:
+    translate(-50%, -50%);
 
   border:
-    1px solid rgba(255, 255, 255, 0.13);
+    1px solid
+    rgba(255, 255, 255, 0.13);
 
   border-radius: 20px;
 
-  /*
-    Visually glass-like without a heavy
-    backdrop-filter.
-  */
   background:
     rgba(7, 11, 27, 0.75);
 
   box-shadow:
-    0 20px 55px rgba(0, 0, 0, 0.24);
+    0 20px 55px
+    rgba(0, 0, 0, 0.24);
 
   color: #eef1ff;
 }
@@ -896,22 +1406,18 @@ video.hero-media {
 .home-service-content h3 {
   margin-bottom: 11px;
 
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-size: 1.85rem;
   font-weight: 500;
 
-  line-height: 1.2;
-
-  color: #ffffff;
+  color: #fff;
 }
 
 .home-service-content p {
   margin-bottom: 17px;
-
-  font-size: 0.97rem;
-
-  line-height: 1.7;
 
   color:
     rgba(238, 241, 255, 0.92);
@@ -919,31 +1425,36 @@ video.hero-media {
 
 
 /* =========================================================
-   20. STANDARD SECTIONS
+   STANDARD HOMEPAGE SECTIONS
 ========================================================= */
 
 .section {
   max-width: 900px;
 
-  margin: 70px auto;
+  margin:
+    70px auto;
 
-  padding: 37px 33px;
+  padding:
+    37px 33px;
 
   text-align: center;
 
   border-radius: 23px;
 
   background:
-    rgba(250, 250, 249, 0.95);
+    rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 15px 42px rgba(0, 0, 0, 0.065);
+    0 15px 42px
+    rgba(0, 0, 0, 0.065);
 }
 
 .section h2 {
   margin-bottom: 11px;
 
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-size: 1.95rem;
   font-weight: 500;
@@ -954,28 +1465,30 @@ video.hero-media {
 .section p {
   margin-bottom: 18px;
 
-  color: #555555;
+  color: #555;
 }
 
 
 /* =========================================================
-   21. STANDARD BUTTON
+   BUTTONS
 ========================================================= */
 
 .btn {
   display: inline-block;
 
-  padding: 8px 21px;
+  padding:
+    8px 21px;
 
   border:
-    1px solid rgba(255, 255, 255, 0.18);
+    1px solid
+    rgba(255, 255, 255, 0.30);
 
   border-radius: 999px;
 
   background:
-    rgba(255, 255, 255, 0.15);
+    rgba(255, 255, 255, 0.14);
 
-  color: #ffffff;
+  color: #fff;
 
   font-size: 0.77rem;
   font-weight: 500;
@@ -989,52 +1502,45 @@ video.hero-media {
   transition:
     background 0.25s ease,
     color 0.25s ease,
-    border-color 0.25s ease,
     transform 0.25s ease;
 }
 
 .btn:hover {
   background:
-    rgba(255, 255, 255, 0.32);
+    rgba(255, 255, 255, 0.30);
 
-  border-color:
-    rgba(255, 255, 255, 0.40);
-
-  color: #111111;
-
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 }
 
 
-/* Light cards need dark buttons */
+/* Light homepage cards */
 
 .hero-text .btn,
 .section .btn,
 .home-services-intro .btn {
   border:
-    1px solid rgba(17, 17, 17, 0.12);
+    1px solid
+    rgba(17, 17, 17, 0.12);
 
   background:
     rgba(17, 17, 17, 0.075);
 
-  color: #111111;
+  color: #111;
 }
 
 .hero-text .btn:hover,
 .section .btn:hover,
 .home-services-intro .btn:hover {
-  border-color:
-    rgba(17, 17, 17, 0.90);
-
   background:
     rgba(17, 17, 17, 0.90);
 
-  color: #ffffff;
+  color: #fff;
 }
 
 
 /* =========================================================
-   22. INNER PAGE BACKGROUND
+   INNER PAGE BACKGROUND
 ========================================================= */
 
 .page-bg {
@@ -1046,29 +1552,29 @@ video.hero-media {
       rgba(5, 8, 20, 0.48),
       rgba(3, 6, 14, 0.80)
     ),
-    url('../images/bg-polo-stilllife.jpg')
-    center center / cover
-    no-repeat;
-
-  background-attachment: scroll;
+    url("../images/bg-polo-stilllife.jpg")
+    center center / cover fixed no-repeat;
 
   color: #f5f7ff;
 }
 
 
 /* =========================================================
-   23. INNER PAGE CONTENT CARD
+   INNER PAGE CONTENT
 ========================================================= */
 
 .content-card {
   max-width: 900px;
 
-  margin: 90px auto;
+  margin:
+    90px auto;
 
-  padding: 40px 38px;
+  padding:
+    40px 38px;
 
   border:
-    1px solid rgba(255, 255, 255, 0.12);
+    1px solid
+    rgba(255, 255, 255, 0.12);
 
   border-radius: 21px;
 
@@ -1076,7 +1582,8 @@ video.hero-media {
     rgba(8, 12, 28, 0.76);
 
   box-shadow:
-    0 22px 60px rgba(0, 0, 0, 0.24);
+    0 22px 60px
+    rgba(0, 0, 0, 0.24);
 
   color: #f5f7ff;
 }
@@ -1084,11 +1591,13 @@ video.hero-media {
 .content-card h1,
 .content-card h2,
 .content-card h3 {
-  font-family: 'Playfair Display', serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
   font-weight: 500;
 
-  color: #ffffff;
+  color: #fff;
 }
 
 .content-card h1 {
@@ -1098,17 +1607,10 @@ video.hero-media {
 }
 
 .content-card h2 {
-  margin-top: 25px;
-  margin-bottom: 10px;
+  margin:
+    25px 0 10px;
 
   font-size: 1.55rem;
-}
-
-.content-card h3 {
-  margin-top: 18px;
-  margin-bottom: 8px;
-
-  font-size: 1.3rem;
 }
 
 .content-card p {
@@ -1118,218 +1620,57 @@ video.hero-media {
 }
 
 .content-card a {
-  color: #ffffff;
+  color: #fff;
 }
 
 
 /* =========================================================
-   24. SERVICES PAGE BANDS
-========================================================= */
-
-.service-band {
-  position: relative;
-
-  min-height: 100vh;
-
-  padding: 90px 24px;
-
-  overflow: hidden;
-
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  color: #ffffff;
-
-  isolation: isolate;
-}
-
-.service-band::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 1;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.42),
-      rgba(0, 0, 0, 0.68)
-    );
-}
-
-.service-band.business {
-  background-image:
-    url('../images/service-business.jpg');
-}
-
-.service-band.portfolio {
-  background-image:
-    url('../images/service-portfolio.jpg');
-}
-
-.service-band.investment {
-  background-image:
-    url('../images/service-investment.jpg');
-}
-
-.service-band-inner {
-  position: relative;
-
-  z-index: 2;
-
-  max-width: 900px;
-
-  margin: 0 auto;
-
-  padding: 35px 40px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.13);
-
-  border-radius: 20px;
-
-  background:
-    rgba(7, 11, 27, 0.77);
-
-  box-shadow:
-    0 20px 55px rgba(0, 0, 0, 0.24);
-}
-
-.service-band h2 {
-  margin-bottom: 13px;
-
-  text-align: center;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 1.95rem;
-  font-weight: 500;
-
-  color: #ffffff;
-}
-
-.service-band p {
-  max-width: 760px;
-
-  margin: 0 auto 20px;
-
-  text-align: center;
-
-  color: #eef1ff;
-}
-
-
-/* =========================================================
-   25. SERVICE LISTS
-========================================================= */
-
-.service-list {
-  max-width: 720px;
-
-  margin: 18px auto 0;
-
-  padding-left: 0;
-
-  list-style: none;
-
-  text-align: left;
-}
-
-.service-list li {
-  margin-bottom: 10px;
-
-  line-height: 1.7;
-
-  color: #eef1ff;
-}
-
-
-/* =========================================================
-   26. CAREERS LISTS
+   CAREERS
 ========================================================= */
 
 .careers-list,
-.opportunity-list {
-  margin: 16px 0;
+.opportunity-list,
+.service-list {
+  margin:
+    16px 0;
 
   padding-left: 1.35rem;
-
-  list-style-position: outside;
 }
 
 .careers-list li,
-.opportunity-list li {
+.opportunity-list li,
+.service-list li {
   margin-bottom: 9px;
-
-  color: #e2e7f5;
-}
-
-
-/* =========================================================
-   27. CAREERS CURRENT OPPORTUNITIES
-========================================================= */
-
-.careers-opportunities {
-  margin: 42px auto 0;
-
-  padding: 36px 30px;
-
-  text-align: center;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.13);
-
-  border-radius: 21px;
-
-  background:
-    rgba(7, 11, 27, 0.78);
-
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.22);
-}
-
-.careers-opportunities h2 {
-  font-family: 'Playfair Display', serif;
-
-  color: #ffffff;
-}
-
-.careers-opportunities p {
-  color: #e2e7f5;
 }
 
 
 /*
-  Fix for your careers page where you currently have:
-
-  <div class="section" style="margin:40px auto 0;">
-
-  Because that .section is inside the dark content-card,
-  make it dark rather than white.
+  Important:
+  fixes the careers Current Opportunities
+  section so it stays dark/glass instead
+  of becoming a white box.
 */
 
 .content-card .section {
   max-width: 100%;
 
-  margin-top: 40px;
+  margin:
+    40px auto 0;
 
   background:
     rgba(255, 255, 255, 0.07);
 
   border:
-    1px solid rgba(255, 255, 255, 0.13);
+    1px solid
+    rgba(255, 255, 255, 0.13);
 
   box-shadow: none;
 
-  color: #ffffff;
+  color: #fff;
 }
 
 .content-card .section h2 {
-  color: #ffffff;
+  color: #fff;
 }
 
 .content-card .section p {
@@ -1338,309 +1679,36 @@ video.hero-media {
 
 .content-card .section .btn {
   border:
-    1px solid rgba(255, 255, 255, 0.30);
+    1px solid
+    rgba(255, 255, 255, 0.30);
 
   background:
     rgba(255, 255, 255, 0.14);
 
-  color: #ffffff;
+  color: #fff;
 }
 
 .content-card .section .btn:hover {
   background:
     rgba(255, 255, 255, 0.28);
 
-  border-color:
-    rgba(255, 255, 255, 0.45);
-
-  color: #ffffff;
+  color: #fff;
 }
 
 
 /* =========================================================
-   28. CURRENT OPPORTUNITIES / JOBS
-========================================================= */
-
-.jobs-wrap {
-  max-width: 980px;
-
-  margin: 90px auto;
-
-  padding: 0 24px;
-}
-
-.jobs-title {
-  margin-bottom: 26px;
-
-  text-align: center;
-}
-
-.jobs-title h1 {
-  margin-bottom: 6px;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 2rem;
-
-  color: #ffffff;
-}
-
-.jobs-title p {
-  color: #e2e7f5;
-}
-
-.job-tiles {
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(300px, 1fr));
-
-  gap: 22px;
-}
-
-.job-tile {
-  padding: 26px 24px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.18);
-
-  border-radius: 18px;
-
-  background:
-    rgba(7, 11, 27, 0.76);
-
-  box-shadow:
-    0 22px 55px rgba(0, 0, 0, 0.22);
-
-  color: #f5f7ff;
-}
-
-.job-tile h2 {
-  margin-bottom: 8px;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 1.55rem;
-
-  color: #ffffff;
-}
-
-.job-meta {
-  margin-bottom: 10px;
-
-  font-size: 0.95rem;
-
-  color: #e2e7f5;
-}
-
-.job-tile p {
-  margin-bottom: 14px;
-
-  color: #e2e7f5;
-}
-
-.role-status {
-  margin-top: 12px;
-
-  font-size: 0.78rem;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-  color:
-    rgba(255, 255, 255, 0.70);
-}
-
-.job-detail {
-  display: none;
-
-  max-width: 900px;
-
-  margin: 90px auto;
-
-  padding: 38px 36px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.18);
-
-  border-radius: 18px;
-
-  background:
-    rgba(7, 11, 27, 0.78);
-
-  box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.27);
-
-  color: #f5f7ff;
-}
-
-.job-detail.active {
-  display: block;
-}
-
-.job-detail h1 {
-  margin-bottom: 10px;
-
-  text-align: center;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 1.95rem;
-
-  color: #ffffff;
-}
-
-.job-detail h2 {
-  margin: 18px 0 8px;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 1.4rem;
-
-  color: #ffffff;
-}
-
-.job-detail p {
-  margin-bottom: 12px;
-
-  color: #e2e7f5;
-}
-
-.job-actions {
-  display: flex;
-
-  justify-content: center;
-
-  flex-wrap: wrap;
-
-  gap: 14px;
-
-  margin-top: 22px;
-}
-
-.closed-role-btn {
-  display: inline-block;
-
-  padding: 8px 21px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.26);
-
-  border-radius: 999px;
-
-  background:
-    rgba(255, 255, 255, 0.12);
-
-  color: #ffffff;
-
-  font-size: 0.77rem;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-  cursor: default;
-
-  pointer-events: none;
-}
-
-
-/* =========================================================
-   29. TEAM
-========================================================= */
-
-.team-member {
-  margin-bottom: 27px;
-
-  text-align: left;
-}
-
-.team-member h3 {
-  margin-bottom: 6px;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 1.3rem;
-
-  color: #ffffff;
-}
-
-
-/* =========================================================
-   30. CONTACT
-========================================================= */
-
-.contact-details p {
-  margin-bottom: 11px;
-}
-
-.contact-details a {
-  color: #ffffff;
-
-  text-decoration: underline;
-
-  text-underline-offset: 3px;
-}
-
-.map-actions {
-  margin-top: 24px;
-}
-
-.map-btn {
-  display: inline-block;
-
-  margin: 6px 8px 6px 0;
-
-  padding: 9px 18px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.22);
-
-  border-radius: 999px;
-
-  background:
-    rgba(255, 255, 255, 0.13);
-
-  color: #ffffff;
-
-  font-size: 0.8rem;
-
-  letter-spacing: 0.08em;
-
-  text-transform: uppercase;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.map-btn:hover {
-  background:
-    rgba(255, 255, 255, 0.28);
-
-  border-color:
-    rgba(255, 255, 255, 0.38);
-}
-
-
-/* =========================================================
-   31. REVEAL ANIMATION
+   REVEAL ANIMATION
 ========================================================= */
 
 .reveal {
   opacity: 0;
 
   transform:
-    translate3d(0, 18px, 0);
+    translate3d(0, 16px, 0);
 
   transition:
-    opacity 0.65s ease,
-    transform 0.65s ease;
-
-  will-change:
-    opacity,
-    transform;
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .reveal.visible {
@@ -1651,20 +1719,31 @@ video.hero-media {
 }
 
 
+/*
+  Service bands should never become
+  invisible again once loaded.
+*/
+
+.home-service-band.reveal.visible {
+  opacity: 1;
+}
+
+
 /* =========================================================
-   32. FOOTER
+   FOOTER
 ========================================================= */
 
 footer {
   width: 100%;
 
-  padding: 40px 20px;
+  padding:
+    40px 20px;
 
   text-align: center;
 
   font-size: 0.83rem;
 
-  color: #777777;
+  color: #777;
 }
 
 .page-bg footer {
@@ -1674,82 +1753,7 @@ footer {
 
 
 /* =========================================================
-   33. PERFORMANCE HELPERS
-========================================================= */
-
-/*
-  Media itself does not receive mouse events.
-  This allows the hero slider container to receive
-  drag/swipe events properly.
-*/
-
-.hero-slide,
-.hero-media,
-.hero-overlay {
-  pointer-events: none;
-}
-
-.hero-controls,
-.hero-dots,
-.hero-dot,
-.hero-next,
-.hero-content,
-.hero-content a {
-  pointer-events: auto;
-}
-
-
-/*
-  Helps browsers avoid unnecessary rendering of
-  sections far below the viewport.
-
-  We DO NOT apply this to the full-screen image bands,
-  because we want those images prepared before scrolling.
-*/
-
-.hero-text-wrapper,
-.home-services-intro,
-.section {
-  content-visibility: auto;
-
-  contain-intrinsic-size:
-    auto 400px;
-}
-
-
-/* =========================================================
-   34. REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  .hero-slide {
-    transition: none;
-  }
-
-  .reveal {
-    opacity: 1;
-
-    transform: none;
-
-    transition: none;
-  }
-
-  .btn,
-  .btn-hero,
-  .hero-dot,
-  .hero-next {
-    transition: none;
-  }
-}
-
-
-/* =========================================================
-   35. TABLET
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -1763,37 +1767,21 @@ footer {
     font-size: 1.65rem;
   }
 
-  .site-subtitle {
-    font-size: 0.72rem;
-  }
-
   .hamburger {
     top: 23px;
     right: 18px;
   }
 
   .mobile-menu {
-    top: 73px;
+    top: 74px;
     right: 14px;
   }
-
-
-  /* HERO */
 
   .hero-full.hero-slider {
     height:
       calc(100svh - 76px);
 
     min-height: 560px;
-  }
-
-  .hero-media {
-    top: -6%;
-    left: -5%;
-
-    width: 110%;
-
-    height: 112%;
   }
 
   .hero-content {
@@ -1806,30 +1794,17 @@ footer {
   }
 
   .hero-content h1 {
-    max-width: 570px;
-
-    margin-bottom: 18px;
-
     font-size:
-      clamp(2.5rem, 9vw, 4rem);
-  }
-
-  .hero-content p {
-    max-width: 520px;
-
-    margin-bottom: 24px;
-
-    font-size: 0.98rem;
-
-    line-height: 1.55;
+      clamp(
+        2.5rem,
+        9vw,
+        4rem
+      );
   }
 
   .hero-controls {
     bottom: 22px;
   }
-
-
-  /* CONTENT */
 
   .hero-text-wrapper {
     padding:
@@ -1853,19 +1828,8 @@ footer {
       55px 16px 35px;
   }
 
-
-  /* SERVICE BANDS */
-
   .home-service-band {
-    min-height: 92vh;
-  }
-
-  .home-service-band > img {
-    top: -7%;
-    left: -5%;
-
-    width: 110%;
-    height: 114%;
+    min-height: 92svh;
   }
 
   .home-service-content {
@@ -1875,35 +1839,7 @@ footer {
       25px 23px;
   }
 
-  .home-service-content h3 {
-    font-size: 1.65rem;
-  }
-
-
-  /* INNER PAGES */
-
   .content-card {
-    margin:
-      70px 16px;
-
-    padding:
-      31px 23px;
-  }
-
-  .service-band-inner {
-    padding:
-      28px 23px;
-  }
-
-  .jobs-wrap {
-    margin:
-      70px auto;
-
-    padding:
-      0 16px;
-  }
-
-  .job-detail {
     margin:
       70px 16px;
 
@@ -1914,10 +1850,15 @@ footer {
 
 
 /* =========================================================
-   36. MOBILE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 600px) {
+
+  body,
+  .page-bg {
+    background-attachment: scroll;
+  }
 
   .site-header {
     padding:
@@ -1929,11 +1870,7 @@ footer {
   }
 
   .site-subtitle {
-    margin-top: 4px;
-
     font-size: 0.66rem;
-
-    letter-spacing: 0.14em;
   }
 
   .hamburger {
@@ -1944,20 +1881,50 @@ footer {
     height: 21px;
   }
 
-  .nav-toggle:checked + .hamburger span:nth-child(1) {
-    transform:
-      translateY(9.5px)
-      rotate(45deg);
+  .mobile-menu {
+    top: 70px;
+    right: 10px;
+
+    width:
+      min(235px, calc(100vw - 20px));
   }
 
-  .nav-toggle:checked + .hamburger span:nth-child(3) {
-    transform:
-      translateY(-9.5px)
-      rotate(-45deg);
+  .intro-background {
+    inset: -30px;
   }
 
+  .intro-brand h1 {
+    font-size:
+      clamp(
+        2.5rem,
+        13vw,
+        4rem
+      );
+  }
 
-  /* HERO */
+  .intro-brand span {
+    font-size: 0.62rem;
+
+    letter-spacing: 0.26em;
+  }
+
+  .intro-welcome {
+    font-size:
+      clamp(
+        1.9rem,
+        9vw,
+        3rem
+      );
+  }
+
+  .intro-strategy {
+    font-size:
+      clamp(
+        1.9rem,
+        9vw,
+        3.2rem
+      );
+  }
 
   .hero-full.hero-slider {
     height:
@@ -1966,12 +1933,13 @@ footer {
     min-height: 540px;
   }
 
-  .hero-media {
-    top: -5%;
+  .hero-slide > img,
+  .hero-slide > video {
+    top: -6%;
     left: -7%;
 
     width: 114%;
-    height: 110%;
+    height: 112%;
   }
 
   .hero-content {
@@ -1979,30 +1947,25 @@ footer {
     right: 22px;
 
     bottom: 102px;
+
+    width: auto;
   }
 
   .hero-content h1 {
+    margin-bottom: 18px;
+
     font-size:
-      clamp(2.35rem, 12vw, 3.4rem);
-
-    line-height: 1.03;
-
-    letter-spacing: -0.02em;
+      clamp(
+        2.35rem,
+        12vw,
+        3.4rem
+      );
   }
 
   .hero-content p {
-    max-width: 440px;
+    margin-bottom: 23px;
 
     font-size: 0.92rem;
-
-    line-height: 1.52;
-  }
-
-  .btn-hero {
-    padding:
-      10px 22px;
-
-    font-size: 0.72rem;
   }
 
   .hero-controls {
@@ -2027,28 +1990,21 @@ footer {
     width: 22px;
   }
 
-  .hero-next {
-    width: 37px;
-    height: 37px;
-  }
-
-
-  /* SERVICE IMAGES */
-
   .home-service-band {
     min-height: 88svh;
   }
 
   .home-service-band > img {
-    top: -6%;
+    top: -8%;
     left: -8%;
 
     width: 116%;
-    height: 112%;
+    height: 116%;
   }
 
   .home-service-content {
-    width: calc(100% - 38px);
+    width:
+      calc(100% - 38px);
 
     padding:
       23px 20px;
@@ -2058,23 +2014,10 @@ footer {
     font-size: 1.5rem;
   }
 
-  .home-service-content p {
-    font-size: 0.91rem;
-  }
-
-
-  /* CARDS */
-
   .hero-text,
   .section,
   .home-services-intro {
     border-radius: 18px;
-  }
-
-  .hero-text h2,
-  .section h2,
-  .home-services-intro h2 {
-    font-size: 1.65rem;
   }
 
   .content-card {
@@ -2083,27 +2026,30 @@ footer {
 
     padding:
       27px 19px;
+  }
+}
 
-    border-radius: 18px;
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
   }
 
-  .content-card h1 {
-    font-size: 1.75rem;
+  .reveal {
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
   }
 
-  .content-card h2 {
-    font-size: 1.4rem;
-  }
-
-  .job-tiles {
-    grid-template-columns: 1fr;
-  }
-
-  .job-detail {
-    margin:
-      55px 12px;
-
-    padding:
-      27px 19px;
+  .hero-slide,
+  .home-service-band > img {
+    transition: none;
   }
 }
