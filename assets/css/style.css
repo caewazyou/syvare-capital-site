@@ -2053,3 +2053,284 @@ footer {
     transition: none;
   }
 }
+/* =========================================================
+   SYVARÉ CAPITAL — FINAL GLASS + CONTACT FIXES
+   Add this at the VERY BOTTOM of style.css
+========================================================= */
+
+
+/* =========================================================
+   1. GLASS BOXES
+   Removes the blue / grey tint.
+
+   Used for:
+   - Business Advisory
+   - Portfolio Advisory
+   - Investment Advisory
+   - Contact page
+   - General content cards
+========================================================= */
+
+.content-card,
+.section,
+.home-service-content,
+.service-content,
+.service-card,
+.contact-card,
+.contact-content,
+.job-tile,
+.job-detail {
+  background: rgba(0, 0, 0, 0.10) !important;
+
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.16) !important;
+}
+
+
+/* =========================================================
+   2. BUSINESS ADVISORY / SERVICE BOXES
+
+   Keeps the background image visible through the glass.
+   No blue tint.
+========================================================= */
+
+.home-service-band .home-service-content,
+.service-band .service-content {
+  background: rgba(0, 0, 0, 0.08) !important;
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.14) !important;
+}
+
+
+/* Text stays readable even though the box is more transparent */
+
+.home-service-content h2,
+.home-service-content h3,
+.service-content h2,
+.service-content h3 {
+  color: #ffffff;
+}
+
+.home-service-content p,
+.service-content p {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+
+/* =========================================================
+   3. CONTACT PAGE MAIN GLASS BOX
+
+   Almost transparent.
+   Background photograph remains clearly visible.
+========================================================= */
+
+.contact-page .content-card,
+.contact-section,
+.contact-card {
+  background: rgba(0, 0, 0, 0.06) !important;
+
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.12) !important;
+}
+
+
+/* =========================================================
+   4. MAP AREA
+========================================================= */
+
+.map-options,
+.contact-map,
+.map-card,
+.map-wrapper {
+  background: transparent !important;
+}
+
+
+/* =========================================================
+   5. MAP ICON — IMPORTANT FIX
+
+   Prevents the giant location icon shown in your screenshot.
+========================================================= */
+
+.map-icon,
+.contact-map-icon,
+.map-options img,
+.contact-map img,
+.map-card img,
+.map-wrapper img {
+  width: 42px !important;
+  height: 42px !important;
+
+  max-width: 42px !important;
+  max-height: 42px !important;
+
+  object-fit: contain;
+
+  display: block;
+
+  margin: 0 0 14px 0;
+
+  transform: none !important;
+}
+
+
+/* If your map icon is an SVG */
+
+.map-icon svg,
+.contact-map-icon svg,
+.map-options svg,
+.contact-map svg,
+.map-card svg,
+.map-wrapper svg {
+  width: 42px !important;
+  height: 42px !important;
+
+  max-width: 42px !important;
+  max-height: 42px !important;
+
+  display: block;
+
+  flex: 0 0 42px;
+
+  transform: none !important;
+}
+
+
+/* =========================================================
+   6. OPEN ADDRESS IN MAPS
+========================================================= */
+
+.map-options h2,
+.contact-map h2,
+.map-card h2 {
+  margin-top: 8px;
+  margin-bottom: 12px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 1.55rem;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   7. GOOGLE MAPS + APPLE MAPS LINKS
+========================================================= */
+
+.map-links {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+
+.map-links a {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 0.9rem;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.map-links a:hover {
+  background: rgba(255, 255, 255, 0.14);
+
+  border-color: rgba(255, 255, 255, 0.30);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   8. CONTACT EMAIL
+========================================================= */
+
+.contact-card a,
+.contact-section a,
+.contact-page .content-card a {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   9. MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .map-icon,
+  .contact-map-icon,
+  .map-options img,
+  .contact-map img,
+  .map-card img,
+  .map-wrapper img {
+    width: 38px !important;
+    height: 38px !important;
+
+    max-width: 38px !important;
+    max-height: 38px !important;
+  }
+
+
+  .map-icon svg,
+  .contact-map-icon svg,
+  .map-options svg,
+  .contact-map svg,
+  .map-card svg,
+  .map-wrapper svg {
+    width: 38px !important;
+    height: 38px !important;
+
+    max-width: 38px !important;
+    max-height: 38px !important;
+  }
+
+
+  .home-service-band .home-service-content,
+  .service-band .service-content,
+  .contact-page .content-card,
+  .contact-section,
+  .contact-card {
+    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(9px);
+  }
+
+}
