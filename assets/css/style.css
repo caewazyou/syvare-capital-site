@@ -1,54 +1,56 @@
-/* ==========================================================
+/* =========================================================
    SYVARÉ CAPITAL
-   COMPLETE STYLE.CSS
-   ========================================================== */
+   MAIN STYLESHEET
+   OLD LAYOUT + NEW FEATURES
+========================================================= */
 
 
-/* ==========================================================
-   1. RESET
-   ========================================================== */
+/* =========================================================
+   RESET / GLOBAL
+========================================================= */
 
-*,
-*::before,
-*::after {
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 html {
-  margin: 0;
-  padding: 0;
   scroll-behavior: smooth;
-  background: #050812;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-
   min-height: 100vh;
-
-  font-family: "Source Sans 3", sans-serif;
-
-  color: #ffffff;
-  background: #050812;
-
   overflow-x: hidden;
+
+  font-family:
+    "Source Sans 3",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+
+  color: #222;
+
+  background:
+    linear-gradient(
+      190deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0.86)
+    ),
+    url("../images/bg-polo-stilllife.jpg")
+    center center / cover fixed no-repeat;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-body,
-button,
-input,
-textarea,
-select {
-  font-family: "Source Sans 3", sans-serif;
-}
-
-img,
-video {
-  display: block;
+body.intro-running {
+  overflow: hidden;
 }
 
 a {
@@ -56,112 +58,89 @@ a {
   text-decoration: none;
 }
 
-button {
+img,
+video {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input {
   font: inherit;
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin-top: 0;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Playfair Display", serif;
-  font-weight: 500;
-}
-
-p {
-  line-height: 1.7;
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 
-
-/* ==========================================================
-   2. GENERAL PAGE BACKGROUND
-   ========================================================== */
-
-.page-bg {
-  min-height: 100vh;
-
-  background:
-    linear-gradient(
-      rgba(3, 7, 18, 0.72),
-      rgba(3, 7, 18, 0.82)
-    ),
-    url("../images/hero-polo.jpg")
-    center center / cover fixed no-repeat;
-}
-
-
-
-/* ==========================================================
-   3. HEADER
-   ========================================================== */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .site-header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
 
   z-index: 1000;
 
   width: 100%;
-  height: 74px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 18px 16px 22px;
 
-  padding: 0 34px;
+  text-align: center;
 
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
 
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  border-bottom:
+    1px solid rgba(0, 0, 0, 0.05);
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.025);
 }
 
 .brand {
   position: relative;
   z-index: 1002;
 
-  text-align: center;
-
-  color: #111111;
+  display: inline-block;
 }
 
 .site-title {
-  font-family: "Playfair Display", serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
-  font-size: 1.65rem;
-  line-height: 1;
+  font-size: 1.9rem;
+  font-weight: 500;
 
-  letter-spacing: 0.02em;
+  line-height: 1.1;
+
+  letter-spacing: 0.025em;
+
+  color: #111;
 }
 
 .site-subtitle {
-  margin-top: 5px;
+  margin-top: 4px;
 
-  font-size: 0.63rem;
+  font-size: 0.76rem;
+  font-weight: 400;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
-  color: rgba(0, 0, 0, 0.60);
+  color: #666;
 }
 
 
-
-/* ==========================================================
-   4. HAMBURGER
-   ========================================================== */
+/* =========================================================
+   HAMBURGER
+========================================================= */
 
 .nav-toggle {
   position: absolute;
@@ -170,25 +149,24 @@ p {
   height: 1px;
 
   opacity: 0;
+
   pointer-events: none;
 }
 
 .hamburger {
   position: absolute;
 
-  right: 32px;
-  top: 50%;
+  top: 24px;
+  right: 24px;
 
   z-index: 1003;
-
-  width: 30px;
-  height: 22px;
-
-  transform: translateY(-50%);
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 30px;
+  height: 23px;
 
   cursor: pointer;
 }
@@ -197,17 +175,21 @@ p {
   display: block;
 
   width: 100%;
-  height: 1px;
+  height: 2px;
 
-  background: #111111;
+  background: #222;
+
+  transform-origin: center;
 
   transition:
-    transform 0.35s ease,
-    opacity 0.35s ease;
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .nav-toggle:checked + .hamburger span:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
+  transform:
+    translateY(10.5px)
+    rotate(45deg);
 }
 
 .nav-toggle:checked + .hamburger span:nth-child(2) {
@@ -215,77 +197,108 @@ p {
 }
 
 .nav-toggle:checked + .hamburger span:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
+  transform:
+    translateY(-10.5px)
+    rotate(-45deg);
 }
 
 
-
-/* ==========================================================
-   5. NAVIGATION MENU
-   ========================================================== */
+/* =========================================================
+   NAVIGATION MENU
+========================================================= */
 
 .mobile-menu {
   position: fixed;
 
-  top: 74px;
-  right: 0;
+  top: 82px;
+  right: 18px;
 
-  z-index: 999;
+  z-index: 1001;
 
-  width: min(390px, 100%);
-  height: calc(100vh - 74px);
+  width: 235px;
 
-  display: flex;
-  flex-direction: column;
+  padding: 8px 0;
 
-  padding: 54px 42px;
+  visibility: hidden;
+  opacity: 0;
 
-  background: rgba(5, 8, 18, 0.96);
+  transform:
+    translateY(-8px);
 
-  -webkit-backdrop-filter: blur(24px);
-  backdrop-filter: blur(24px);
+  background:
+    rgba(255, 255, 255, 0.98);
 
-  transform: translateX(100%);
+  border:
+    1px solid rgba(0, 0, 0, 0.05);
 
-  transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
+  border-radius: 12px;
+
+  box-shadow:
+    0 18px 45px
+    rgba(0, 0, 0, 0.13);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s;
 }
 
 .nav-toggle:checked ~ .mobile-menu {
-  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  pointer-events: auto;
 }
 
 .mobile-menu a {
-  padding: 16px 0;
+  display: block;
 
-  font-family: "Playfair Display", serif;
+  padding: 11px 18px;
 
-  font-size: 1.45rem;
+  font-size: 0.79rem;
+  font-weight: 500;
 
-  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.12em;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+
+  color: #222;
+
+  border-bottom:
+    1px solid rgba(0, 0, 0, 0.055);
 
   transition:
-    color 0.25s ease,
-    padding-left 0.25s ease;
+    background 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.mobile-menu a:last-child {
+  border-bottom: none;
 }
 
 .mobile-menu a:hover {
-  color: #ffffff;
-  padding-left: 7px;
+  padding-left: 22px;
+
+  background:
+    rgba(0, 0, 0, 0.035);
 }
 
 
-
-/* ==========================================================
-   6. INTRO
-   ========================================================== */
+/* =========================================================
+   CINEMATIC INTRO
+   NEW FEATURE
+========================================================= */
 
 .syvare-intro {
   position: fixed;
   inset: 0;
 
-  z-index: 10000;
+  z-index: 99999;
 
   display: flex;
   align-items: center;
@@ -293,51 +306,245 @@ p {
 
   overflow: hidden;
 
-  background: #030711;
+  background: #03050a;
+
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transition:
+    opacity 1.25s
+    cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 1.25s;
 }
+
+
+/* =========================================================
+   INTRO BACKGROUND
+========================================================= */
 
 .intro-background {
   position: absolute;
 
-  inset: -30px;
+  inset: -40px;
 
   background:
     linear-gradient(
-      rgba(2, 5, 14, 0.62),
-      rgba(2, 5, 14, 0.78)
+      180deg,
+      rgba(3, 6, 15, 0.50),
+      rgba(3, 6, 15, 0.68)
     ),
     url("../images/hero-polo.jpg")
     center center / cover no-repeat;
 
-  filter: blur(14px);
+  transform:
+    translate3d(0, 0, 0)
+    scale(1.12);
 
-  transform: scale(1.08);
+  filter:
+    blur(20px)
+    brightness(0.62);
 
-  animation: introBackgroundMove 9s ease-out forwards;
+  transform-origin: center;
+
+  will-change:
+    transform,
+    filter;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  animation:
+    introBackgroundAnimation
+    10s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
 }
 
-@keyframes introBackgroundMove {
-  from {
-    transform: scale(1.10);
-    filter: blur(15px);
+@keyframes introBackgroundAnimation {
+
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.12);
+
+    filter:
+      blur(20px)
+      brightness(0.60);
   }
 
-  to {
-    transform: scale(1.03);
-    filter: blur(7px);
+  30% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.10);
+
+    filter:
+      blur(18px)
+      brightness(0.64);
+  }
+
+  60% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.075);
+
+    filter:
+      blur(13px)
+      brightness(0.70);
+  }
+
+  82% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.05);
+
+    filter:
+      blur(7px)
+      brightness(0.77);
+  }
+
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1.025);
+
+    filter:
+      blur(2px)
+      brightness(0.84);
   }
 }
+
+
+/* =========================================================
+   INTRO CONTENT
+========================================================= */
 
 .intro-content {
   position: relative;
-  z-index: 2;
+
+  z-index: 3;
 
   width: 90%;
+  height: 100%;
 
   text-align: center;
+
+  color: #fff;
 }
 
-.intro-brand,
+
+/* =========================================================
+   INTRO BRAND
+========================================================= */
+
+.intro-brand {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%);
+
+  animation:
+    introBrandAnimation
+    3.2s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.intro-brand h1 {
+  margin: 0;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(2.8rem, 6vw, 5.5rem);
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.03em;
+
+  color: #fff;
+
+  text-shadow:
+    0 5px 30px
+    rgba(0, 0, 0, 0.28);
+}
+
+.intro-brand span {
+  display: block;
+
+  margin-top: 17px;
+
+  font-size: 0.72rem;
+  font-weight: 400;
+
+  letter-spacing: 0.35em;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(255, 255, 255, 0.76);
+}
+
+@keyframes introBrandAnimation {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -42%)
+      scale(0.97);
+
+    filter: blur(7px);
+  }
+
+  18% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  70% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -57%)
+      scale(1.015);
+
+    filter: blur(2px);
+  }
+}
+
+
+/* =========================================================
+   INTRO MESSAGES
+========================================================= */
+
 .intro-message {
   position: absolute;
 
@@ -346,156 +553,273 @@ p {
 
   width: 100%;
 
-  transform: translate(-50%, -50%);
-
   opacity: 0;
-}
 
-.intro-brand {
-  animation: introBrandSequence 3.4s ease forwards;
-}
+  transform:
+    translate(-50%, -50%);
 
-.intro-brand h1 {
-  margin-bottom: 8px;
+  font-family:
+    "Playfair Display",
+    serif;
 
-  font-size: clamp(2.2rem, 6vw, 5rem);
+  font-weight: 400;
 
-  letter-spacing: 0.02em;
-}
+  line-height: 1.15;
 
-.intro-brand span {
-  font-size: 0.8rem;
+  color: #fff;
 
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-
-  color: rgba(255, 255, 255, 0.70);
+  text-shadow:
+    0 5px 35px
+    rgba(0, 0, 0, 0.30);
 }
 
 .intro-welcome {
-  animation: introWelcomeSequence 3.2s 3.1s ease forwards;
+  font-size:
+    clamp(2rem, 4.5vw, 4.2rem);
+
+  animation:
+    introWelcomeAnimation
+    3.4s
+    2.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes introWelcomeAnimation {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -42%);
+
+    filter: blur(6px);
+  }
+
+  18% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%);
+
+    filter: blur(0);
+  }
+
+  72% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%);
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -58%);
+
+    filter: blur(2px);
+  }
 }
 
 .intro-strategy {
-  animation: introStrategySequence 3.6s 6s ease forwards;
+  font-size:
+    clamp(2.1rem, 5vw, 4.8rem);
+
+  animation:
+    introStrategyAnimation
+    3.6s
+    5.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
 }
 
-.intro-message {
-  font-family: "Playfair Display", serif;
+@keyframes introStrategyAnimation {
 
-  font-size: clamp(1.8rem, 4.5vw, 4rem);
-
-  letter-spacing: 0.015em;
-}
-
-@keyframes introBrandSequence {
   0% {
     opacity: 0;
-    transform: translate(-50%, -46%);
+
+    transform:
+      translate(-50%, -42%)
+      scale(0.98);
+
+    filter: blur(6px);
   }
 
-  22%,
-  70% {
+  18% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  75% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, -54%);
+
+    transform:
+      translate(-50%, -56%)
+      scale(1.01);
+
+    filter: blur(2px);
   }
 }
 
-@keyframes introWelcomeSequence {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -46%);
-  }
 
-  22%,
-  70% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -54%);
-  }
-}
-
-@keyframes introStrategySequence {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -46%);
-  }
-
-  25%,
-  78% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
+/* =========================================================
+   INTRO LINE
+========================================================= */
 
 .intro-line {
   position: absolute;
 
-  bottom: 11%;
+  left: 50%;
+  bottom: 0;
 
-  z-index: 3;
+  z-index: 4;
 
   width: 0;
   height: 1px;
 
-  background: rgba(255, 255, 255, 0.75);
+  transform:
+    translateX(-50%);
 
-  animation: introLine 9.2s linear forwards;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(225, 207, 166, 0.95),
+      transparent
+    );
+
+  animation:
+    introLineAnimation
+    8.7s
+    0.5s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
 }
 
-@keyframes introLine {
-  from {
+@keyframes introLineAnimation {
+
+  0% {
     width: 0;
+    opacity: 0;
   }
 
-  to {
-    width: min(360px, 70vw);
+  15% {
+    width: 25%;
+    opacity: 0.7;
+  }
+
+  45% {
+    width: 48%;
+    opacity: 1;
+  }
+
+  75% {
+    width: 72%;
+    opacity: 0.72;
+  }
+
+  100% {
+    width: 100%;
+    opacity: 0;
   }
 }
 
 
+/* =========================================================
+   INTRO EXIT
+========================================================= */
 
-/* ==========================================================
-   7. HERO
-   ========================================================== */
+.syvare-intro.intro-finished {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+body.intro-running main,
+body.intro-running .site-header {
+  opacity: 0;
+
+  transform:
+    translate3d(0, 10px, 0)
+    scale(1.005);
+}
+
+body.intro-ready main,
+body.intro-ready .site-header {
+  opacity: 1;
+
+  transform:
+    translate3d(0, 0, 0)
+    scale(1);
+
+  transition:
+    opacity 1.25s
+    cubic-bezier(0.22, 1, 0.36, 1),
+
+    transform 1.45s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   HERO
+   ORIGINAL LAYOUT PRESERVED
+========================================================= */
 
 .hero-full {
   position: relative;
 
-  width: 100%;
-  height: 100vh;
-  min-height: 680px;
+  height:
+    calc(100vh - 86px);
 
   overflow: hidden;
 
-  background: #050812;
+  color: #fff;
+
+  background: #0b0f1a;
 }
 
-.hero-slider {
+.hero-full.hero-slider {
+  isolation: isolate;
+
   touch-action: pan-y;
+
+  cursor: grab;
 
   user-select: none;
   -webkit-user-select: none;
 
-  cursor: grab;
+  transform: translateZ(0);
 }
 
-.hero-slider:active {
+.hero-full.hero-slider.dragging {
   cursor: grabbing;
 }
+
+
+/* =========================================================
+   HERO SLIDES
+========================================================= */
 
 .hero-slide {
   position: absolute;
@@ -505,9 +829,14 @@ p {
 
   pointer-events: none;
 
-  transition: opacity 1s ease;
+  transition:
+    opacity 0.75s
+    cubic-bezier(0.22, 1, 0.36, 1);
 
-  overflow: hidden;
+  will-change: opacity;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .hero-slide.active {
@@ -520,345 +849,451 @@ p {
 .hero-slide video {
   position: absolute;
 
-  left: 0;
-  top: -7%;
+  inset: 0;
 
   width: 100%;
-  height: 114%;
+  height: 100%;
 
   object-fit: cover;
 
   transform:
-    translate3d(0, var(--hero-scroll, 0px), 0)
-    scale(1.025);
+    translate3d(
+      0,
+      var(--hero-scroll, 0px),
+      0
+    )
+    scale(1.035);
+
+  transform-origin: center;
 
   will-change: transform;
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+
+  pointer-events: none;
 }
 
-.hero-slide.active img {
-  animation: heroImageZoom 10s ease-out forwards;
+.hero-slide video {
+  background: #050812;
 }
 
-@keyframes heroImageZoom {
-  from {
-    transform:
-      translate3d(0, var(--hero-scroll, 0px), 0)
-      scale(1.08);
-  }
 
-  to {
-    transform:
-      translate3d(0, var(--hero-scroll, 0px), 0)
-      scale(1.025);
-  }
-}
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
 
 .hero-overlay {
   position: absolute;
   inset: 0;
 
-  z-index: 2;
+  z-index: 5;
+
+  pointer-events: none;
 
   background:
     linear-gradient(
       90deg,
-      rgba(2, 6, 16, 0.72) 0%,
-      rgba(2, 6, 16, 0.38) 52%,
-      rgba(2, 6, 16, 0.22) 100%
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.42) 38%,
+      rgba(0, 0, 0, 0.12) 70%,
+      rgba(0, 0, 0, 0.05) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.03),
+      rgba(0, 0, 0, 0.06) 60%,
+      rgba(0, 0, 0, 0.32)
     );
 }
+
+
+/* =========================================================
+   HERO TEXT
+   ORIGINAL POSITION PRESERVED
+========================================================= */
 
 .hero-content {
   position: absolute;
 
-  z-index: 3;
+  left: 7%;
 
-  left: clamp(30px, 7vw, 110px);
-  bottom: clamp(110px, 17vh, 180px);
+  bottom: 17%;
 
-  width: min(680px, 84vw);
+  z-index: 10;
+
+  max-width: 650px;
+
+  color: #fff;
 }
 
 .hero-content h1 {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 
-  font-size: clamp(2.7rem, 5.6vw, 5.5rem);
+  font-family:
+    "Playfair Display",
+    serif;
 
-  line-height: 1.03;
+  font-size:
+    clamp(3rem, 5vw, 5.3rem);
 
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.30);
+  font-weight: 500;
+
+  line-height: 1.02;
+
+  letter-spacing: -0.025em;
+
+  color: #fff;
 }
 
 .hero-content p {
-  max-width: 600px;
+  margin-bottom: 28px;
 
-  margin-bottom: 30px;
+  max-width: 580px;
 
-  font-size: 1.08rem;
+  font-size: 1.05rem;
 
-  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.65;
+
+  color:
+    rgba(255, 255, 255, 0.90);
 }
 
 
+/* =========================================================
+   HERO BUTTON
+========================================================= */
 
-/* ==========================================================
-   8. BUTTONS
-   ========================================================== */
-
-.btn,
 .btn-hero {
   display: inline-flex;
 
   align-items: center;
-  justify-content: center;
 
-  min-height: 44px;
+  gap: 14px;
 
-  padding: 10px 23px;
+  padding:
+    10px 26px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.52);
 
   border-radius: 999px;
 
-  border: 1px solid rgba(255, 255, 255, 0.30);
+  background:
+    rgba(5, 8, 17, 0.55);
 
-  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
 
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  font-size: 0.77rem;
+  font-weight: 600;
 
-  color: #ffffff;
+  letter-spacing: 0.15em;
 
-  font-size: 0.88rem;
+  text-transform: uppercase;
 
   transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.3s ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.btn:hover,
+.btn-hero::after {
+  content: "→";
+}
+
 .btn-hero:hover {
-  background: rgba(255, 255, 255, 0.17);
+  background: #fff;
 
-  border-color: rgba(255, 255, 255, 0.48);
+  color: #111;
 
-  transform: translateY(-2px);
+  transform:
+    translateY(-1px);
 }
 
 
-
-/* ==========================================================
-   9. HERO CONTROLS
-   ========================================================== */
+/* =========================================================
+   HERO CONTROLS
+========================================================= */
 
 .hero-controls {
   position: absolute;
 
-  z-index: 5;
+  left: 50%;
+  bottom: 26px;
 
-  right: clamp(25px, 5vw, 70px);
-  bottom: 48px;
+  z-index: 30;
 
   display: flex;
+
   align-items: center;
 
-  gap: 20px;
+  gap: 10px;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: auto;
 }
 
 .hero-dots {
   display: flex;
+
   align-items: center;
 
-  gap: 10px;
+  gap: 9px;
+
+  min-height: 38px;
+
+  padding:
+    8px 13px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(6, 9, 18, 0.68);
+
+  box-shadow:
+    0 10px 28px
+    rgba(0, 0, 0, 0.22);
+
+  touch-action: none;
 }
 
 .hero-dot {
-  width: 8px;
-  height: 8px;
+  flex: 0 0 auto;
+
+  width: 9px;
+  height: 9px;
 
   padding: 0;
 
   border: 0;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.42);
-
-  cursor: pointer;
-
-  transition:
-    width 0.3s ease,
-    border-radius 0.3s ease,
-    background 0.3s ease;
-}
-
-.hero-dot.active {
-  width: 27px;
 
   border-radius: 999px;
 
-  background: #ffffff;
-}
-
-.hero-next {
-  width: 42px;
-  height: 42px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255, 255, 255, 0.30);
-
-  background: rgba(255, 255, 255, 0.07);
-
-  color: #ffffff;
-
-  font-size: 1.8rem;
+  background:
+    rgba(255, 255, 255, 0.42);
 
   cursor: pointer;
 
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  transition:
+    width 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
 
-  transition: background 0.3s ease;
+.hero-dot.active {
+  width: 24px;
+
+  background: #fff;
+}
+
+.hero-dot:hover {
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  transform:
+    scale(1.15);
+}
+
+.hero-next {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(6, 9, 18, 0.68);
+
+  color: #fff;
+
+  font-size: 1.7rem;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 28px
+    rgba(0, 0, 0, 0.22);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .hero-next:hover {
-  background: rgba(255, 255, 255, 0.17);
+  background:
+    rgba(255, 255, 255, 0.22);
+
+  transform:
+    translateX(2px);
 }
 
 
-
-/* ==========================================================
-   10. REVEAL ANIMATIONS
-   ========================================================== */
-
-.reveal {
-  opacity: 0;
-
-  transform: translate3d(0, 35px, 0);
-
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s cubic-bezier(.22, 1, .36, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-
-  transform: translate3d(0, 0, 0);
-}
-
-
-
-/* ==========================================================
-   11. HOME ABOUT
-   ========================================================== */
+/* =========================================================
+   ABOUT PREVIEW
+   OLD LAYOUT
+========================================================= */
 
 .hero-text-wrapper {
-  position: relative;
+  width: 100%;
 
-  z-index: 5;
-
-  padding: 120px 28px;
-
-  background: #060a14;
+  padding:
+    70px 20px 10px;
 }
 
 .hero-text {
-  width: min(840px, 100%);
+  max-width: 820px;
 
   margin: 0 auto;
 
+  padding:
+    38px 34px;
+
   text-align: center;
+
+  border-radius: 22px;
+
+  background:
+    rgba(250, 250, 249, 0.96);
+
+  box-shadow:
+    0 18px 50px
+    rgba(0, 0, 0, 0.07);
 }
 
 .hero-text h2 {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 1.9rem;
+  font-weight: 500;
+
+  color: #1b1b1b;
 }
 
 .hero-text p {
-  color: rgba(255, 255, 255, 0.76);
+  margin-bottom: 18px;
 
-  font-size: 1.05rem;
+  color: #555;
 }
 
 
-
-/* ==========================================================
-   12. OUR WORK INTRO
-   ========================================================== */
+/* =========================================================
+   OUR WORK INTRO
+   OLD LAYOUT
+========================================================= */
 
 .home-services-intro {
-  padding: 110px 28px 70px;
+  max-width: 820px;
+
+  margin:
+    70px auto 35px;
+
+  padding:
+    34px 30px;
 
   text-align: center;
 
-  background: #060a14;
+  border-radius: 22px;
+
+  background:
+    rgba(250, 250, 249, 0.96);
+
+  box-shadow:
+    0 15px 42px
+    rgba(0, 0, 0, 0.065);
 }
 
 .home-services-intro h2 {
-  margin-bottom: 18px;
+  margin-bottom: 8px;
 
-  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 1.9rem;
+  font-weight: 500;
+
+  color: #1b1b1b;
 }
 
 .home-services-intro p {
-  max-width: 720px;
-
-  margin: 0 auto;
-
-  color: rgba(255, 255, 255, 0.72);
+  color: #555;
 }
 
 
-
-/* ==========================================================
-   13. HOME SERVICE BANDS
-   ========================================================== */
+/* =========================================================
+   HOME SERVICE BANDS
+   OLD LAYOUT + NEW PERFORMANCE
+========================================================= */
 
 .home-service-band {
   position: relative;
 
   width: 100%;
-  min-height: 680px;
 
-  display: flex;
-  align-items: center;
-
-  padding: 80px clamp(28px, 7vw, 110px);
+  min-height: 100vh;
 
   overflow: hidden;
 
-  background: #050812;
+  background: #0a0f1e;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  isolation: isolate;
+
+  transform: translateZ(0);
 }
 
-.home-service-band > img {
+.home-service-band img {
   position: absolute;
 
-  top: -12%;
+  top: -18%;
   left: 0;
 
-  z-index: 0;
+  z-index: 1;
 
   width: 100%;
-  height: 124%;
+  max-width: none;
+
+  height: 136%;
 
   object-fit: cover;
+  object-position: center;
 
-  transform: translate3d(0, 0, 0) scale(1.02);
+  transform:
+    translate3d(
+      0,
+      var(--service-scroll, 0px),
+      0
+    )
+    scale(
+      var(--service-scale, 1.045)
+    );
+
+  transform-origin: center;
 
   will-change: transform;
 
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  pointer-events: none;
 }
 
 .home-service-band::after {
@@ -867,170 +1302,306 @@ p {
   position: absolute;
   inset: 0;
 
-  z-index: 1;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(2, 6, 16, 0.68),
-      rgba(2, 6, 16, 0.28)
-    );
-}
-
-.home-service-content {
-  position: relative;
-
   z-index: 2;
 
-  width: min(570px, 100%);
+  background:
+    rgba(0, 0, 0, 0.45);
 
-  padding: 38px 40px;
+  pointer-events: none;
+}
 
-  /*
-     IMPORTANT:
-     neutral transparent glass.
-     NO BLUE TINT.
-  */
 
-  background: rgba(0, 0, 0, 0.08);
+/* =========================================================
+   SERVICE CONTENT
+   IMPORTANT:
+   OLD POSITION / SIZE PRESERVED
+   ONLY GLASS APPEARANCE CHANGED
+========================================================= */
 
-  -webkit-backdrop-filter: blur(11px);
-  backdrop-filter: blur(11px);
+.home-service-content {
+  position: sticky;
 
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  top: 34vh;
+
+  z-index: 4;
+
+  max-width: 620px;
+
+  width: 80%;
+
+  margin: 0 auto;
+
+  padding:
+    24px 26px;
 
   border-radius: 18px;
 
+
+  /* NEW GLASS:
+     almost transparent,
+     neutral,
+     NO blue tint
+  */
+
+  background:
+    rgba(0, 0, 0, 0.08);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  backdrop-filter:
+    blur(8px);
+
+  border: none;
+
+  color: #eef1ff;
+
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.18);
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
 }
 
 .home-service-content h3 {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 1.8rem;
+
+  font-weight: 500;
+
+  color: #fff;
 }
 
 .home-service-content p {
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 
-  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+
+  color:
+    rgba(238, 241, 255, 0.92);
 }
 
 
-
-/* ==========================================================
-   14. STANDARD SECTIONS
-   ========================================================== */
+/* =========================================================
+   STANDARD HOMEPAGE SECTIONS
+   OLD LAYOUT
+========================================================= */
 
 .section {
-  width: min(900px, calc(100% - 48px));
+  max-width: 880px;
 
-  margin: 90px auto;
+  margin:
+    70px auto;
 
-  padding: 52px 48px;
+  padding:
+    36px 32px;
 
   text-align: center;
 
-  /*
-     Transparent neutral glass.
-  */
+  border-radius: 22px;
 
-  background: rgba(0, 0, 0, 0.07);
-
-  -webkit-backdrop-filter: blur(11px);
-  backdrop-filter: blur(11px);
-
-  border: 1px solid rgba(255, 255, 255, 0.13);
-
-  border-radius: 18px;
+  background:
+    rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.16);
+    0 15px 42px
+    rgba(0, 0, 0, 0.065);
 }
 
 .section h2 {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 
-  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 1.9rem;
+  font-weight: 500;
+
+  color: #1b1b1b;
 }
 
 .section p {
-  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 16px;
+
+  color: #555;
 }
 
 
+/* =========================================================
+   BUTTONS
+========================================================= */
 
-/* ==========================================================
-   15. GENERAL CONTENT CARD
-   ========================================================== */
+.btn {
+  display: inline-block;
 
-main {
-  position: relative;
+  padding:
+    8px 20px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.14);
+
+  color: #fff;
+
+  font-size: 0.77rem;
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.page-bg main {
-  padding-top: 110px;
+.btn:hover {
+  background:
+    rgba(255, 255, 255, 0.30);
+
+  transform:
+    translateY(-1px);
 }
+
+.hero-text .btn,
+.section .btn,
+.home-services-intro .btn {
+  background:
+    rgba(17, 17, 17, 0.08);
+
+  color: #111;
+}
+
+.hero-text .btn:hover,
+.section .btn:hover,
+.home-services-intro .btn:hover {
+  background:
+    rgba(17, 17, 17, 0.90);
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   INNER PAGE BACKGROUND
+   OLD LAYOUT
+========================================================= */
+
+.page-bg {
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      190deg,
+      rgba(5, 8, 20, 0.45),
+      rgba(3, 6, 14, 0.78)
+    ),
+    url("../images/bg-polo-stilllife.jpg")
+    center center / cover fixed no-repeat;
+
+  color: #f5f7ff;
+}
+
+
+/* =========================================================
+   INNER PAGE CONTENT
+   OLD LAYOUT PRESERVED
+========================================================= */
 
 .content-card {
-  width: min(1000px, calc(100% - 48px));
+  max-width: 880px;
 
-  margin: 60px auto 90px;
+  margin:
+    90px auto;
 
-  padding: 50px 48px;
+  padding:
+    38px 36px;
 
-  background: rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
 
-  -webkit-backdrop-filter: blur(11px);
-  backdrop-filter: blur(11px);
+  background:
+    rgba(5, 9, 30, 0.35);
 
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-  border-radius: 18px;
+  border: none;
 
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.16);
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
+
+  color: #f5f7ff;
+}
+
+.content-card h1,
+.content-card h2,
+.content-card h3 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-weight: 500;
+
+  color: #fff;
 }
 
 .content-card h1 {
-  margin-bottom: 25px;
+  margin-bottom: 12px;
 
-  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  font-size: 2rem;
 }
 
 .content-card h2 {
-  margin-top: 35px;
-  margin-bottom: 13px;
+  margin:
+    24px 0 10px;
 
-  font-size: 1.65rem;
+  font-size: 1.5rem;
 }
 
-.content-card p,
-.content-card li {
-  color: rgba(255, 255, 255, 0.84);
+.content-card p {
+  margin-bottom: 14px;
+
+  color: #e2e7f5;
+}
+
+.content-card a {
+  color: #fff;
 }
 
 
-
-/* ==========================================================
-   16. SERVICES PAGE
-   ========================================================== */
+/* =========================================================
+   SERVICES PAGE
+   OLD LAYOUT + NEW GLASS
+========================================================= */
 
 .service-band {
   position: relative;
 
-  min-height: 650px;
+  min-height: 100vh;
 
-  display: flex;
-  align-items: center;
+  padding:
+    90px 24px;
 
-  padding: 80px clamp(28px, 7vw, 110px);
-
-  background-size: cover;
-  background-position: center;
+  color: #fff;
 
   overflow: hidden;
+
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center;
+
+  will-change: background-position;
 }
 
 .service-band::before {
@@ -1039,183 +1610,318 @@ main {
   position: absolute;
   inset: 0;
 
-  background: rgba(2, 6, 16, 0.38);
+  z-index: 1;
+
+  background:
+    rgba(0, 0, 0, 0.68);
+
+  pointer-events: none;
 }
 
-.service-content {
-  position: relative;
+
+/*
+   ORIGINAL sticky layout is retained.
+   Only glass colour has changed.
+*/
+
+.service-band-inner {
+  position: sticky;
+
+  top: 34vh;
 
   z-index: 2;
 
-  width: min(600px, 100%);
+  max-width: 900px;
 
-  padding: 38px 40px;
+  margin: 0 auto;
 
-  background: rgba(0, 0, 0, 0.08);
-
-  -webkit-backdrop-filter: blur(11px);
-  backdrop-filter: blur(11px);
-
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding:
+    32px 38px;
 
   border-radius: 18px;
 
+  background:
+    rgba(0, 0, 0, 0.08);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  backdrop-filter:
+    blur(8px);
+
+  border: none;
+
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.18);
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
+}
+
+.service-band h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 1.9rem;
+
+  margin-bottom: 12px;
+
+  text-align: center;
+}
+
+.service-band p {
+  margin-bottom: 20px;
+
+  text-align: center;
+
+  max-width: 760px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.service-band.business {
+  background-image:
+    url("../images/service-business.jpg");
+}
+
+.service-band.portfolio {
+  background-image:
+    url("../images/service-portfolio.jpg");
+}
+
+.service-band.investment {
+  background-image:
+    url("../images/service-investment.jpg");
 }
 
 
-
-/* ==========================================================
-   17. CAREERS
-   ========================================================== */
+/* =========================================================
+   CAREERS
+========================================================= */
 
 .careers-list,
-.opportunity-list {
-  padding-left: 20px;
+.opportunity-list,
+.service-list {
+  margin:
+    14px 0;
+
+  padding-left: 1.35rem;
 }
 
 .careers-list li,
-.opportunity-list li {
-  margin-bottom: 9px;
+.opportunity-list li,
+.service-list li {
+  margin-bottom: 8px;
 }
 
+
+/* =========================================================
+   CURRENT OPPORTUNITIES
+========================================================= */
+
+.careers-opportunities {
+  margin:
+    40px auto 0;
+
+  padding: 40px;
+
+  text-align: center;
+
+  background:
+    rgba(5, 9, 30, 0.35);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: none;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
+}
+
+.careers-opportunities h2 {
+  color: #fff;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  margin-bottom: 10px;
+}
+
+.careers-opportunities p {
+  color: #e2e7f5;
+
+  margin-bottom: 18px;
+}
+
+.careers-opportunities .btn {
+  background:
+    rgba(255, 255, 255, 0.14);
+
+  color: #fff;
+
+  border: none;
+}
+
+.careers-opportunities .btn:hover {
+  background:
+    rgba(255, 255, 255, 0.28);
+
+  color: #111;
+}
+
+
+/* =========================================================
+   JOBS
+========================================================= */
+
 .jobs-wrap {
-  width: min(980px, calc(100% - 48px));
+  max-width: 980px;
 
-  margin: 90px auto;
+  margin: 80px auto;
 
-  padding-top: 50px;
+  padding:
+    0 20px;
 }
 
 .jobs-title {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 
   text-align: center;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 2rem;
+
+  color: #fff;
 }
 
 .job-tiles {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(300px, 1fr));
+    repeat(
+      auto-fit,
+      minmax(280px, 1fr)
+    );
 
-  gap: 22px;
-}
-
-.job-tile,
-.job-detail {
-  background: rgba(0, 0, 0, 0.08);
-
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-
-  border: 1px solid rgba(255, 255, 255, 0.14);
-
-  border-radius: 18px;
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.18);
+  gap: 18px;
 }
 
 .job-tile {
-  padding: 28px;
+  padding:
+    26px 24px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(5, 9, 30, 0.35);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border: none;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
+
+  color: #eef1ff;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.job-tile:hover {
+  transform:
+    translateY(-3px);
+
+  background:
+    rgba(5, 9, 30, 0.50);
+}
+
+.job-tile h3 {
+  margin-bottom: 8px;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  color: #fff;
+}
+
+.job-tile p {
+  margin-bottom: 12px;
+
+  color: #dce2f2;
 }
 
 .job-detail {
-  width: min(900px, calc(100% - 48px));
+  max-width: 900px;
 
-  margin: 100px auto;
+  margin:
+    80px auto;
 
-  padding: 45px;
-}
+  padding:
+    38px 36px;
 
+  border-radius: 20px;
 
+  background:
+    rgba(5, 9, 30, 0.35);
 
-/* ==========================================================
-   18. CONTACT PAGE
-   ========================================================== */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-/*
-   The normal content card on contact.html remains
-   almost completely transparent.
-
-   There is NO navy/blue colour in this background.
-*/
-
-.contact-page .content-card,
-body.contact-page .content-card,
-.contact-card,
-.contact-section,
-.contact-container {
-  background: rgba(0, 0, 0, 0.035) !important;
-
-  -webkit-backdrop-filter: blur(8px) !important;
-  backdrop-filter: blur(8px) !important;
-
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border: none;
 
   box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.12) !important;
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
+
+  color: #eef1ff;
+}
+
+.job-detail h1,
+.job-detail h2,
+.job-detail h3 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  color: #fff;
 }
 
 
-
-/* ==========================================================
-   19. CONTACT MAP SECTION
-   ========================================================== */
+/* =========================================================
+   CONTACT MAP
+========================================================= */
 
 .map-options,
 .contact-map,
 .map-card,
-.map-wrapper,
-.map-choice,
-.map-links-wrapper {
-  background: transparent !important;
-
-  border: 0;
-
-  box-shadow: none;
+.map-wrapper {
+  background: transparent;
 }
 
 
+/* =========================================================
+   MAP ICON
+   IMPORTANT:
+   ONLY THE LOCATION ICON IS RESIZED.
+   NORMAL WEBSITE IMAGES ARE NOT AFFECTED.
+========================================================= */
 
-/* ==========================================================
-   20. MAP ICON — HARD SIZE RESET
-   ========================================================== */
-
-/*
-   THIS SECTION FIXES THE GIANT ICON.
-
-   The previous problem happens because a general CSS rule
-   such as:
-
-       .content-card img { width:100%; }
-
-   or:
-
-       svg { width:100%; }
-
-   expands the map icon.
-
-   These rules override BOTH possibilities.
-*/
-
-
-/* ----- IMAGE ICON ----- */
-
-.contact-page .map-icon,
-.contact-page img.map-icon,
-.content-card .map-icon,
-.content-card img.map-icon,
-.contact-map .map-icon,
-.contact-map img,
-.map-options .map-icon,
-.map-options img,
-.map-card .map-icon,
-.map-card img,
-.map-wrapper .map-icon,
-.map-wrapper img {
+.map-icon,
+img.map-icon,
+svg.map-icon {
   width: 32px !important;
   height: 32px !important;
 
@@ -1227,38 +1933,13 @@ body.contact-page .content-card,
 
   object-fit: contain !important;
 
-  object-position: center !important;
-
   display: inline-block !important;
 
-  position: static !important;
-
-  inset: auto !important;
-
-  margin: 0 10px 0 0 !important;
-
-  padding: 0 !important;
-
   transform: none !important;
-
-  scale: 1 !important;
-
-  flex: 0 0 32px !important;
-
-  vertical-align: middle !important;
 }
 
-
-/* ----- SVG ICON ----- */
-
-.contact-page .map-icon svg,
-.contact-page svg.map-icon,
-.content-card .map-icon svg,
-.content-card svg.map-icon,
-.contact-map svg,
-.map-options svg,
-.map-card svg,
-.map-wrapper svg {
+.map-icon img,
+.map-icon svg {
   width: 32px !important;
   height: 32px !important;
 
@@ -1268,85 +1949,43 @@ body.contact-page .content-card,
   max-width: 32px !important;
   max-height: 32px !important;
 
-  display: inline-block !important;
-
-  position: static !important;
-
-  inset: auto !important;
-
-  margin: 0 10px 0 0 !important;
-
-  padding: 0 !important;
+  object-fit: contain !important;
 
   transform: none !important;
-
-  scale: 1 !important;
-
-  flex: 0 0 32px !important;
-
-  vertical-align: middle !important;
 }
 
 
-/* ----- SVG paths do NOT get dimensions ----- */
+/*
+   These selectors cover the case where your HTML
+   did not put .map-icon directly on the icon.
+*/
 
-.contact-page svg path,
-.contact-map svg path,
-.map-options svg path,
-.map-card svg path {
-  transform: none;
+.map-options > img,
+.contact-map > img,
+.map-card > img,
+.map-wrapper > img,
+.map-options > svg,
+.contact-map > svg,
+.map-card > svg,
+.map-wrapper > svg {
+  width: 32px !important;
+  height: 32px !important;
+
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  max-width: 32px !important;
+  max-height: 32px !important;
+
+  object-fit: contain !important;
+
+  transform: none !important;
 }
 
 
-
-/* ==========================================================
-   21. IF YOUR ICON IS INSIDE A LINK/BUTTON
-   ========================================================== */
-
-.map-button,
-.map-link,
-.map-trigger,
-.map-options > a,
-.contact-map > a {
-  display: inline-flex !important;
-
-  align-items: center !important;
-
-  width: auto !important;
-  height: auto !important;
-
-  max-width: 100%;
-
-  gap: 9px;
-
-  background: transparent;
-
-  overflow: visible !important;
-}
-
-
-
-/* ==========================================================
-   22. MAP HEADING
-   ========================================================== */
-
-.map-options h2,
-.contact-map h2,
-.map-card h2,
-.map-wrapper h2 {
-  margin-top: 18px;
-  margin-bottom: 12px;
-
-  font-size: 1.55rem;
-
-  color: #ffffff;
-}
-
-
-
-/* ==========================================================
-   23. GOOGLE / APPLE MAP BUTTONS
-   ========================================================== */
+/* =========================================================
+   MAP LINKS
+========================================================= */
 
 .map-links {
   display: flex;
@@ -1366,307 +2005,400 @@ body.contact-page .content-card,
   align-items: center;
   justify-content: center;
 
-  width: auto;
-
-  padding: 8px 16px;
-
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding:
+    8px 16px;
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.04);
+  background:
+    rgba(255, 255, 255, 0.12);
 
-  color: #ffffff;
+  color: #fff;
 
-  font-size: 0.88rem;
+  font-size: 0.85rem;
 
   transition:
     background 0.25s ease,
-    border-color 0.25s ease,
     transform 0.25s ease;
 }
 
 .map-links a:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background:
+    rgba(255, 255, 255, 0.24);
 
-  border-color: rgba(255, 255, 255, 0.32);
-
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 }
 
 
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
 
-/* ==========================================================
-   24. CONTACT LINKS
-   ========================================================== */
+.reveal {
+  opacity: 0;
 
-.content-card a,
-.contact-card a,
-.contact-section a {
-  color: #ffffff;
+  transform:
+    translateY(16px);
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.home-service-band.reveal.visible {
+  opacity: 1;
 }
 
 
-
-/* ==========================================================
-   25. FOOTER
-   ========================================================== */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer {
-  padding: 35px 25px;
+  width: 100%;
+
+  padding:
+    40px 20px;
 
   text-align: center;
 
-  font-size: 0.82rem;
+  font-size: 0.83rem;
 
-  letter-spacing: 0.04em;
+  color: #777;
+}
 
-  color: rgba(255, 255, 255, 0.52);
-
-  background: #030711;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+.page-bg footer {
+  color:
+    rgba(255, 255, 255, 0.72);
 }
 
 
-
-/* ==========================================================
-   26. TABLET
-   ========================================================== */
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 900px) {
 
-  .hero-content {
-    left: 35px;
-
-    width: calc(100% - 70px);
-  }
-
-  .home-service-band {
-    min-height: 620px;
-
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-  .home-service-content {
-    width: min(520px, 100%);
-  }
-
-  .content-card {
-    padding: 42px 35px;
-  }
-
-}
-
-
-
-/* ==========================================================
-   27. MOBILE
-   ========================================================== */
-
-@media (max-width: 700px) {
-
   .site-header {
-    height: 68px;
-
-    padding: 0 20px;
+    padding:
+      16px 14px 20px;
   }
 
   .site-title {
-    font-size: 1.35rem;
-  }
-
-  .site-subtitle {
-    font-size: 0.55rem;
+    font-size: 1.65rem;
   }
 
   .hamburger {
-    right: 20px;
-
-    width: 26px;
-    height: 19px;
+    top: 21px;
+    right: 18px;
   }
 
-  .nav-toggle:checked + .hamburger span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+  .mobile-menu {
+    top: 74px;
+    right: 14px;
   }
 
-  .nav-toggle:checked + .hamburger span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+  .hero-full {
+    height:
+      calc(100vh - 76px);
+  }
+
+  .hero-content {
+    left: 28px;
+    right: 28px;
+
+    bottom: 110px;
+
+    max-width: none;
+  }
+
+  .hero-content h1 {
+    font-size:
+      clamp(
+        2.5rem,
+        9vw,
+        4rem
+      );
+  }
+
+  .hero-controls {
+    bottom: 20px;
+  }
+
+  .hero-text-wrapper {
+    padding:
+      45px 16px 10px;
+  }
+
+  .hero-text,
+  .section,
+  .home-services-intro {
+    padding:
+      28px 22px;
+  }
+
+  .section {
+    margin:
+      55px 16px;
+  }
+
+  .home-services-intro {
+    margin:
+      55px 16px 35px;
+  }
+
+  .home-service-band {
+    min-height: 90vh;
+  }
+
+  .home-service-content {
+    width: 88%;
+
+    padding:
+      22px 20px;
+  }
+
+  .content-card {
+    margin:
+      70px 16px;
+
+    padding:
+      30px 22px;
+  }
+
+  .service-band-inner {
+    padding:
+      28px 25px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  body,
+  .page-bg {
+    background-attachment: scroll;
+  }
+
+  .site-header {
+    padding:
+      15px 12px 18px;
+  }
+
+  .site-title {
+    font-size: 1.45rem;
+  }
+
+  .site-subtitle {
+    font-size: 0.66rem;
+  }
+
+  .hamburger {
+    top: 19px;
+    right: 16px;
+
+    width: 27px;
+    height: 21px;
   }
 
   .mobile-menu {
     top: 68px;
+    right: 10px;
 
-    height: calc(100vh - 68px);
-
-    padding: 40px 28px;
+    width:
+      min(
+        235px,
+        calc(100vw - 20px)
+      );
   }
 
+
+  /* INTRO */
+
+  .intro-background {
+    inset: -30px;
+  }
+
+  .intro-brand h1 {
+    font-size:
+      clamp(
+        2.5rem,
+        13vw,
+        4rem
+      );
+  }
+
+  .intro-brand span {
+    font-size: 0.62rem;
+
+    letter-spacing: 0.26em;
+  }
+
+  .intro-welcome {
+    font-size:
+      clamp(
+        1.9rem,
+        9vw,
+        3rem
+      );
+  }
+
+  .intro-strategy {
+    font-size:
+      clamp(
+        1.9rem,
+        9vw,
+        3.2rem
+      );
+  }
+
+
+  /* HERO */
+
   .hero-full {
-    min-height: 620px;
+    height:
+      calc(100svh - 70px);
+
+    min-height: 540px;
   }
 
   .hero-content {
-    left: 24px;
-    bottom: 125px;
+    left: 22px;
+    right: 22px;
 
-    width: calc(100% - 48px);
+    bottom: 100px;
+
+    max-width: none;
   }
 
   .hero-content h1 {
-    font-size: clamp(2.4rem, 12vw, 4rem);
+    margin-bottom: 18px;
+
+    font-size:
+      clamp(
+        2.35rem,
+        12vw,
+        3.4rem
+      );
   }
 
   .hero-content p {
-    font-size: 0.98rem;
+    margin-bottom: 22px;
+
+    font-size: 0.92rem;
   }
 
   .hero-controls {
-    left: 24px;
-    right: auto;
+    bottom: 18px;
 
-    bottom: 42px;
+    gap: 8px;
   }
 
-  .hero-text-wrapper {
-    padding: 90px 24px;
-  }
+  .hero-dots {
+    gap: 7px;
 
-  .home-services-intro {
     padding:
-      85px
-      24px
-      55px;
+      8px 12px;
   }
+
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .hero-dot.active {
+    width: 22px;
+  }
+
+
+  /* SERVICE BANDS */
 
   .home-service-band {
-    min-height: 590px;
-
-    align-items: flex-end;
-
-    padding:
-      45px
-      20px;
+    min-height: 85vh;
   }
 
   .home-service-content {
-    width: 100%;
-
-    padding: 27px 25px;
-
-    background: rgba(0, 0, 0, 0.07);
-
-    -webkit-backdrop-filter: blur(9px);
-    backdrop-filter: blur(9px);
-  }
-
-  .section {
-    width: calc(100% - 32px);
-
-    margin: 55px auto;
+    width:
+      calc(100% - 36px);
 
     padding:
-      38px
-      24px;
+      20px 18px;
   }
 
-  .page-bg main {
-    padding-top: 90px;
+  .home-service-content h3 {
+    font-size: 1.5rem;
+  }
+
+
+  /* STANDARD CARDS */
+
+  .hero-text,
+  .section,
+  .home-services-intro {
+    border-radius: 18px;
   }
 
   .content-card {
-    width: calc(100% - 28px);
-
-    margin: 35px auto 65px;
+    margin:
+      55px 12px;
 
     padding:
-      35px
-      24px;
+      26px 18px;
   }
 
   .service-band {
-    min-height: 570px;
-
-    align-items: flex-end;
-
     padding:
-      40px
-      20px;
+      70px 16px;
   }
 
-  .service-content {
+  .service-band-inner {
     padding:
-      28px
-      24px;
+      24px 18px;
   }
 
 
-  /* ------------------------------------------
-     MOBILE MAP ICON
-     ------------------------------------------ */
+  /* MAP ICON */
 
-  .contact-page .map-icon,
-  .contact-page img.map-icon,
-  .content-card .map-icon,
-  .content-card img.map-icon,
-  .contact-map .map-icon,
-  .contact-map img,
-  .map-options .map-icon,
-  .map-options img,
-  .map-card .map-icon,
-  .map-card img,
-  .map-wrapper .map-icon,
-  .map-wrapper img {
-    width: 28px !important;
-    height: 28px !important;
+  .map-icon,
+  img.map-icon,
+  svg.map-icon,
+  .map-icon img,
+  .map-icon svg,
+  .map-options > img,
+  .contact-map > img,
+  .map-card > img,
+  .map-wrapper > img,
+  .map-options > svg,
+  .contact-map > svg,
+  .map-card > svg,
+  .map-wrapper > svg {
+    width: 30px !important;
+    height: 30px !important;
 
-    min-width: 28px !important;
-    min-height: 28px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
 
-    max-width: 28px !important;
-    max-height: 28px !important;
-
-    flex-basis: 28px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
   }
-
-
-  .contact-page .map-icon svg,
-  .contact-page svg.map-icon,
-  .content-card .map-icon svg,
-  .content-card svg.map-icon,
-  .contact-map svg,
-  .map-options svg,
-  .map-card svg,
-  .map-wrapper svg {
-    width: 28px !important;
-    height: 28px !important;
-
-    min-width: 28px !important;
-    min-height: 28px !important;
-
-    max-width: 28px !important;
-    max-height: 28px !important;
-
-    flex-basis: 28px !important;
-  }
-
 }
 
 
-
-/* ==========================================================
-   28. PERFORMANCE
-   ========================================================== */
-
-.hero-slide,
-.hero-slide img,
-.hero-slide video,
-.home-service-band > img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1674,43 +2406,34 @@ footer {
     scroll-behavior: auto;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+  .reveal {
+    opacity: 1;
 
-    transition-duration: 0.01ms !important;
+    transform: none;
+
+    transition: none;
   }
 
+  .hero-slide,
+  .home-service-band img {
+    transition: none;
+  }
 }
 
 
+/* =========================================================
+   FINAL MAP ICON FAILSAFE
+   KEEP THIS AT THE VERY BOTTOM
 
-/* ==========================================================
-   29. FINAL MAP ICON FAILSAFE
-   KEEP THIS AT THE ABSOLUTE BOTTOM OF STYLE.CSS
-   ========================================================== */
+   This is intentionally narrow.
+   It will NOT resize your hero/service/background images.
+========================================================= */
 
-/*
-   Do NOT remove this.
-
-   It overrides any earlier generic img/svg rule.
-*/
-
-main .content-card .map-options img,
-main .content-card .contact-map img,
-main .content-card .map-card img,
-main .content-card .map-wrapper img,
-
-main .content-card .map-options svg,
-main .content-card .contact-map svg,
-main .content-card .map-card svg,
-main .content-card .map-wrapper svg,
-
+main .map-icon,
 main img.map-icon,
-main svg.map-icon {
-
+main svg.map-icon,
+main .map-icon img,
+main .map-icon svg {
   width: 32px !important;
   height: 32px !important;
 
@@ -1720,15 +2443,293 @@ main svg.map-icon {
   max-width: 32px !important;
   max-height: 32px !important;
 
-  position: static !important;
-
-  display: inline-block !important;
-
   object-fit: contain !important;
 
   transform: none !important;
+}
+/* =========================================================
+   CONTACT PAGE ICON SIZE FIX
+   ONLY affects Get Directions + Mail Us icons
+========================================================= */
 
-  margin: 0 !important;
+.contact-card .luxury-contact-links .luxury-link svg {
+  width: 18px !important;
+  height: 18px !important;
 
-  padding: 0 !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+
+  max-width: 18px !important;
+  max-height: 18px !important;
+
+  flex: 0 0 18px !important;
+
+  display: inline-block;
+
+  transform: none !important;
+}
+
+/* =========================================================
+   CONTACT PAGE — MAP BUTTONS
+   Google Maps + Apple Maps only
+========================================================= */
+
+.contact-card .map-title {
+  margin-top: 30px;
+  margin-bottom: 14px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+
+  color: rgba(255, 255, 255, 0.96);
+}
+
+
+/* Button container */
+
+.contact-card .map-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 4px;
+}
+
+
+/* Individual map button */
+
+.contact-card .map-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 11px;
+
+  padding: 9px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+
+  letter-spacing: 0.06em;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* Arrow */
+
+.contact-card .map-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  line-height: 1;
+
+  opacity: 0.7;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+/* Hover */
+
+.contact-card .map-button:hover {
+  background: rgba(255, 255, 255, 0.13);
+
+  border-color: rgba(255, 255, 255, 0.34);
+
+  color: #fff;
+
+  transform: translateY(-2px);
+}
+
+.contact-card .map-button:hover .map-arrow {
+  opacity: 1;
+
+  transform: translate(2px, -2px);
+}
+
+
+/* Click */
+
+.contact-card .map-button:active {
+  transform: translateY(0);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .contact-card .map-title {
+    margin-top: 25px;
+
+    font-size: 1.2rem;
+  }
+
+  .contact-card .map-buttons {
+    gap: 8px;
+  }
+
+  .contact-card .map-button {
+    padding: 8px 14px;
+
+    font-size: 0.74rem;
+  }
+}
+/* =========================================================
+   CONTACT PAGE — MAP BUTTONS
+   Google Maps + Apple Maps only
+========================================================= */
+
+.contact-card .map-title {
+  margin-top: 30px;
+  margin-bottom: 14px;
+
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+
+  color: rgba(255, 255, 255, 0.96);
+}
+
+
+/* Button container */
+
+.contact-card .map-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 4px;
+}
+
+
+/* Individual map button */
+
+.contact-card .map-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 11px;
+
+  padding: 9px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+
+  letter-spacing: 0.06em;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* Arrow */
+
+.contact-card .map-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  line-height: 1;
+
+  opacity: 0.7;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+/* Hover */
+
+.contact-card .map-button:hover {
+  background: rgba(255, 255, 255, 0.13);
+
+  border-color: rgba(255, 255, 255, 0.34);
+
+  color: #fff;
+
+  transform: translateY(-2px);
+}
+
+.contact-card .map-button:hover .map-arrow {
+  opacity: 1;
+
+  transform: translate(2px, -2px);
+}
+
+
+/* Click */
+
+.contact-card .map-button:active {
+  transform: translateY(0);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .contact-card .map-title {
+    margin-top: 25px;
+
+    font-size: 1.2rem;
+  }
+
+  .contact-card .map-buttons {
+    gap: 8px;
+  }
+
+  .contact-card .map-button {
+    padding: 8px 14px;
+
+    font-size: 0.74rem;
+  }
 }
