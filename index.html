@@ -2,68 +2,212 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+
+  <!-- =====================================================
+       BASIC PAGE SETTINGS
+  ====================================================== -->
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
 
   <title>Syvaré Capital | Family &amp; Partners</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Syvaré Capital is an independent advisory house providing strategic consulting, operational structure and investment support."
+  />
 
-  <!-- FAVICONS -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#050812" />
 
-  <!-- FONTS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- =====================================================
+       FAVICON
+  ====================================================== -->
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  >
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  />
 
-  <!-- PRELOAD IMPORTANT HOMEPAGE IMAGES -->
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  />
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  />
+
+  <link
+    rel="shortcut icon"
+    href="/favicon.ico?v=4"
+  />
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  />
+
+
+  <!-- =====================================================
+       PRELOAD IMPORTANT HOMEPAGE MEDIA
+  ====================================================== -->
+
+  <!-- Main hero image -->
   <link
     rel="preload"
     as="image"
     href="assets/images/hero-polo.jpg"
     fetchpriority="high"
-  >
+  />
 
+  <!-- First service image -->
   <link
     rel="preload"
     as="image"
     href="assets/images/service-business.jpg"
-  >
+  />
+
+
+  <!-- =====================================================
+       GOOGLE FONTS
+  ====================================================== -->
 
   <link
-    rel="preload"
-    as="image"
-    href="assets/images/service-portfolio.jpg"
-  >
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
 
   <link
-    rel="preload"
-    as="image"
-    href="assets/images/service-investment.jpg"
-  >
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
 
-  <!-- MAIN CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+
+  <!-- =====================================================
+       MAIN CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css"
+  />
+
 </head>
 
 
 <body>
 
+
   <!-- =====================================================
-       HEADER
+       CINEMATIC OPENING INTRO
+
+       Sequence:
+       Syvaré Capital
+             ↓
+       Welcome to Syvaré Capital
+             ↓
+       Where Strategy Meets Capital
+             ↓
+       Homepage reveals
+  ====================================================== -->
+
+  <div
+    id="syvare-intro"
+    class="syvare-intro"
+    aria-hidden="true"
+  >
+
+    <!--
+      Uses hero-polo.jpg.
+
+      style.css controls:
+      - blur
+      - darkness
+      - slow zoom
+      - gradual sharpening
+    -->
+
+    <div class="intro-background"></div>
+
+
+    <div class="intro-content">
+
+
+      <!-- INTRO STAGE 1 -->
+
+      <div class="intro-brand">
+
+        <h1>
+          Syvaré Capital
+        </h1>
+
+        <span>
+          Family &amp; Partners
+        </span>
+
+      </div>
+
+
+      <!-- INTRO STAGE 2 -->
+
+      <div class="intro-message intro-welcome">
+
+        Welcome to Syvaré Capital
+
+      </div>
+
+
+      <!-- INTRO STAGE 3 -->
+
+      <div class="intro-message intro-strategy">
+
+        Where Strategy Meets Capital
+
+      </div>
+
+
+    </div>
+
+
+    <!-- Small luxury loading/reveal line -->
+
+    <div class="intro-line"></div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       SITE HEADER
   ====================================================== -->
 
   <header class="site-header">
 
-    <a href="/" class="brand">
+
+    <!-- BRAND / LOGO -->
+
+    <a
+      href="./"
+      class="brand"
+      aria-label="Syvaré Capital homepage"
+    >
 
       <div class="site-title">
         Syvaré Capital
@@ -76,27 +220,45 @@
     </a>
 
 
+
+    <!-- ===================================================
+         HAMBURGER MENU CONTROL
+    ==================================================== -->
+
     <input
       type="checkbox"
       id="nav-toggle"
       class="nav-toggle"
-    >
+      aria-hidden="true"
+    />
 
 
     <label
       for="nav-toggle"
       class="hamburger"
-      aria-label="Toggle navigation"
+      aria-label="Toggle navigation menu"
     >
+
       <span></span>
       <span></span>
       <span></span>
+
     </label>
 
 
-    <nav class="mobile-menu">
 
-      <a href="/">Home</a>
+    <!-- ===================================================
+         NAVIGATION
+    ==================================================== -->
+
+    <nav
+      class="mobile-menu"
+      aria-label="Main navigation"
+    >
+
+      <a href="./">
+        Home
+      </a>
 
       <a href="about.html">
         About Us
@@ -128,45 +290,63 @@
 
 
 
+  <!-- =====================================================
+       MAIN WEBSITE
+  ====================================================== -->
+
   <main>
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
-    <section class="hero-full hero-slider">
 
 
-      <!-- HERO IMAGE -->
+    <!-- ===================================================
+         HERO SLIDER
+    ==================================================== -->
+
+    <section
+      class="hero-full hero-slider"
+      aria-label="Syvaré Capital featured media"
+    >
+
+
+      <!-- =================================================
+           SLIDE 1
+           MAIN HERO IMAGE
+      ================================================== -->
 
       <div class="hero-slide active">
 
         <img
-          class="hero-media"
           src="assets/images/hero-polo.jpg"
-          alt="Polo rider representing Syvaré Capital"
+          alt="Syvaré Capital"
           fetchpriority="high"
-        >
+          decoding="async"
+          draggable="false"
+        />
 
       </div>
 
 
 
-      <!-- VIDEO 1 -->
+      <!-- =================================================
+           SLIDE 2
+           VIDEO 1
+      ================================================== -->
 
       <div class="hero-slide">
 
         <video
-          class="hero-media"
           muted
           playsinline
           preload="auto"
+          loop
+          disablepictureinpicture
+          aria-hidden="true"
         >
 
           <source
             src="assets/videos/hero-video-1.mp4"
             type="video/mp4"
-          >
+          />
 
         </video>
 
@@ -174,21 +354,26 @@
 
 
 
-      <!-- VIDEO 2 -->
+      <!-- =================================================
+           SLIDE 3
+           VIDEO 2
+      ================================================== -->
 
       <div class="hero-slide">
 
         <video
-          class="hero-media"
           muted
           playsinline
           preload="metadata"
+          loop
+          disablepictureinpicture
+          aria-hidden="true"
         >
 
           <source
             src="assets/videos/hero-video-2.mp4"
             type="video/mp4"
-          >
+          />
 
         </video>
 
@@ -196,21 +381,26 @@
 
 
 
-      <!-- VIDEO 3 -->
+      <!-- =================================================
+           SLIDE 4
+           VIDEO 3
+      ================================================== -->
 
       <div class="hero-slide">
 
         <video
-          class="hero-media"
           muted
           playsinline
           preload="metadata"
+          loop
+          disablepictureinpicture
+          aria-hidden="true"
         >
 
           <source
             src="assets/videos/hero-video-3.mp4"
             type="video/mp4"
-          >
+          />
 
         </video>
 
@@ -218,21 +408,26 @@
 
 
 
-      <!-- VIDEO 4 -->
+      <!-- =================================================
+           SLIDE 5
+           VIDEO 4
+      ================================================== -->
 
       <div class="hero-slide">
 
         <video
-          class="hero-media"
           muted
           playsinline
           preload="metadata"
+          loop
+          disablepictureinpicture
+          aria-hidden="true"
         >
 
           <source
             src="assets/videos/hero-video-4.mp4"
             type="video/mp4"
-          >
+          />
 
         </video>
 
@@ -240,20 +435,23 @@
 
 
 
-      <!-- OVERLAY -->
+      <!-- =================================================
+           HERO DARK OVERLAY
+      ================================================== -->
 
       <div class="hero-overlay"></div>
 
 
 
-      <!-- HERO CONTENT -->
+      <!-- =================================================
+           HERO TEXT
+      ================================================== -->
 
       <div class="hero-content">
 
         <h1>
           Where Strategy Meets Capital
         </h1>
-
 
         <p>
           Independent advisory across strategic consulting,
@@ -274,44 +472,66 @@
 
 
 
-      <!-- HERO CONTROLS -->
+      <!-- =================================================
+           HERO SLIDER CONTROLS
+      ================================================== -->
 
       <div class="hero-controls">
 
-        <div class="hero-dots">
+
+        <!-- SLIDER DOTS -->
+
+        <div
+          class="hero-dots"
+          aria-label="Hero slider navigation"
+        >
+
 
           <button
             class="hero-dot active"
+            type="button"
             data-slide="0"
-            aria-label="Slide 1"
+            aria-label="Show slide 1"
           ></button>
+
 
           <button
             class="hero-dot"
+            type="button"
             data-slide="1"
-            aria-label="Slide 2"
+            aria-label="Show slide 2"
           ></button>
+
 
           <button
             class="hero-dot"
+            type="button"
             data-slide="2"
-            aria-label="Slide 3"
+            aria-label="Show slide 3"
           ></button>
+
 
           <button
             class="hero-dot"
+            type="button"
             data-slide="3"
-            aria-label="Slide 4"
+            aria-label="Show slide 4"
           ></button>
+
 
           <button
             class="hero-dot"
+            type="button"
             data-slide="4"
-            aria-label="Slide 5"
+            aria-label="Show slide 5"
           ></button>
+
 
         </div>
 
+
+
+        <!-- NEXT SLIDE BUTTON -->
 
         <button
           class="hero-next"
@@ -321,15 +541,17 @@
           ›
         </button>
 
+
       </div>
+
 
     </section>
 
 
 
-    <!-- =====================================================
-         ABOUT
-    ====================================================== -->
+    <!-- ===================================================
+         ABOUT PREVIEW
+    ==================================================== -->
 
     <section
       id="about-preview"
@@ -344,18 +566,20 @@
 
 
         <p>
-          Syvaré Capital is an independent advisory house based
-          in London, working across strategic consulting,
-          operational structure and investment advisory.
+          Syvaré Capital is an independent advisory house
+          based in London, working across strategic
+          consulting, operational structure and investment
+          advisory. We support business owners, investors
+          and portfolio holders in making informed,
+          confident and well structured decisions with a
+          long-term view of value creation.
+        </p>
 
-          We support business owners, investors and portfolio
-          holders in making informed, confident and well
-          structured decisions with a long-term view of value
-          creation.
 
-          Our philosophy is straightforward: thoughtful advice
-          delivered with integrity, discretion and disciplined
-          execution.
+        <p>
+          Our philosophy is straightforward: thoughtful
+          advice delivered with integrity, discretion and
+          disciplined execution.
         </p>
 
 
@@ -372,11 +596,13 @@
 
 
 
-    <!-- =====================================================
-         OUR WORK INTRO
-    ====================================================== -->
+    <!-- ===================================================
+         OUR WORK INTRODUCTION
+    ==================================================== -->
 
-    <section class="home-services-intro reveal">
+    <section
+      class="home-services-intro reveal"
+    >
 
       <h2>
         Our Work
@@ -394,22 +620,24 @@
 
 
 
-    <!-- =====================================================
+    <!-- ===================================================
+         SERVICE 1
          BUSINESS ADVISORY
-    ====================================================== -->
+    ==================================================== -->
 
     <section
-      class="home-service-band"
-      onclick="location.href='services.html#business'"
+      class="home-service-band reveal"
+      data-link="services.html#business"
     >
+
 
       <img
         src="assets/images/service-business.jpg"
-        alt="Business advisory background"
-      >
-
-
-      <div class="home-service-overlay"></div>
+        alt="Business advisory"
+        loading="eager"
+        decoding="async"
+        draggable="false"
+      />
 
 
       <div class="home-service-content">
@@ -421,8 +649,8 @@
 
         <p>
           Strategic direction, operational structure and
-          margin focus for business owners seeking disciplined
-          growth and resilient performance.
+          margin focus for business owners seeking
+          disciplined growth and resilient performance.
         </p>
 
 
@@ -435,26 +663,29 @@
 
       </div>
 
+
     </section>
 
 
 
-    <!-- =====================================================
-         PORTFOLIO
-    ====================================================== -->
+    <!-- ===================================================
+         SERVICE 2
+         REAL ESTATE & PORTFOLIO
+    ==================================================== -->
 
     <section
-      class="home-service-band"
-      onclick="location.href='services.html#portfolio'"
+      class="home-service-band reveal"
+      data-link="services.html#portfolio"
     >
+
 
       <img
         src="assets/images/service-portfolio.jpg"
-        alt="Real estate and portfolio advisory background"
-      >
-
-
-      <div class="home-service-overlay"></div>
+        alt="Real estate and portfolio advisory"
+        loading="eager"
+        decoding="async"
+        draggable="false"
+      />
 
 
       <div class="home-service-content">
@@ -465,9 +696,10 @@
 
 
         <p>
-          Portfolio assessment, asset review, deal evaluation
-          and rental cashflow understanding for investors
-          navigating residential and commercial holdings.
+          Portfolio assessment, asset review, deal
+          evaluation and rental cashflow understanding for
+          investors navigating residential and commercial
+          holdings.
         </p>
 
 
@@ -480,26 +712,29 @@
 
       </div>
 
+
     </section>
 
 
 
-    <!-- =====================================================
-         INVESTMENT
-    ====================================================== -->
+    <!-- ===================================================
+         SERVICE 3
+         INVESTMENT ADVISORY
+    ==================================================== -->
 
     <section
-      class="home-service-band"
-      onclick="location.href='services.html#investment'"
+      class="home-service-band reveal"
+      data-link="services.html#investment"
     >
+
 
       <img
         src="assets/images/service-investment.jpg"
-        alt="Investment advisory background"
-      >
-
-
-      <div class="home-service-overlay"></div>
+        alt="Investment advisory and deal support"
+        loading="eager"
+        decoding="async"
+        draggable="false"
+      />
 
 
       <div class="home-service-content">
@@ -511,8 +746,9 @@
 
         <p>
           Investment readiness, commercial due diligence
-          preparation and structured support for transactions,
-          partnerships and long-term value creation.
+          preparation and structured support for
+          transactions, partnerships and long-term value
+          creation.
         </p>
 
 
@@ -525,13 +761,14 @@
 
       </div>
 
+
     </section>
 
 
 
-    <!-- =====================================================
-         APPROACH
-    ====================================================== -->
+    <!-- ===================================================
+         OUR APPROACH
+    ==================================================== -->
 
     <section class="section reveal">
 
@@ -541,11 +778,11 @@
 
 
       <p>
-        We take a structured and thoughtful approach to every
-        mandate. Our process is built around clarity,
-        commercial sense and long-term perspective, combining
-        analytical understanding with grounded judgement at
-        each stage.
+        We take a structured and thoughtful approach to
+        every mandate. Our process is built around clarity,
+        commercial sense and long-term perspective,
+        combining analytical understanding with grounded
+        judgement at each stage.
       </p>
 
 
@@ -560,9 +797,9 @@
 
 
 
-    <!-- =====================================================
-         TEAM
-    ====================================================== -->
+    <!-- ===================================================
+         MEET THE TEAM
+    ==================================================== -->
 
     <section class="section reveal">
 
@@ -591,9 +828,9 @@
 
 
 
-    <!-- =====================================================
+    <!-- ===================================================
          CAREERS
-    ====================================================== -->
+    ==================================================== -->
 
     <section class="section reveal">
 
@@ -604,8 +841,8 @@
 
       <p>
         We are building our advisory platform deliberately
-        and responsibly. View current opportunities and learn
-        more about working with Syvaré Capital.
+        and responsibly. View opportunities and learn more
+        about working with Syvaré Capital.
       </p>
 
 
@@ -620,9 +857,9 @@
 
 
 
-    <!-- =====================================================
+    <!-- ===================================================
          CONTACT
-    ====================================================== -->
+    ==================================================== -->
 
     <section class="section reveal">
 
@@ -635,22 +872,28 @@
 
         Syvaré Capital Family &amp; Partners Limited
 
-        <br>
+        <br />
 
         40 South Way, Wembley HA9 0HZ
 
-        <br>
+        <br />
 
         London, United Kingdom
 
-        <br>
+        <br /><br />
 
-        For enquiries, introductions or to discuss a specific
-        mandate, please contact:
+
+        For enquiries, introductions or to discuss a
+        specific mandate, please contact:
+
+        <br />
+
 
         <strong>
 
-          <a href="mailto:info@syvarecapital.com">
+          <a
+            href="mailto:info@syvarecapital.com"
+          >
             info@syvarecapital.com
           </a>
 
@@ -668,6 +911,7 @@
 
     </section>
 
+
   </main>
 
 
@@ -678,16 +922,28 @@
 
   <footer>
 
-    &copy; 2025 Syvaré Capital Family &amp; Partners Limited.
+    &copy; 2026 Syvaré Capital Family &amp; Partners Limited.
     All rights reserved.
 
   </footer>
 
 
 
-  <!-- MAIN JAVASCRIPT -->
+  <!-- =====================================================
+       JAVASCRIPT
 
-  <script src="assets/js/main.js"></script>
+       IMPORTANT:
+       This is the ONLY JavaScript include needed.
+
+       Do not add the old slider/swipe scripts below it.
+       Everything is handled by main.js.
+  ====================================================== -->
+
+  <script
+    src="assets/js/main.js"
+    defer
+  ></script>
+
 
 </body>
 
