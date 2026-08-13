@@ -1,8 +1,101 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =====================================================
-     REVEAL
-  ===================================================== */
+  "use strict";
+
+
+  /* =========================================================
+     INTRO
+  ========================================================= */
+
+  const intro =
+    document.getElementById("syvare-intro");
+
+  const INTRO_DURATION = 10000;
+
+
+  function finishIntro() {
+
+    if (!intro) {
+      return;
+    }
+
+    intro.classList.add("intro-finished");
+
+    document.body.classList.remove("intro-running");
+    document.body.classList.add("intro-ready");
+
+    /*
+      Save for this browser tab/session so navigating
+      back to Home doesn't replay a 10-second intro.
+    */
+
+    try {
+      sessionStorage.setItem(
+        "syvareIntroSeen",
+        "true"
+      );
+    } catch (error) {
+      /* Ignore storage errors */
+    }
+
+
+    setTimeout(function () {
+
+      intro.style.display = "none";
+
+    }, 1300);
+  }
+
+
+  if (intro) {
+
+    let introSeen = false;
+
+    try {
+
+      introSeen =
+        sessionStorage.getItem(
+          "syvareIntroSeen"
+        ) === "true";
+
+    } catch (error) {
+
+      introSeen = false;
+    }
+
+
+    if (introSeen) {
+
+      intro.style.display = "none";
+
+      document.body.classList.add(
+        "intro-ready"
+      );
+
+    } else {
+
+      document.body.classList.add(
+        "intro-running"
+      );
+
+      setTimeout(
+        finishIntro,
+        INTRO_DURATION
+      );
+    }
+
+  } else {
+
+    document.body.classList.add(
+      "intro-ready"
+    );
+  }
+
+
+
+  /* =========================================================
+     REVEAL ANIMATION
+  ========================================================= */
 
   const revealElements =
     document.querySelectorAll(".reveal");
@@ -10,187 +103,206 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if ("IntersectionObserver" in window) {
 
-    const observer =
+    const revealObserver =
       new IntersectionObserver(
         function (entries) {
 
-          entries.forEach(function (entry) {
+          entries.forEach(
+            function (entry) {
 
-            if (entry.isIntersecting) {
+              if (entry.isIntersecting) {
 
-              entry.target.classList.add("visible");
+                entry.target.classList.add(
+                  "visible"
+                );
 
-              observer.unobserve(entry.target);
+                /*
+                  Once visible, it stays visible.
+                  This prevents images/sections disappearing
+                  when scrolling back up or down.
+                */
 
+                revealObserver.unobserve(
+                  entry.target
+                );
+              }
             }
-
-          });
+          );
 
         },
         {
-          threshold: 0.08,
-          rootMargin: "0px 0px -30px 0px"
+          threshold: 0.04,
+
+          /*
+            Load/reveal before the element actually
+            reaches the visible screen.
+          */
+
+          rootMargin:
+            "180px 0px 180px 0px"
         }
       );
 
 
-    revealElements.forEach(function (element) {
+    revealElements.forEach(
+      function (element) {
 
-      observer.observe(element);
-
-    });
+        revealObserver.observe(
+          element
+        );
+      }
+    );
 
   } else {
 
-    revealElements.forEach(function (element) {
+    revealElements.forEach(
+      function (element) {
 
-      element.classList.add("visible");
-
-    });
-
+        element.classList.add(
+          "visible"
+        );
+      }
+    );
   }
 
 
 
-  /* =====================================================
-     HERO
-  ===================================================== */
+  /* =========================================================
+     HERO ELEMENTS
+  ========================================================= */
 
   const slider =
-    document.querySelector(".hero-slider");
-
-
-  if (!slider) return;
-
+    document.querySelector(
+      ".hero-slider"
+    );
 
   const slides =
     Array.from(
-      slider.querySelectorAll(".hero-slide")
-    );
-
-
-  const dots =
-    Array.from(
-      slider.querySelectorAll(".hero-dot")
-    );
-
-
-  const dotsContainer =
-    slider.querySelector(".hero-dots");
-
-
-  const nextButton =
-    slider.querySelector(".hero-next");
-
-
-  const heroMedia =
-    Array.from(
-      slider.querySelectorAll(".hero-media")
-    );
-
-
-  const serviceImages =
-    Array.from(
       document.querySelectorAll(
-        ".home-service-band > img"
+        ".hero-slide"
       )
     );
 
+  const dots =
+    Array.from(
+      document.querySelectorAll(
+        ".hero-dot"
+      )
+    );
 
-  if (!slides.length) return;
+  const dotsContainer =
+    document.querySelector(
+      ".hero-dots"
+    );
 
-
-
-  /* =====================================================
-     SETTINGS
-  ===================================================== */
-
-  const SLIDE_DURATION = 9000;
-
-  const SWIPE_THRESHOLD = 45;
-
-  const TRACKPAD_THRESHOLD = 50;
+  const nextButton =
+    document.querySelector(
+      ".hero-next"
+    );
 
 
   let currentSlide = 0;
 
-  let autoTimer = null;
+  let autoSlideTimer = null;
 
-  let pageVisible = true;
-
-
-
-  /* =====================================================
-     VIDEO
-  ===================================================== */
-
-  function getVideo(index) {
-
-    if (!slides[index]) return null;
-
-    return slides[index].querySelector("video");
-
-  }
+  const AUTO_SLIDE_TIME = 9000;
 
 
 
-  function pauseVideo(index) {
+  /* =========================================================
+     FIND INITIAL ACTIVE SLIDE
+  ========================================================= */
 
-    const video = getVideo(index);
+  if (slides.length > 0) {
 
-    if (!video) return;
+    const activeIndex =
+      slides.findIndex(
+        function (slide) {
 
-    video.pause();
+          return slide.classList.contains(
+            "active"
+          );
+        }
+      );
 
-  }
+
+    currentSlide =
+      activeIndex >= 0
+        ? activeIndex
+        : 0;
 
 
+    slides.forEach(
+      function (slide, index) {
 
-  function pauseInactiveVideos() {
-
-    slides.forEach(function (slide, index) {
-
-      if (index === currentSlide) return;
-
-      const video =
-        slide.querySelector("video");
-
-      if (video) {
-
-        video.pause();
-
+        slide.classList.toggle(
+          "active",
+          index === currentSlide
+        );
       }
+    );
 
-    });
 
+    dots.forEach(
+      function (dot, index) {
+
+        dot.classList.toggle(
+          "active",
+          index === currentSlide
+        );
+      }
+    );
   }
 
 
 
-  function playCurrentVideo() {
+  /* =========================================================
+     VIDEO FUNCTIONS
+  ========================================================= */
 
-    const video =
-      getVideo(currentSlide);
+  function pauseVideo(video) {
+
+    if (!video) {
+      return;
+    }
+
+    try {
+      video.pause();
+    } catch (error) {
+      /* Ignore */
+    }
+  }
 
 
-    if (!video) return;
+  function prepareVideo(video) {
 
+    if (!video) {
+      return;
+    }
 
     video.muted = true;
 
     video.playsInline = true;
 
+    video.setAttribute(
+      "playsinline",
+      ""
+    );
 
-    /*
-      Start from beginning when
-      returning to a video.
-    */
+    video.setAttribute(
+      "webkit-playsinline",
+      ""
+    );
+  }
 
-    try {
 
-      video.currentTime = 0;
+  function playVideo(video) {
 
-    } catch (error) {}
+    if (!video) {
+      return;
+    }
+
+    prepareVideo(video);
 
 
     const promise =
@@ -199,92 +311,148 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (
       promise &&
-      typeof promise.catch === "function"
+      typeof promise.catch ===
+      "function"
     ) {
 
-      promise.catch(function () {});
-
+      promise.catch(
+        function () {
+          /*
+            Autoplay may occasionally be blocked.
+            Do not throw an error.
+          */
+        }
+      );
     }
+  }
 
+
+  function pauseInactiveVideos() {
+
+    slides.forEach(
+      function (slide, index) {
+
+        const video =
+          slide.querySelector("video");
+
+
+        if (!video) {
+          return;
+        }
+
+
+        if (index === currentSlide) {
+
+          playVideo(video);
+
+        } else {
+
+          pauseVideo(video);
+        }
+      }
+    );
   }
 
 
 
-  /* =====================================================
-     VIDEO PRELOADING
-  ===================================================== */
+  /* =========================================================
+     PRELOAD VIDEOS
+  ========================================================= */
 
-  function preloadVideo(index) {
+  slides.forEach(
+    function (slide) {
 
-    const video =
-      getVideo(index);
-
-
-    if (!video) return;
+      const video =
+        slide.querySelector("video");
 
 
-    /*
-      Important:
-      preload actual video data rather
-      than metadata only.
-    */
+      if (!video) {
+        return;
+      }
 
-    if (video.preload !== "auto") {
 
-      video.preload = "auto";
+      prepareVideo(video);
 
-      video.load();
 
+      /*
+        The HTML already provides preload.
+        Calling load() here gives the browser an early
+        opportunity to start reading metadata/buffering.
+      */
+
+      try {
+        video.load();
+      } catch (error) {
+        /* Ignore */
+      }
+    }
+  );
+
+
+
+  /* =========================================================
+     PREPARE NEXT VIDEO
+  ========================================================= */
+
+  function prepareNextSlide() {
+
+    if (slides.length < 2) {
+      return;
     }
 
-  }
 
-
-
-  function preloadUpcomingVideos() {
-
-    const next =
+    const nextIndex =
       (currentSlide + 1) %
       slides.length;
 
 
-    const secondNext =
-      (currentSlide + 2) %
-      slides.length;
+    const nextVideo =
+      slides[nextIndex]
+        .querySelector("video");
 
 
-    setTimeout(function () {
-
-      preloadVideo(next);
-
-    }, 100);
+    if (!nextVideo) {
+      return;
+    }
 
 
-    setTimeout(function () {
+    prepareVideo(nextVideo);
 
-      preloadVideo(secondNext);
 
-    }, 700);
+    /*
+      Do not force playback here.
+      Simply ensure the browser has started loading it.
+    */
 
+    if (
+      nextVideo.readyState === 0
+    ) {
+
+      try {
+        nextVideo.load();
+      } catch (error) {
+        /* Ignore */
+      }
+    }
   }
 
 
 
-  /* =====================================================
-     TIMER
-  ===================================================== */
+  /* =========================================================
+     AUTO SLIDER
+  ========================================================= */
 
   function stopAutoSlider() {
 
-    if (!autoTimer) return;
+    if (autoSlideTimer) {
 
+      clearInterval(
+        autoSlideTimer
+      );
 
-    clearTimeout(autoTimer);
-
-    autoTimer = null;
-
+      autoSlideTimer = null;
+    }
   }
-
 
 
   function startAutoSlider() {
@@ -292,173 +460,555 @@ document.addEventListener("DOMContentLoaded", function () {
     stopAutoSlider();
 
 
-    if (
-      !pageVisible ||
-      slides.length <= 1
-    ) {
+    if (slides.length <= 1) {
       return;
     }
 
 
-    autoTimer =
-      setTimeout(function () {
+    autoSlideTimer =
+      setInterval(
+        function () {
 
-        nextSlide();
+          nextSlide();
 
-      }, SLIDE_DURATION);
+        },
+        AUTO_SLIDE_TIME
+      );
+  }
 
+
+  function restartAutoSlider() {
+
+    startAutoSlider();
   }
 
 
 
-  /* =====================================================
-     SLIDE CHANGE
-  ===================================================== */
+  /* =========================================================
+     SHOW SLIDE
+  ========================================================= */
 
   function showSlide(index) {
 
-    const newIndex =
-      (
-        index +
-        slides.length
-      ) %
-      slides.length;
+    if (slides.length === 0) {
+      return;
+    }
+
+
+    let newIndex = index;
+
+
+    if (newIndex < 0) {
+
+      newIndex =
+        slides.length - 1;
+    }
 
 
     if (
-      newIndex === currentSlide
+      newIndex >=
+      slides.length
     ) {
 
-      startAutoSlider();
+      newIndex = 0;
+    }
+
+
+    if (
+      newIndex ===
+      currentSlide
+    ) {
+
+      restartAutoSlider();
 
       return;
-
     }
 
 
-    const oldIndex =
+    const previousIndex =
       currentSlide;
-
-
-    pauseVideo(oldIndex);
-
-
-    slides[oldIndex]
-      .classList
-      .remove("active");
-
-
-    if (dots[oldIndex]) {
-
-      dots[oldIndex]
-        .classList
-        .remove("active");
-
-    }
 
 
     currentSlide =
       newIndex;
 
 
+    /*
+      Activate new slide before removing the old one.
+      This helps prevent a blank frame between slides.
+    */
+
     slides[currentSlide]
-      .classList
-      .add("active");
+      .classList.add(
+        "active"
+      );
 
 
-    if (dots[currentSlide]) {
+    dots.forEach(
+      function (dot, dotIndex) {
 
-      dots[currentSlide]
-        .classList
-        .add("active");
+        dot.classList.toggle(
+          "active",
+          dotIndex === currentSlide
+        );
+      }
+    );
 
+
+    const newVideo =
+      slides[currentSlide]
+        .querySelector("video");
+
+
+    if (newVideo) {
+
+      playVideo(newVideo);
     }
 
 
-    pauseInactiveVideos();
+    /*
+      Let the browser paint the new slide before
+      removing the previous active class.
+    */
+
+    requestAnimationFrame(
+      function () {
+
+        requestAnimationFrame(
+          function () {
+
+            if (
+              previousIndex !==
+              currentSlide
+            ) {
+
+              slides[previousIndex]
+                .classList.remove(
+                  "active"
+                );
 
 
-    playCurrentVideo();
+              const previousVideo =
+                slides[previousIndex]
+                  .querySelector(
+                    "video"
+                  );
 
 
-    preloadUpcomingVideos();
+              if (previousVideo) {
+
+                setTimeout(
+                  function () {
+
+                    pauseVideo(
+                      previousVideo
+                    );
+
+                  },
+                  760
+                );
+              }
+            }
+
+          }
+        );
+
+      }
+    );
 
 
-    startAutoSlider();
+    prepareNextSlide();
 
+    restartAutoSlider();
   }
 
 
 
   function nextSlide() {
 
+    if (slides.length === 0) {
+      return;
+    }
+
+
     showSlide(
-      currentSlide + 1
+      (currentSlide + 1) %
+      slides.length
     );
-
   }
-
 
 
   function previousSlide() {
 
-    showSlide(
-      currentSlide - 1
-    );
+    if (slides.length === 0) {
+      return;
+    }
 
+
+    showSlide(
+      (
+        currentSlide -
+        1 +
+        slides.length
+      ) %
+      slides.length
+    );
   }
 
 
 
-  /* =====================================================
-     DOTS
-  ===================================================== */
+  /* =========================================================
+     DOT CLICK
+  ========================================================= */
 
-  dots.forEach(function (dot, index) {
+  dots.forEach(
+    function (dot) {
 
-    dot.addEventListener(
+      dot.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+
+          const slideIndex =
+            Number(
+              dot.dataset.slide
+            );
+
+
+          if (
+            Number.isInteger(
+              slideIndex
+            )
+          ) {
+
+            showSlide(
+              slideIndex
+            );
+          }
+        }
+      );
+    }
+  );
+
+
+
+  /* =========================================================
+     NEXT BUTTON
+  ========================================================= */
+
+  if (nextButton) {
+
+    nextButton.addEventListener(
       "click",
       function (event) {
 
+        event.preventDefault();
         event.stopPropagation();
 
-        showSlide(index);
-
+        nextSlide();
       }
     );
+  }
 
 
-    /*
-      Hover slide changing for
-      laptops/desktops.
-    */
 
-    dot.addEventListener(
-      "mouseenter",
-      function () {
+  /* =========================================================
+     SWIPE / MOUSE DRAG / MAC TRACKPAD POINTER DRAG
+  ========================================================= */
+
+  let pointerActive = false;
+
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+
+  let pointerLastX = 0;
+  let pointerLastY = 0;
+
+
+  const SWIPE_DISTANCE = 45;
+
+
+  if (slider) {
+
+    slider.addEventListener(
+      "pointerdown",
+      function (event) {
+
+        /*
+          Buttons and links must remain clickable.
+        */
 
         if (
-          window
-            .matchMedia("(hover: hover)")
-            .matches
+          event.target.closest(
+            "a, button"
+          )
         ) {
 
-          showSlide(index);
-
+          return;
         }
 
+
+        pointerActive = true;
+
+        pointerStartX =
+          event.clientX;
+
+        pointerStartY =
+          event.clientY;
+
+        pointerLastX =
+          event.clientX;
+
+        pointerLastY =
+          event.clientY;
+
+
+        slider.classList.add(
+          "dragging"
+        );
+
+
+        stopAutoSlider();
+
+
+        try {
+
+          slider.setPointerCapture(
+            event.pointerId
+          );
+
+        } catch (error) {
+          /* Ignore */
+        }
       }
     );
 
-  });
+
+    slider.addEventListener(
+      "pointermove",
+      function (event) {
+
+        if (!pointerActive) {
+          return;
+        }
+
+
+        pointerLastX =
+          event.clientX;
+
+        pointerLastY =
+          event.clientY;
+      }
+    );
+
+
+    slider.addEventListener(
+      "pointerup",
+      function (event) {
+
+        if (!pointerActive) {
+          return;
+        }
+
+
+        pointerActive = false;
+
+
+        slider.classList.remove(
+          "dragging"
+        );
+
+
+        const endX =
+          event.clientX;
+
+        const endY =
+          event.clientY;
+
+
+        const distanceX =
+          endX -
+          pointerStartX;
+
+        const distanceY =
+          endY -
+          pointerStartY;
+
+
+        /*
+          Vertical movement should continue to behave
+          as normal page scrolling.
+        */
+
+        if (
+          Math.abs(distanceY) >
+          Math.abs(distanceX)
+        ) {
+
+          restartAutoSlider();
+
+          return;
+        }
+
+
+        if (
+          Math.abs(distanceX) <
+          SWIPE_DISTANCE
+        ) {
+
+          restartAutoSlider();
+
+          return;
+        }
+
+
+        if (distanceX < 0) {
+
+          nextSlide();
+
+        } else {
+
+          previousSlide();
+        }
+      }
+    );
+
+
+    slider.addEventListener(
+      "pointercancel",
+      function () {
+
+        pointerActive = false;
+
+        slider.classList.remove(
+          "dragging"
+        );
+
+        restartAutoSlider();
+      }
+    );
+  }
 
 
 
-  /* =====================================================
-     PRESS + HOLD + DRAG DOTS
-  ===================================================== */
+  /* =========================================================
+     TRACKPAD HORIZONTAL SWIPE
 
-  let draggingDots = false;
+     Pointer events handle click-and-drag.
+     Wheel events below additionally allow a genuine
+     horizontal two-finger Mac trackpad gesture.
+  ========================================================= */
+
+  let trackpadLocked = false;
+
+  let accumulatedDeltaX = 0;
+
+  let trackpadResetTimer = null;
+
+
+  if (slider) {
+
+    slider.addEventListener(
+      "wheel",
+      function (event) {
+
+        /*
+          Only react when horizontal movement is clearly
+          stronger than vertical scrolling.
+        */
+
+        if (
+          Math.abs(event.deltaX) <=
+          Math.abs(event.deltaY)
+        ) {
+
+          return;
+        }
+
+
+        /*
+          Avoid changing multiple slides from a single
+          momentum swipe.
+        */
+
+        if (trackpadLocked) {
+          return;
+        }
+
+
+        accumulatedDeltaX +=
+          event.deltaX;
+
+
+        clearTimeout(
+          trackpadResetTimer
+        );
+
+
+        trackpadResetTimer =
+          setTimeout(
+            function () {
+
+              accumulatedDeltaX = 0;
+
+            },
+            180
+          );
+
+
+        if (
+          Math.abs(
+            accumulatedDeltaX
+          ) < 55
+        ) {
+
+          return;
+        }
+
+
+        trackpadLocked = true;
+
+
+        if (
+          accumulatedDeltaX > 0
+        ) {
+
+          nextSlide();
+
+        } else {
+
+          previousSlide();
+        }
+
+
+        accumulatedDeltaX = 0;
+
+
+        setTimeout(
+          function () {
+
+            trackpadLocked = false;
+
+          },
+          700
+        );
+      },
+      {
+        passive: true
+      }
+    );
+  }
+
+
+
+  /* =========================================================
+     PRESS + HOLD / DRAG ACROSS DOTS
+  ========================================================= */
+
+  let dotDragActive = false;
 
 
   if (dotsContainer) {
@@ -467,7 +1017,20 @@ document.addEventListener("DOMContentLoaded", function () {
       "pointerdown",
       function (event) {
 
-        draggingDots = true;
+        const selectedDot =
+          event.target.closest(
+            ".hero-dot"
+          );
+
+
+        if (!selectedDot) {
+          return;
+        }
+
+
+        dotDragActive = true;
+
+        stopAutoSlider();
 
 
         try {
@@ -477,8 +1040,29 @@ document.addEventListener("DOMContentLoaded", function () {
               event.pointerId
             );
 
-        } catch (error) {}
+        } catch (error) {
+          /* Ignore */
+        }
 
+
+        const slideIndex =
+          Number(
+            selectedDot
+              .dataset
+              .slide
+          );
+
+
+        if (
+          Number.isInteger(
+            slideIndex
+          )
+        ) {
+
+          showSlide(
+            slideIndex
+          );
+        }
       }
     );
 
@@ -487,8 +1071,15 @@ document.addEventListener("DOMContentLoaded", function () {
       "pointermove",
       function (event) {
 
-        if (!draggingDots) return;
+        if (!dotDragActive) {
+          return;
+        }
 
+
+        /*
+          elementFromPoint lets us detect which dot the
+          pointer is currently moving across while held.
+        */
 
         const element =
           document.elementFromPoint(
@@ -497,357 +1088,186 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
 
-        if (!element) return;
+        if (!element) {
+          return;
+        }
 
 
-        const dot =
-          element.closest(".hero-dot");
+        const selectedDot =
+          element.closest(
+            ".hero-dot"
+          );
 
 
-        if (!dot) return;
+        if (!selectedDot) {
+          return;
+        }
 
 
-        const index =
+        const slideIndex =
           Number(
-            dot.dataset.slide
+            selectedDot
+              .dataset
+              .slide
           );
 
 
         if (
-          Number.isInteger(index) &&
-          index !== currentSlide
+          Number.isInteger(
+            slideIndex
+          ) &&
+          slideIndex !==
+          currentSlide
         ) {
 
-          showSlide(index);
-
+          showSlide(
+            slideIndex
+          );
         }
-
       }
     );
 
 
-    function stopDotDrag() {
+    function endDotDrag() {
 
-      draggingDots = false;
+      if (!dotDragActive) {
+        return;
+      }
 
+
+      dotDragActive = false;
+
+      restartAutoSlider();
     }
 
 
     dotsContainer.addEventListener(
       "pointerup",
-      stopDotDrag
+      endDotDrag
     );
 
 
     dotsContainer.addEventListener(
       "pointercancel",
-      stopDotDrag
+      endDotDrag
     );
-
   }
 
 
 
-  /* =====================================================
-     NEXT BUTTON
-  ===================================================== */
+  /* =========================================================
+     HERO PARALLAX
 
-  if (nextButton) {
+     requestAnimationFrame prevents the browser from doing
+     heavy work for every individual scroll event.
+  ========================================================= */
 
-    nextButton.addEventListener(
-      "click",
-      function (event) {
+  let heroFrameRequested = false;
 
-        event.stopPropagation();
 
-        nextSlide();
+  function updateHeroParallax() {
 
-      }
-    );
-
-  }
-
-
-
-  /* =====================================================
-     TOUCH / MOUSE SWIPE
-  ===================================================== */
-
-  let pointerActive = false;
-
-  let startX = 0;
-
-  let startY = 0;
-
-
-
-  slider.addEventListener(
-    "pointerdown",
-    function (event) {
-
-      if (
-        event.target.closest(
-          ".hero-controls"
-        )
-      ) {
-        return;
-      }
-
-
-      pointerActive = true;
-
-
-      startX =
-        event.clientX;
-
-
-      startY =
-        event.clientY;
-
-    }
-  );
-
-
-
-  slider.addEventListener(
-    "pointerup",
-    function (event) {
-
-      if (!pointerActive) return;
-
-
-      pointerActive = false;
-
-
-      const differenceX =
-        startX -
-        event.clientX;
-
-
-      const differenceY =
-        startY -
-        event.clientY;
-
-
-      if (
-        Math.abs(differenceX) <
-        SWIPE_THRESHOLD
-      ) {
-        return;
-      }
-
-
-      /*
-        Vertical scroll remains normal.
-      */
-
-      if (
-        Math.abs(differenceY) >
-        Math.abs(differenceX)
-      ) {
-        return;
-      }
-
-
-      if (differenceX > 0) {
-
-        nextSlide();
-
-      } else {
-
-        previousSlide();
-
-      }
-
-    }
-  );
-
-
-
-  slider.addEventListener(
-    "pointercancel",
-    function () {
-
-      pointerActive = false;
-
-    }
-  );
-
-
-
-  /* =====================================================
-     MACBOOK TRACKPAD
-  ===================================================== */
-
-  let accumulatedX = 0;
-
-  let trackpadLocked = false;
-
-
-
-  slider.addEventListener(
-    "wheel",
-    function (event) {
-
-      /*
-        Ignore normal vertical
-        scrolling.
-      */
-
-      if (
-        Math.abs(event.deltaX) <=
-        Math.abs(event.deltaY)
-      ) {
-
-        accumulatedX = 0;
-
-        return;
-
-      }
-
-
-      if (trackpadLocked) return;
-
-
-      accumulatedX +=
-        event.deltaX;
-
-
-      if (
-        Math.abs(accumulatedX) <
-        TRACKPAD_THRESHOLD
-      ) {
-        return;
-      }
-
-
-      trackpadLocked = true;
-
-
-      if (accumulatedX > 0) {
-
-        nextSlide();
-
-      } else {
-
-        previousSlide();
-
-      }
-
-
-      accumulatedX = 0;
-
-
-      setTimeout(function () {
-
-        trackpadLocked = false;
-
-      }, 600);
-
-    },
-
-    {
-      passive: true
-    }
-  );
-
-
-
-  /* =====================================================
-     SMOOTH PARALLAX + ZOOM
-  ===================================================== */
-
-  let animationFrame = null;
-
-
-
-  function renderScrollEffects() {
-
-    animationFrame = null;
-
-
-    /* =================================================
-       HERO
-    ================================================= */
-
-    const heroRect =
-      slider.getBoundingClientRect();
+    heroFrameRequested = false;
 
 
     if (
-      heroRect.bottom > 0 &&
-      heroRect.top <
-      window.innerHeight
+      !slider ||
+      slides.length === 0
     ) {
 
-      /*
-        Progress from 0 to 1 as
-        hero leaves viewport.
-      */
-
-      let progress =
-        -heroRect.top /
-        heroRect.height;
-
-
-      progress =
-        Math.max(
-          0,
-          Math.min(1, progress)
-        );
-
-
-      /*
-        Vertical cinematic movement.
-      */
-
-      const movement =
-        progress * 75;
-
-
-      /*
-        Subtle zoom.
-
-        1.00 -> 1.06
-      */
-
-      const scale =
-        1 +
-        progress * 0.06;
-
-
-      heroMedia.forEach(
-        function (media) {
-
-          media.style.transform =
-            "translate3d(0," +
-            movement.toFixed(1) +
-            "px,0) " +
-            "scale(" +
-            scale.toFixed(4) +
-            ")";
-
-        }
-      );
-
+      return;
     }
 
 
+    const rect =
+      slider.getBoundingClientRect();
 
-    /* =================================================
-       SERVICE IMAGE MOVEMENT
-    ================================================= */
 
-    serviceImages.forEach(
-      function (image) {
+    /*
+      Stop calculations when hero is nowhere near viewport.
+    */
 
-        const section =
-          image.closest(
-            ".home-service-band"
+    if (
+      rect.bottom < -100 ||
+      rect.top >
+      window.innerHeight + 100
+    ) {
+
+      return;
+    }
+
+
+    const movement =
+      Math.max(
+        -70,
+        Math.min(
+          70,
+          rect.top * -0.10
+        )
+      );
+
+
+    slides.forEach(
+      function (slide) {
+
+        slide.style.setProperty(
+          "--hero-scroll",
+          movement + "px"
+        );
+      }
+    );
+  }
+
+
+  function requestHeroParallax() {
+
+    if (heroFrameRequested) {
+      return;
+    }
+
+
+    heroFrameRequested = true;
+
+
+    requestAnimationFrame(
+      updateHeroParallax
+    );
+  }
+
+
+
+  /* =========================================================
+     SERVICE IMAGE PARALLAX
+  ========================================================= */
+
+  const serviceBands =
+    Array.from(
+      document.querySelectorAll(
+        ".home-service-band"
+      )
+    );
+
+
+  let serviceFrameRequested = false;
+
+
+  function updateServiceParallax() {
+
+    serviceFrameRequested = false;
+
+
+    serviceBands.forEach(
+      function (section) {
+
+        const image =
+          section.querySelector(
+            ":scope > img"
           );
 
 
-        if (!section) return;
+        if (!image) {
+          return;
+        }
 
 
         const rect =
@@ -856,100 +1276,113 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-          Larger buffer means the browser
-          prepares the image before it
-          enters the screen.
+          Ignore sections far away from the viewport.
         */
 
         if (
-          rect.bottom < -600 ||
+          rect.bottom < -250 ||
           rect.top >
-          window.innerHeight + 600
+          window.innerHeight + 250
         ) {
+
           return;
         }
 
 
-        const totalDistance =
-          window.innerHeight +
-          rect.height;
+        const viewportCenter =
+          window.innerHeight / 2;
 
 
-        let progress =
-          (
-            window.innerHeight -
-            rect.top
-          ) /
-          totalDistance;
+        const sectionCenter =
+          rect.top +
+          rect.height / 2;
 
 
-        progress =
-          Math.max(
-            0,
-            Math.min(1, progress)
-          );
+        const distance =
+          sectionCenter -
+          viewportCenter;
 
 
         /*
-          Parallax movement.
+          Small movement only.
+          Large values are what caused blank edges
+          and lag in the older version.
         */
 
         const movement =
-          (
-            progress -
-            0.5
-          ) *
-          90;
+          Math.max(
+            -55,
+            Math.min(
+              55,
+              distance * -0.055
+            )
+          );
 
 
-        /*
-          Slow cinematic zoom.
+        const visibleProgress =
+          Math.max(
+            0,
+            1 -
+            Math.abs(distance) /
+            (
+              window.innerHeight +
+              rect.height / 2
+            )
+          );
 
-          1.04 -> 1.09
-        */
 
         const scale =
-          1.04 +
-          progress *
-          0.05;
+          1.045 +
+          visibleProgress * 0.018;
 
 
-        image.style.transform =
-          "translate3d(0," +
-          movement.toFixed(1) +
-          "px,0) " +
-          "scale(" +
-          scale.toFixed(4) +
-          ")";
+        section.style.setProperty(
+          "--service-scroll",
+          movement + "px"
+        );
 
+
+        section.style.setProperty(
+          "--service-scale",
+          scale.toFixed(4)
+        );
       }
     );
-
   }
 
 
+  function requestServiceParallax() {
 
-  function requestScrollRender() {
-
-    if (
-      animationFrame !== null
-    ) {
+    if (serviceFrameRequested) {
       return;
     }
 
 
-    animationFrame =
-      requestAnimationFrame(
-        renderScrollEffects
-      );
+    serviceFrameRequested = true;
 
+
+    requestAnimationFrame(
+      updateServiceParallax
+    );
   }
 
 
 
+  /* =========================================================
+     SHARED SCROLL HANDLER
+  ========================================================= */
+
+  function handleScroll() {
+
+    requestHeroParallax();
+
+    requestServiceParallax();
+  }
+
+
   window.addEventListener(
     "scroll",
-    requestScrollRender,
+    handleScroll,
     {
       passive: true
     }
@@ -958,7 +1391,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener(
     "resize",
-    requestScrollRender,
+    handleScroll,
     {
       passive: true
     }
@@ -966,131 +1399,138 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  /* =====================================================
+  /* =========================================================
+     SERVICE BAND CLICK
+  ========================================================= */
+
+  serviceBands.forEach(
+    function (band) {
+
+      const destination =
+        band.dataset.link;
+
+
+      if (!destination) {
+        return;
+      }
+
+
+      band.addEventListener(
+        "click",
+        function (event) {
+
+          /*
+            Don't interfere with the actual button.
+          */
+
+          if (
+            event.target.closest("a")
+          ) {
+
+            return;
+          }
+
+
+          window.location.href =
+            destination;
+        }
+      );
+    }
+  );
+
+
+
+  /* =========================================================
+     CLOSE MOBILE MENU AFTER SELECTING A LINK
+  ========================================================= */
+
+  const navToggle =
+    document.getElementById(
+      "nav-toggle"
+    );
+
+
+  const navigationLinks =
+    document.querySelectorAll(
+      ".mobile-menu a"
+    );
+
+
+  if (navToggle) {
+
+    navigationLinks.forEach(
+      function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            navToggle.checked =
+              false;
+          }
+        );
+      }
+    );
+  }
+
+
+
+  /* =========================================================
      PAGE VISIBILITY
-  ===================================================== */
+
+     Pause videos when tab isn't visible.
+     Resume only the active video when user returns.
+  ========================================================= */
 
   document.addEventListener(
     "visibilitychange",
     function () {
 
-      pageVisible =
-        !document.hidden;
-
-
-      if (!pageVisible) {
-
-        stopAutoSlider();
-
+      if (document.hidden) {
 
         slides.forEach(
           function (slide) {
 
-            const video =
+            pauseVideo(
               slide.querySelector(
                 "video"
-              );
-
-
-            if (video) {
-
-              video.pause();
-
-            }
-
+              )
+            );
           }
         );
 
+
+        stopAutoSlider();
+
       } else {
 
-        playCurrentVideo();
+        pauseInactiveVideos();
+
+        prepareNextSlide();
 
         startAutoSlider();
-
-        requestScrollRender();
-
       }
-
     }
   );
 
 
 
-  /* =====================================================
-     INITIALIZE
-  ===================================================== */
+  /* =========================================================
+     INITIALISE
+  ========================================================= */
 
-  slides.forEach(
-    function (slide, index) {
+  if (slides.length > 0) {
 
-      slide.classList.toggle(
-        "active",
-        index === 0
-      );
+    pauseInactiveVideos();
 
-    }
-  );
+    prepareNextSlide();
+
+    startAutoSlider();
+  }
 
 
-  dots.forEach(
-    function (dot, index) {
+  requestHeroParallax();
 
-      dot.classList.toggle(
-        "active",
-        index === 0
-      );
-
-    }
-  );
-
-
-  currentSlide = 0;
-
-
-  /*
-    Video 1 begins buffering immediately.
-  */
-
-  preloadVideo(1);
-
-
-  /*
-    Give the browser a moment before
-    starting Video 2.
-  */
-
-  setTimeout(function () {
-
-    preloadVideo(2);
-
-  }, 1000);
-
-
-  /*
-    Start Video 3 shortly afterwards.
-  */
-
-  setTimeout(function () {
-
-    preloadVideo(3);
-
-  }, 3000);
-
-
-  /*
-    Video 4 can load last.
-  */
-
-  setTimeout(function () {
-
-    preloadVideo(4);
-
-  }, 5000);
-
-
-  startAutoSlider();
-
-
-  requestScrollRender();
+  requestServiceParallax();
 
 });
