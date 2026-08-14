@@ -2733,3 +2733,25 @@ main .map-icon svg {
     font-size: 0.74rem;
   }
 }
+/* =========================================================
+   REMOVE BULLET POINTS
+========================================================= */
+
+.careers-list,
+.opportunity-list,
+.service-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.careers-list li,
+.opportunity-list li,
+.service-list li {
+  list-style: none;
+}
+
+.careers-list li::marker,
+.opportunity-list li::marker,
+.service-list li::marker {
+  content: "";
+}
