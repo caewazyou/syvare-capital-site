@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Current Opportunities | Syvaré Capital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico?v=2">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Only additions for tiles + same-page role switching -->
+  <style>
+    .jobs-wrap {
+      max-width: 980px;
+      margin: 90px auto;
+      padding: 0 24px;
+    }
+
+    .jobs-title {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .jobs-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .jobs-title p {
+      color: #e2e7f5;
+    }
+
+    .job-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .job-tile {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 18px;
+      padding: 26px 24px;
+      color: #f5f7ff;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
+    }
+
+    .job-tile h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .job-meta {
+      color: #e2e7f5;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .job-tile p {
+      color: #e2e7f5;
+      margin-bottom: 14px;
+    }
+
+    .role-status {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .job-detail {
+      max-width: 900px;
+      margin: 90px auto;
+      padding: 38px 36px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
+      color: #f5f7ff;
+      display: none;
+    }
+
+    .job-detail.active {
+      display: block;
+    }
+
+    .job-detail h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.95rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .job-detail h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin: 18px 0 8px;
+      color: #ffffff;
+    }
+
+    .job-detail p {
+      color: #e2e7f5;
+      margin-bottom: 12px;
+    }
+
+    .job-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    .job-actions .btn,
+    .job-tile .btn {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      color: #ffffff;
+    }
+
+    .job-actions .btn:hover,
+    .job-tile .btn:hover {
+      background: rgba(255, 255, 255, 0.30);
+      color: #111111;
+    }
+
+    .closed-role-btn {
+      display: inline-block;
+      padding: 7px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      color: #ffffff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      backdrop-filter: blur(10px);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .closed-role-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
+      color: #ffffff;
+    }
+
+    .spacer { height: 12px; }
+
+    .opportunity-list {
+      list-style: disc;
+      list-style-position: inside;
+      padding-left: 0;
+      margin: 12px 0;
+    }
+
+    .opportunity-list li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body class="page-bg">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="site-title">Syvaré Capital</div>
+      <div class="site-subtitle">Family &amp; Partners</div>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Our Work</a>
+      <a href="approach.html">Our Approach</a>
+      <a href="team.html">Meet the Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- TILES VIEW -->
+    <section id="jobs-view" class="jobs-wrap">
+      <div class="jobs-title">
+        <h1>Current Opportunities</h1>
+        <p>View previous role details below.</p>
+      </div>
+
+      <div class="job-tiles">
+
+        <!-- Research Analyst tile -->
+        <div class="job-tile">
+          <h2>Research Analyst</h2>
+          <div class="job-meta">Advisory Research • Deadline: 13 March 2026</div>
+          <p>
+            Analytical support across live and developing mandates covering SMEs, real estate and investment-related themes.
+          </p>
+          <button class="btn" type="button" onclick="openRole('senior')">View more</button>
+          <div class="role-status">Position Closed</div>
+        </div>
+
+        <!-- Senior Accountant tile -->
+        <div class="job-tile">
+          <h2>Senior Accountant</h2>
+          <div class="job-meta">Remote Working Across the UK • Deadline: 13 March</div>
+          <p>
+            Senior compliance role for a qualified accountant authorised to submit statutory accounts and tax filings to HMRC.
+          </p>
+          <button class="btn" type="button" onclick="openRole('accountant')">View more</button>
+          <div class="role-status">Position Closed</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESEARCH ANALYST DETAIL -->
+    <section id="role-senior" class="job-detail">
+      <h1>Current Opportunity</h1>
+
+      <h2>Research Analyst</h2>
+
+      <h2>Overview</h2>
+      <p>
+        As part of its initial team build, Syvaré Capital is seeking a Research Analyst to support advisory and analytical work
+        across live and developing mandates. The role is designed for a graduate or early career professional who is highly
+        analytical, detail oriented and comfortable working with complex information.
+      </p>
+      <p>
+        The Research Analyst will work closely with senior team members, supporting research, analysis and preparation of written
+        materials that inform decision making across SMEs, real estate and investment related topics.
+      </p>
+
+      <h2>Role Description</h2>
+      <p>
+        The Research Analyst will support senior team members through structured research, data analysis and preparation of written
+        materials. The role requires strong analytical capability, precision in written communication and the ability to synthesise
+        complex information into clear, decision ready insight.
+      </p>
+      <p>
+        This is a hands on role with real exposure to advisory work rather than a purely administrative position.
+      </p>
+
+      <h2>Key Responsibilities</h2>
+      <ul class="opportunity-list">
+        <li>Conduct market, sector and company level research across SMEs, real estate and investment related themes</li>
+        <li>Analyse publicly available data, reports and financial information</li>
+        <li>Support preparation of research notes, internal briefings and advisory documentation</li>
+        <li>Assist with operational and financial assessments under guidance from senior team members</li>
+        <li>Maintain research files, data integrity and internal documentation standards</li>
+      </ul>
+
+      <h2>Skills and Capabilities</h2>
+      <ul class="opportunity-list">
+        <li>Strong analytical and critical thinking ability</li>
+        <li>High standard of written English with clear and concise expression</li>
+        <li>Ability to interpret quantitative and qualitative data</li>
+        <li>Strong attention to detail and a structured approach to problem solving</li>
+        <li>Professional judgement, discretion and reliability</li>
+      </ul>
+
+      <h2>Technical and Software Skills</h2>
+      <p>
+        Candidates should be comfortable working with the following tools or demonstrate a strong aptitude to learn them quickly.
+      </p>
+      <ul class="opportunity-list">
+        <li>Microsoft Excel including advanced formulas, PivotTables, data analysis and basic financial modelling</li>
+        <li>Microsoft PowerPoint for structured advisory decks and executive briefing materials</li>
+        <li>Microsoft Word for professional research documentation and reports</li>
+        <li>Microsoft Outlook for professional communication and coordination</li>
+        <li>Google Workspace including Google Sheets and Google Docs for collaborative research and analysis</li>
+        <li>Power BI or Tableau for basic data visualisation and insight presentation</li>
+      </ul>
+
+      <p>Familiarity with the following is advantageous but not essential.</p>
+      <ul class="opportunity-list">
+        <li>Capital IQ, Refinitiv Eikon or Bloomberg Terminal</li>
+        <li>Companies House and Office for National Statistics databases for UK corporate and economic research</li>
+        <li>PitchBook or Crunchbase for company and market analysis</li>
+        <li>Basic understanding of financial statements, cash flow analysis and operational metrics</li>
+      </ul>
+
+      <h2>What We Offer</h2>
+      <p>
+        Syvaré Capital aims to provide a professional and well supported working environment that enables focused, high quality work.
+      </p>
+      <p>Team members can expect.</p>
+      <ul class="opportunity-list">
+        <li>A firm issued laptop and required hardware to support research and analytical work</li>
+        <li>Access to professional software tools and research platforms relevant to the role</li>
+        <li>Structured onboarding and ongoing guidance from senior team members</li>
+        <li>Exposure to real world advisory work across UK markets, SMEs and real estate</li>
+        <li>A professional environment focused on clarity, learning and long term development</li>
+        <li>Flexible working arrangements aligned with role requirements and research schedules</li>
+        <li>The opportunity to grow with the firm as Syvaré Capital expands its advisory and research capabilities</li>
+      </ul>
+
+      <p>
+        As an early stage firm, responsibility and learning are closely linked. The role offers meaningful exposure rather than purely transactional tasks.
+      </p>
+
+      <h2>Qualifications</h2>
+      <ul class="opportunity-list">
+        <li>Degree in business, finance, economics or a related discipline</li>
+        <li>Graduate or early career professionals are encouraged to apply</li>
+      </ul>
+
+      <h2>Application Process</h2>
+      <p>Interested candidates may apply by submitting.</p>
+      <ul class="opportunity-list">
+        <li>Curriculum vitae</li>
+        <li>A brief note outlining areas of interest</li>
+        <li>Contact details</li>
+      </ul>
+
+      <h2>Application Deadline</h2>
+      <p><strong>13 March 2026</strong></p>
+
+      <p>
+        All applications will be handled confidentially. Appointments will be aligned with firm requirements and advisory mandates.
+      </p>
+
+      <div class="job-actions">
+        <button class="btn" type="button" onclick="goBack()">Back</button>
+        <button class="closed-role-btn" type="button">No Longer Available</button>
+      </div>
+    </section>
+
+    <!-- SENIOR ACCOUNTANT DETAIL -->
+    <section id="role-accountant" class="job-detail">
+      <h1>Current Opportunity</h1>
+
+      <h2>Senior Accountant</h2>
+      <p><strong>Remote Working Across the UK</strong></p>
+      <p><strong>Application Deadline:</strong> 13 March</p>
+
+      <div class="spacer"></div>
+
+      <p>
+        Syvaré Capital Family and Partners is an independent advisory and accounting firm supporting businesses across multiple stages of growth.
+        We operate with a strong emphasis on regulatory discipline, professional judgement, and institutional quality.
+      </p>
+
+      <p>
+        We are seeking an experienced accountant who is fully authorised and competent to submit statutory accounts and tax filings directly to HMRC.
+        This role is designed for a senior professional capable of independently managing compliance, submissions, and tax consultation across a client portfolio.
+      </p>
+
+      <h2>Role Overview</h2>
+      <p>
+        You will take full responsibility for accounting delivery and statutory compliance for assigned clients. This includes preparation, review,
+        and direct submission of accounts and tax filings to HMRC, alongside ongoing tax consultation and professional client support.
+      </p>
+      <p>
+        This is a senior responsibility role requiring accuracy, sound judgement, and adherence to high regulatory and professional standards.
+      </p>
+
+      <h2>Key Responsibilities</h2>
+      <ul class="opportunity-list">
+        <li>End to end accounting management for a portfolio of clients</li>
+        <li>Preparation and direct submission of statutory accounts, VAT returns, and corporation tax filings to HMRC</li>
+        <li>Delivery of tax consultation including corporation tax and VAT advisory</li>
+        <li>Maintenance of compliant documentation, audit trails, and supporting schedules</li>
+        <li>Professional handling of HMRC correspondence and compliance queries</li>
+        <li>Participation in structured virtual review meetings every two weeks</li>
+      </ul>
+
+      <h2>Mandatory Requirements</h2>
+      <p><strong>Applicants must meet all of the following criteria:</strong></p>
+      <ul class="opportunity-list">
+        <li>Proven experience independently submitting statutory accounts and tax filings to HMRC</li>
+        <li>Recognised professional qualification such as ACA, ACCA, or CIMA</li>
+        <li>Strong technical knowledge of UK accounting standards and HMRC regulations</li>
+        <li>Demonstrated experience providing tax consultation and compliance advice</li>
+        <li>High level of professional judgement, accuracy, and accountability</li>
+        <li>Proficiency with cloud accounting platforms such as Xero or QuickBooks</li>
+        <li>Legal Right to Work in the United Kingdom</li>
+        <li>Ability to operate independently within a structured, MNC-grade compliance framework</li>
+      </ul>
+
+      <p>
+        Applications that do not meet the HMRC submission requirement or Right to Work requirement will not be considered.
+      </p>
+
+      <h2>Working Arrangement</h2>
+      <ul class="opportunity-list">
+        <li>Fully remote working within the UK</li>
+        <li>Monthly income based on client portfolio size and complexity</li>
+        <li>Virtual team update meeting once every two weeks</li>
+        <li>Long term opportunity within a disciplined advisory firm</li>
+      </ul>
+
+      <h2>Benefits</h2>
+      <ul class="opportunity-list">
+        <li>Flexible remote working structure</li>
+        <li>Predictable monthly income linked to client portfolio</li>
+        <li>Senior level autonomy with clear accountability</li>
+        <li>Exposure to clients across multiple industries and complexity levels</li>
+        <li>Institutional standards, processes, and governance</li>
+        <li>Long term collaboration within a growing advisory platform</li>
+      </ul>
+
+      <h2>Application Deadline</h2>
+      <p><strong>13 March 2026</strong></p>
+
+      <p>
+        All applications will be handled confidentially. Appointments will be aligned with firm requirements and advisory mandates.
+      </p>
+
+      <div class="job-actions">
+        <button class="btn" type="button" onclick="goBack()">Back</button>
+        <button class="closed-role-btn" type="button">No Longer Available</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Syvaré Capital. All rights reserved.
+  </footer>
+
+  <script>
+    function openRole(role) {
+      document.getElementById('jobs-view').style.display = 'none';
+
+      document.getElementById('role-senior').classList.remove('active');
+      document.getElementById('role-accountant').classList.remove('active');
+
+      document.getElementById('role-' + role).classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goBack() {
+      document.getElementById('role-senior').classList.remove('active');
+      document.getElementById('role-accountant').classList.remove('active');
+
+      document.getElementById('jobs-view').style.display = '';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
