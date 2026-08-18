@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <title>Make an Enquiry | Syvaré Capital</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
+  <meta
+    name="description"
+    content="Submit a private enquiry to Syvaré Capital Family & Partners."
+  />
+
+
+  <!-- =====================================================
+       FAVICONS
+  ====================================================== -->
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  />
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  />
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  />
+
+  <link
+    rel="shortcut icon"
+    href="/favicon.ico"
+  />
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  />
+
+
+  <!-- =====================================================
+       FONTS
+  ====================================================== -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+
+  <!-- =====================================================
+       MAIN WEBSITE CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css"
+  />
+
+
+  <!-- =====================================================
+       ENQUIRY PAGE ONLY
+  ====================================================== -->
+
+  <style>
+
+    /* =====================================================
+       PAGE
+    ====================================================== */
+
+    .enquiry-wrap {
+      max-width: 900px;
+      margin: 90px auto;
+      padding: 0 24px;
+    }
+
+
+    .enquiry-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+
+    .enquiry-eyebrow {
+      display: block;
+      margin-bottom: 12px;
+
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+
+    .enquiry-heading h1 {
+      margin: 0 0 14px;
+
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 500;
+
+      color: #ffffff;
+    }
+
+
+    .enquiry-heading p {
+      max-width: 650px;
+      margin: 0 auto;
+
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+
+      color: #e2e7f5;
+    }
+
+
+
+    /* =====================================================
+       GLASS CARD
+    ====================================================== */
+
+    .enquiry-card {
+      position: relative;
+
+      padding: 38px 36px;
+
+      border-radius: 18px;
+
+      background:
+        rgba(255, 255, 255, 0.12);
+
+      backdrop-filter:
+        blur(20px);
+
+      -webkit-backdrop-filter:
+        blur(20px);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.30);
+
+      box-shadow:
+        0 25px 60px
+        rgba(0, 0, 0, 0.28);
+
+      overflow: hidden;
+    }
+
+
+
+    /* =====================================================
+       FORM
+    ====================================================== */
+
+    .enquiry-form {
+      display: grid;
+      gap: 22px;
+    }
+
+
+    .form-row {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+
+    .form-field label {
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.78rem;
+      font-weight: 500;
+
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+
+      color:
+        rgba(255, 255, 255, 0.76);
+    }
+
+
+    .required {
+      color: #ffffff;
+    }
+
+
+    .optional {
+      margin-left: 4px;
+
+      font-size: 0.68rem;
+      font-weight: 300;
+
+      letter-spacing: 0.05em;
+
+      opacity: 0.55;
+    }
+
+
+
+    /* =====================================================
+       INPUTS
+    ====================================================== */
+
+    .enquiry-form input,
+    .enquiry-form select,
+    .enquiry-form textarea {
+
+      width: 100%;
+
+      box-sizing: border-box;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.22);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255, 255, 255, 0.10);
+
+      color: #ffffff;
+
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.95rem;
+
+      outline: none;
+
+      transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+
+    .enquiry-form input,
+    .enquiry-form select {
+
+      min-height: 48px;
+
+      padding:
+        0 14px;
+    }
+
+
+    .enquiry-form textarea {
+
+      min-height: 155px;
+
+      padding:
+        14px;
+
+      resize: vertical;
+
+      line-height: 1.55;
+    }
+
+
+    .enquiry-form input::placeholder,
+    .enquiry-form textarea::placeholder {
+
+      color:
+        rgba(255, 255, 255, 0.42);
+    }
+
+
+    .enquiry-form input:focus,
+    .enquiry-form select:focus,
+    .enquiry-form textarea:focus {
+
+      border-color:
+        rgba(255, 255, 255, 0.62);
+
+      background:
+        rgba(255, 255, 255, 0.15);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(255, 255, 255, 0.06);
+    }
+
+
+    .enquiry-form select option {
+      color: #111111;
+      background: #ffffff;
+    }
+
+
+
+    /* =====================================================
+       CONSENT
+    ====================================================== */
+
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 11px;
+
+      padding-top: 2px;
+    }
+
+
+    .consent-row input {
+      width: 16px;
+      height: 16px;
+
+      min-height: auto;
+
+      flex-shrink: 0;
+
+      margin-top: 4px;
+
+      accent-color: #ffffff;
+    }
+
+
+    .consent-row label {
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.88rem;
+      line-height: 1.55;
+
+      color: #e2e7f5;
+    }
+
+
+    .consent-row a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+
+
+    /* =====================================================
+       HONEYPOT
+    ====================================================== */
+
+    .website-field {
+      position: absolute !important;
+
+      width: 1px !important;
+      height: 1px !important;
+
+      overflow: hidden !important;
+
+      opacity: 0 !important;
+
+      pointer-events: none !important;
+
+      left: -9999px !important;
+    }
+
+
+
+    /* =====================================================
+       FORM ACTIONS
+    ====================================================== */
+
+    .form-actions {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 14px;
+
+      margin-top: 4px;
+    }
+
+
+    .back-link,
+    .submit-enquiry {
+
+      min-height: 44px;
+
+      padding:
+        0 24px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 999px;
+
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.78rem;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        opacity 180ms ease;
+    }
+
+
+    .back-link {
+
+      background:
+        rgba(255, 255, 255, 0.08);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.24);
+
+      color: #ffffff;
+    }
+
+
+    .submit-enquiry {
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.36);
+
+      background:
+        rgba(255, 255, 255, 0.18);
+
+      color: #ffffff;
+    }
+
+
+    .back-link:hover,
+    .submit-enquiry:hover {
+
+      background:
+        rgba(255, 255, 255, 0.30);
+
+      color: #111111;
+    }
+
+
+    .submit-enquiry:disabled {
+      cursor: wait;
+      opacity: 0.6;
+    }
+
+
+
+    /* =====================================================
+       PRIVACY NOTE
+    ====================================================== */
+
+    .privacy-note {
+
+      margin-top: 24px;
+
+      padding-top: 20px;
+
+      border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.78rem;
+
+      line-height: 1.55;
+
+      color:
+        rgba(255, 255, 255, 0.58);
+    }
+
+
+
+    /* =====================================================
+       SUBMISSION OVERLAY
+    ====================================================== */
+
+    .submission-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 99999;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 24px;
+
+      background:
+        rgba(3, 7, 17, 0.82);
+
+      backdrop-filter:
+        blur(16px);
+
+      -webkit-backdrop-filter:
+        blur(16px);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      transition:
+        opacity 220ms ease,
+        visibility 220ms ease;
+    }
+
+
+    .submission-overlay.active {
+
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: all;
+    }
+
+
+    .submission-box {
+
+      width: min(
+        390px,
+        calc(100vw - 48px)
+      );
+
+      text-align: center;
+
+      padding:
+        38px 28px;
+
+      border-radius: 18px;
+
+      background:
+        rgba(255, 255, 255, 0.10);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.24);
+
+      box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.35);
+    }
+
+
+
+    /* =====================================================
+       SYVARÉ LOADING LOGO
+    ====================================================== */
+
+    .submission-logo {
+
+      width: 64px;
+      height: 64px;
+
+      object-fit: contain;
+
+      margin-bottom: 20px;
+
+      animation:
+        syvareLoadingPulse
+        1.6s
+        ease-in-out
+        infinite;
+    }
+
+
+    @keyframes syvareLoadingPulse {
+
+      0% {
+        opacity: 0.45;
+        transform: scale(0.94);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0.45;
+        transform: scale(0.94);
+      }
+
+    }
+
+
+    .submission-box h2 {
+
+      margin:
+        0 0 9px;
+
+      font-family:
+        'Playfair Display',
+        serif;
+
+      font-size: 1.45rem;
+
+      font-weight: 500;
+
+      color: #ffffff;
+    }
+
+
+    .submission-box p {
+
+      margin: 0;
+
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.9rem;
+
+      line-height: 1.55;
+
+      color: #e2e7f5;
+    }
+
+
+
+    /* =====================================================
+       STATUS MESSAGE
+    ====================================================== */
+
+    .form-status {
+
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 14px 16px;
+
+      border-radius: 10px;
+
+      font-family:
+        'Source Sans 3',
+        sans-serif;
+
+      font-size: 0.9rem;
+
+      line-height: 1.5;
+    }
+
+
+    .form-status.success {
+
+      display: block;
+
+      background:
+        rgba(90, 160, 120, 0.15);
+
+      border:
+        1px solid
+        rgba(120, 200, 150, 0.25);
+
+      color: #e9fff1;
+    }
+
+
+    .form-status.error {
+
+      display: block;
+
+      background:
+        rgba(180, 60, 60, 0.14);
+
+      border:
+        1px solid
+        rgba(220, 100, 100, 0.28);
+
+      color: #ffeaea;
+    }
+
+
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (max-width: 700px) {
+
+      .enquiry-wrap {
+
+        margin:
+          60px auto;
+
+        padding:
+          0 16px;
+
+      }
+
+
+      .enquiry-heading h1 {
+
+        font-size:
+          1.75rem;
+
+      }
+
+
+      .enquiry-card {
+
+        padding:
+          28px 20px;
+
+        border-radius:
+          16px;
+
+      }
+
+
+      .form-row {
+
+        grid-template-columns:
+          1fr;
+
+        gap:
+          22px;
+
+      }
+
+
+      .form-actions {
+
+        flex-direction:
+          column-reverse;
+
+        align-items:
+          stretch;
+
+      }
+
+
+      .back-link,
+      .submit-enquiry {
+
+        width: 100%;
+
+        box-sizing:
+          border-box;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body class="page-bg">
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+
+      <div class="site-title">
+        Syvaré Capital
+      </div>
+
+      <div class="site-subtitle">
+        Family &amp; Partners
+      </div>
+
+    </a>
+
+
+    <input
+      type="checkbox"
+      id="nav-toggle"
+      class="nav-toggle"
+    />
+
+
+    <label
+      for="nav-toggle"
+      class="hamburger"
+      aria-label="Toggle navigation"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </label>
+
+
+    <nav class="mobile-menu">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="about.html">
+        About Us
+      </a>
+
+      <a href="services.html">
+        Our Work
+      </a>
+
+      <a href="approach.html">
+        Our Approach
+      </a>
+
+      <a href="team.html">
+        Meet the Team
+      </a>
+
+      <a href="careers.html">
+        Careers
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+    </nav>
+
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main>
+
+
+    <section class="enquiry-wrap">
+
+
+      <div class="enquiry-heading">
+
+        <span class="enquiry-eyebrow">
+          Private Enquiries
+        </span>
+
+        <h1>
+          Make an Enquiry
+        </h1>
+
+        <p>
+          If you would like to discuss a business,
+          investment or portfolio matter, please provide
+          a few details below. A member of our team will
+          review your enquiry and respond where appropriate.
+        </p>
+
+      </div>
+
+
+
+      <!-- =================================================
+           ENQUIRY CARD
+      ================================================== -->
+
+      <div class="enquiry-card">
+
+
+        <form
+          id="syvare-enquiry-form"
+          class="enquiry-form"
+        >
+
+
+          <!-- NAME + EMAIL -->
+
+          <div class="form-row">
+
+
+            <div class="form-field">
+
+              <label for="enquiry-name">
+
+                Name
+                <span class="required">*</span>
+
+              </label>
+
+              <input
+                id="enquiry-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+              />
+
+            </div>
+
+
+
+            <div class="form-field">
+
+              <label for="enquiry-email">
+
+                Email
+                <span class="required">*</span>
+
+              </label>
+
+              <input
+                id="enquiry-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- COMPANY + TELEPHONE -->
+
+          <div class="form-row">
+
+
+            <div class="form-field">
+
+              <label for="enquiry-company">
+
+                Company
+
+                <span class="optional">
+                  Optional
+                </span>
+
+              </label>
+
+              <input
+                id="enquiry-company"
+                name="company"
+                type="text"
+                autocomplete="organization"
+              />
+
+            </div>
+
+
+
+            <div class="form-field">
+
+              <label for="enquiry-phone">
+
+                Telephone
+
+                <span class="optional">
+                  Optional
+                </span>
+
+              </label>
+
+              <input
+                id="enquiry-phone"
+                name="telephone"
+                type="tel"
+                autocomplete="tel"
+              />
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- NATURE OF ENQUIRY -->
+
+          <div class="form-field full">
+
+            <label for="enquiry-type">
+
+              Nature of Enquiry
+              <span class="required">*</span>
+
+            </label>
+
+
+            <select
+              id="enquiry-type"
+              name="enquiryType"
+              required
+            >
+
+              <option
+                value=""
+                selected
+                disabled
+              >
+                Select an enquiry type
+              </option>
+
+
+              <option value="business-advisory">
+                Business Advisory
+              </option>
+
+
+              <option value="real-estate-portfolio">
+                Real Estate &amp; Portfolio Advisory
+              </option>
+
+
+              <option value="investment-advisory">
+                Investment Advisory &amp; Deal Support
+              </option>
+
+
+              <option value="partnership">
+                Partnership / Introduction
+              </option>
+
+
+              <option value="general">
+                General Enquiry
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <!-- MESSAGE -->
+
+          <div class="form-field full">
+
+            <label for="enquiry-message">
+
+              Message
+              <span class="required">*</span>
+
+            </label>
+
+
+            <textarea
+              id="enquiry-message"
+              name="message"
+              placeholder="Please provide a brief overview of your enquiry."
+              required
+            ></textarea>
+
+          </div>
+
+
+
+          <!-- SPAM HONEYPOT -->
+
+          <div
+            class="website-field"
+            aria-hidden="true"
+          >
+
+            <label for="website">
+              Website
+            </label>
+
+            <input
+              id="website"
+              name="website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+          </div>
+
+
+
+          <!-- CONSENT -->
+
+          <div class="consent-row">
+
+            <input
+              id="enquiry-consent"
+              name="consent"
+              type="checkbox"
+              required
+            />
+
+
+            <label for="enquiry-consent">
+
+              I consent to Syvaré Capital using the
+              information provided above to respond to my
+              enquiry in accordance with the
+
+              <a href="privacy.html">
+                Privacy Policy
+              </a>.
+
+            </label>
+
+          </div>
+
+
+
+          <!-- BUTTONS -->
+
+          <div class="form-actions">
+
+
+            <a
+              href="contact.html"
+              class="back-link"
+            >
+              Back to Contact
+            </a>
+
+
+            <button
+              id="enquiry-submit"
+              class="submit-enquiry"
+              type="submit"
+            >
+              Send Enquiry
+            </button>
+
+
+          </div>
+
+
+        </form>
+
+
+
+        <!-- STATUS MESSAGE -->
+
+        <div
+          id="enquiry-status"
+          class="form-status"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+
+
+        <!-- PRIVACY NOTE -->
+
+        <div class="privacy-note">
+
+          Information submitted through this form should
+          only be used for legitimate enquiries relating
+          to Syvaré Capital's services. Please do not
+          include passwords, payment card information or
+          other unnecessary sensitive information.
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       SUBMISSION LOADING OVERLAY
+  ====================================================== -->
+
+  <div
+    id="submission-overlay"
+    class="submission-overlay"
+    aria-hidden="true"
+  >
+
+
+    <div class="submission-box">
+
+
+      <img
+        src="assets/images/syvaré-loading.png"
+        class="submission-logo"
+        alt=""
+      />
+
+
+      <h2 id="submission-title">
+        Sending your enquiry
+      </h2>
+
+
+      <p id="submission-message">
+
+        Please wait while your enquiry is securely
+        submitted.
+
+      </p>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    &copy; 2026 Syvaré Capital Family &amp; Partners Limited.
+    All rights reserved.
+
+  </footer>
+
+
+
+  <!-- =====================================================
+       LIVE ENQUIRY FORM CONNECTION
+  ====================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+
+        "use strict";
+
+
+        /* =================================================
+           ELEMENTS
+        ================================================= */
+
+
+        const form =
+          document.getElementById(
+            "syvare-enquiry-form"
+          );
+
+
+        const submitButton =
+          document.getElementById(
+            "enquiry-submit"
+          );
+
+
+        const overlay =
+          document.getElementById(
+            "submission-overlay"
+          );
+
+
+        const status =
+          document.getElementById(
+            "enquiry-status"
+          );
+
+
+        const website =
+          document.getElementById(
+            "website"
+          );
+
+
+        const submissionTitle =
+          document.getElementById(
+            "submission-title"
+          );
+
+
+        const submissionMessage =
+          document.getElementById(
+            "submission-message"
+          );
+
+
+        if (!form) {
+          return;
+        }
+
+
+
+        /* =================================================
+           CLOUDFLARE WORKER ENDPOINT
+        ================================================= */
+
+
+        const ENQUIRY_ENDPOINT =
+          "https://syvare-enquiry-api.coelhoay.workers.dev/";
+
+
+
+        /* =================================================
+           FORM SUBMISSION
+        ================================================= */
+
+
+        form.addEventListener(
+          "submit",
+          async function (event) {
+
+
+            event.preventDefault();
+
+
+
+            /* ---------------------------------------------
+               CLEAR PREVIOUS STATUS
+            --------------------------------------------- */
+
+
+            status.className =
+              "form-status";
+
+
+            status.textContent =
+              "";
+
+
+
+            /* ---------------------------------------------
+               HONEYPOT SPAM CHECK
+            --------------------------------------------- */
+
+
+            if (
+              website &&
+              website.value.trim() !== ""
+            ) {
+
+              return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               BROWSER VALIDATION
+            --------------------------------------------- */
+
+
+            if (
+              !form.checkValidity()
+            ) {
+
+              form.reportValidity();
+
+              return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               SHOW LOADING OVERLAY
+            --------------------------------------------- */
+
+
+            submissionTitle.textContent =
+              "Sending your enquiry";
+
+
+            submissionMessage.textContent =
+              "Please wait while your enquiry is securely submitted.";
+
+
+            overlay.classList.add(
+              "active"
+            );
+
+
+            overlay.setAttribute(
+              "aria-hidden",
+              "false"
+            );
+
+
+            submitButton.disabled =
+              true;
+
+
+
+            try {
+
+
+              /* ===========================================
+                 CREATE ENQUIRY
+              =========================================== */
+
+
+              const enquiryType =
+                form.elements.enquiryType;
+
+
+              const selectedEnquiry =
+                enquiryType.options[
+                  enquiryType.selectedIndex
+                ].text;
+
+
+
+              const payload = {
+
+                name:
+                  form.elements.name.value.trim(),
+
+                email:
+                  form.elements.email.value.trim(),
+
+                company:
+                  form.elements.company.value.trim(),
+
+                phone:
+                  form.elements.telephone.value.trim(),
+
+                subject:
+                  selectedEnquiry,
+
+                enquiryType:
+                  form.elements.enquiryType.value,
+
+                message:
+                  form.elements.message.value.trim()
+
+              };
+
+
+
+              /* ===========================================
+                 SEND TO CLOUDFLARE WORKER
+              =========================================== */
+
+
+              const response =
+                await fetch(
+                  ENQUIRY_ENDPOINT,
+                  {
+
+                    method:
+                      "POST",
+
+                    headers: {
+
+                      "Content-Type":
+                        "application/json"
+
+                    },
+
+                    body:
+                      JSON.stringify(
+                        payload
+                      )
+
+                  }
+                );
+
+
+
+              /* ===========================================
+                 READ RESPONSE
+              =========================================== */
+
+
+              let result = {};
+
+
+              try {
+
+                result =
+                  await response.json();
+
+              }
+
+              catch (jsonError) {
+
+                /*
+                  The Worker returned something other
+                  than JSON.
+                */
+
+              }
+
+
+
+              /* ===========================================
+                 CHECK FOR SERVER ERROR
+              =========================================== */
+
+
+              if (
+                !response.ok ||
+                result.success !== true
+              ) {
+
+                throw new Error(
+
+                  result.message ||
+
+                  "We could not send your enquiry. Please try again."
+
+                );
+
+              }
+
+
+
+              /* ===========================================
+                 SUCCESS
+              =========================================== */
+
+
+              submissionTitle.textContent =
+                "Enquiry sent";
+
+
+              submissionMessage.textContent =
+                "Thank you. Your enquiry has been securely submitted to Syvaré Capital.";
+
+
+
+              /* -------------------------------------------
+                 KEEP CONFIRMATION VISIBLE
+              ------------------------------------------- */
+
+
+              await new Promise(
+                function (resolve) {
+
+                  setTimeout(
+                    resolve,
+                    1800
+                  );
+
+                }
+              );
+
+
+
+              /* -------------------------------------------
+                 CLOSE OVERLAY
+              ------------------------------------------- */
+
+
+              overlay.classList.remove(
+                "active"
+              );
+
+
+              overlay.setAttribute(
+                "aria-hidden",
+                "true"
+              );
+
+
+
+              /* -------------------------------------------
+                 SHOW SUCCESS MESSAGE
+              ------------------------------------------- */
+
+
+              status.className =
+                "form-status success";
+
+
+              status.textContent =
+                "Thank you. Your enquiry has been sent successfully. A member of our team will review it and respond where appropriate.";
+
+
+
+              /* -------------------------------------------
+                 CLEAR FORM
+              ------------------------------------------- */
+
+
+              form.reset();
+
+
+
+            }
+
+
+            catch (error) {
+
+
+              console.error(
+                "Syvaré enquiry error:",
+                error
+              );
+
+
+
+              /* -------------------------------------------
+                 CLOSE OVERLAY
+              ------------------------------------------- */
+
+
+              overlay.classList.remove(
+                "active"
+              );
+
+
+              overlay.setAttribute(
+                "aria-hidden",
+                "true"
+              );
+
+
+
+              /* -------------------------------------------
+                 SHOW ERROR
+              ------------------------------------------- */
+
+
+              status.className =
+                "form-status error";
+
+
+              status.textContent =
+                error.message ||
+                "We could not send your enquiry. Please try again.";
+
+
+            }
+
+
+            finally {
+
+
+              submitButton.disabled =
+                false;
+
+
+            }
+
+
+          }
+        );
+
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
+</html>
