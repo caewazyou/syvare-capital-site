@@ -1893,6 +1893,11 @@ svg.map-icon,
   transform:
     translateY(0);
 }
+.contact-enquiry-link {
+  margin-top: 28px;
+  text-align: center;
+}
+
 
 
 /* =========================================================
