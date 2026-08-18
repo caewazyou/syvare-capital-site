@@ -763,7 +763,393 @@
 
 
     </section>
+<!-- =====================================================
+     MARKET INSIGHTS
+====================================================== -->
 
+<section class="markets-section reveal" id="markets">
+
+  <div class="markets-heading">
+
+    <span class="markets-eyebrow">
+      MARKET INSIGHTS
+    </span>
+
+    <h2>Global Markets</h2>
+
+    <p>
+      Explore selected equity indices, foreign exchange rates
+      and interest-rate data.
+    </p>
+
+  </div>
+
+
+  <div class="markets-dashboard">
+
+
+    <!-- =========================
+         MARKET TABS
+    ========================== -->
+
+    <div class="market-tabs">
+
+      <button
+        type="button"
+        class="market-tab active"
+        data-market-tab="equities"
+      >
+        Equities
+      </button>
+
+      <button
+        type="button"
+        class="market-tab"
+        data-market-tab="fx"
+      >
+        FX
+      </button>
+
+      <button
+        type="button"
+        class="market-tab"
+        data-market-tab="rates"
+      >
+        Rates
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         EQUITIES
+    ========================== -->
+
+    <div
+      class="market-panel active"
+      data-market-panel="equities"
+    >
+
+      <div class="market-instrument-row">
+
+        <button
+          type="button"
+          class="market-instrument active"
+          data-equity="ftse100"
+        >
+          FTSE 100
+          <small>United Kingdom</small>
+        </button>
+
+        <button
+          type="button"
+          class="market-instrument"
+          data-equity="ftse250"
+        >
+          FTSE 250
+          <small>United Kingdom</small>
+        </button>
+
+        <button
+          type="button"
+          class="market-instrument"
+          data-equity="sp500"
+        >
+          S&amp;P 500
+          <small>United States</small>
+        </button>
+
+        <button
+          type="button"
+          class="market-instrument"
+          data-equity="nasdaq"
+        >
+          Nasdaq Composite
+          <small>United States</small>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         FOREIGN EXCHANGE
+    ========================== -->
+
+    <div
+      class="market-panel"
+      data-market-panel="fx"
+    >
+
+      <div class="fx-selector">
+
+        <div class="currency-field">
+
+          <label for="fx-base">
+            Base currency
+          </label>
+
+          <select id="fx-base"></select>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="fx-swap"
+          id="fx-swap"
+          aria-label="Swap currencies"
+        >
+          ⇄
+        </button>
+
+
+        <div class="currency-field">
+
+          <label for="fx-quote">
+            Quote currency
+          </label>
+
+          <select id="fx-quote"></select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         RATES
+    ========================== -->
+
+    <div
+      class="market-panel"
+      data-market-panel="rates"
+    >
+
+      <div class="market-instrument-row">
+
+        <button
+          type="button"
+          class="market-instrument active"
+          data-rate="uk-bank-rate"
+        >
+          UK Bank Rate
+          <small>Bank of England</small>
+        </button>
+
+        <button
+          type="button"
+          class="market-instrument"
+          data-rate="us-2y"
+        >
+          US 2Y
+          <small>Treasury Yield</small>
+        </button>
+
+        <button
+          type="button"
+          class="market-instrument"
+          data-rate="us-10y"
+        >
+          US 10Y
+          <small>Treasury Yield</small>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         MARKET SUMMARY
+    ========================== -->
+
+    <div class="market-summary">
+
+      <div>
+
+        <span
+          class="market-region"
+          id="market-region"
+        >
+          UNITED KINGDOM
+        </span>
+
+        <h3 id="market-title">
+          FTSE 100
+        </h3>
+
+      </div>
+
+
+      <div class="market-value-area">
+
+        <div id="market-value">
+          —
+        </div>
+
+        <div id="market-movement">
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         CHART
+    ========================== -->
+
+    <div class="market-chart-container">
+
+      <canvas id="market-chart"></canvas>
+
+      <div
+        id="market-loading"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        id="market-error"
+        role="alert"
+      ></div>
+
+    </div>
+
+
+    <!-- =========================
+         PERIOD SELECTOR
+    ========================== -->
+
+    <div class="market-periods">
+
+      <button
+        type="button"
+        data-period="1M"
+      >
+        1M
+      </button>
+
+      <button
+        type="button"
+        data-period="6M"
+      >
+        6M
+      </button>
+
+      <button
+        type="button"
+        class="active"
+        data-period="1Y"
+      >
+        1Y
+      </button>
+
+      <button
+        type="button"
+        data-period="5Y"
+      >
+        5Y
+      </button>
+
+      <button
+        type="button"
+        data-period="MAX"
+      >
+        Max
+      </button>
+
+      <button
+        type="button"
+        data-period="CUSTOM"
+      >
+        Custom
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         CUSTOM PERIOD
+    ========================== -->
+
+    <div
+      class="custom-market-period"
+      id="custom-market-period"
+      hidden
+    >
+
+      <div class="custom-date-block">
+
+        <span>From</span>
+
+        <select
+          id="market-from-month"
+          aria-label="From month"
+        ></select>
+
+        <select
+          id="market-from-year"
+          aria-label="From year"
+        ></select>
+
+      </div>
+
+
+      <div class="custom-date-separator">
+        —
+      </div>
+
+
+      <div class="custom-date-block">
+
+        <span>To</span>
+
+        <select
+          id="market-to-month"
+          aria-label="To month"
+        ></select>
+
+        <select
+          id="market-to-year"
+          aria-label="To year"
+        ></select>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="market-apply-period"
+        id="market-apply-period"
+      >
+        View Period
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         SOURCE / UPDATED
+    ========================== -->
+
+    <div class="market-footer">
+
+      <span id="market-source">
+        Market data
+      </span>
+
+      <span id="market-updated"></span>
+
+    </div>
+
+  </div>
+
+</section>
 
 
     <!-- ===================================================
@@ -946,9 +1332,18 @@
   ====================================================== -->
 
   <script
-    src="assets/js/main.js"
-    defer
-  ></script>
+  src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+></script>
+
+<script
+  src="assets/js/main.js"
+  defer
+></script>
+
+<script
+  src="assets/js/markets.js"
+  defer
+></script>
 
 
 </body>
