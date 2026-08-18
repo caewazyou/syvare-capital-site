@@ -1,7 +1,6 @@
 /* =========================================================
    SYVARÉ CAPITAL
    MAIN STYLESHEET
-   OLD LAYOUT + NEW FEATURES
 ========================================================= */
 
 
@@ -68,7 +67,8 @@ img {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -84,11 +84,9 @@ button {
 .site-header {
   position: sticky;
   top: 0;
-
   z-index: 1000;
 
   width: 100%;
-
   padding: 18px 16px 22px;
 
   text-align: center;
@@ -116,9 +114,7 @@ button {
 
   font-size: 1.9rem;
   font-weight: 500;
-
   line-height: 1.1;
-
   letter-spacing: 0.025em;
 
   color: #111;
@@ -129,9 +125,7 @@ button {
 
   font-size: 0.76rem;
   font-weight: 400;
-
   letter-spacing: 0.16em;
-
   text-transform: uppercase;
 
   color: #666;
@@ -149,7 +143,6 @@ button {
   height: 1px;
 
   opacity: 0;
-
   pointer-events: none;
 }
 
@@ -187,9 +180,7 @@ button {
 }
 
 .nav-toggle:checked + .hamburger span:nth-child(1) {
-  transform:
-    translateY(10.5px)
-    rotate(45deg);
+  transform: translateY(10.5px) rotate(45deg);
 }
 
 .nav-toggle:checked + .hamburger span:nth-child(2) {
@@ -197,9 +188,7 @@ button {
 }
 
 .nav-toggle:checked + .hamburger span:nth-child(3) {
-  transform:
-    translateY(-10.5px)
-    rotate(-45deg);
+  transform: translateY(-10.5px) rotate(-45deg);
 }
 
 
@@ -216,17 +205,14 @@ button {
   z-index: 1001;
 
   width: 235px;
-
   padding: 8px 0;
 
   visibility: hidden;
   opacity: 0;
 
-  transform:
-    translateY(-8px);
+  transform: translateY(-8px);
 
-  background:
-    rgba(255, 255, 255, 0.98);
+  background: rgba(255, 255, 255, 0.98);
 
   border:
     1px solid rgba(0, 0, 0, 0.05);
@@ -234,8 +220,7 @@ button {
   border-radius: 12px;
 
   box-shadow:
-    0 18px 45px
-    rgba(0, 0, 0, 0.13);
+    0 18px 45px rgba(0, 0, 0, 0.13);
 
   pointer-events: none;
 
@@ -249,8 +234,7 @@ button {
   visibility: visible;
   opacity: 1;
 
-  transform:
-    translateY(0);
+  transform: translateY(0);
 
   pointer-events: auto;
 }
@@ -262,9 +246,7 @@ button {
 
   font-size: 0.79rem;
   font-weight: 500;
-
   letter-spacing: 0.12em;
-
   text-transform: uppercase;
 
   color: #222;
@@ -291,7 +273,6 @@ button {
 
 /* =========================================================
    CINEMATIC INTRO
-   NEW FEATURE
 ========================================================= */
 
 .syvare-intro {
@@ -314,15 +295,9 @@ button {
   pointer-events: auto;
 
   transition:
-    opacity 1.25s
-    cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.25s cubic-bezier(0.22, 1, 0.36, 1),
     visibility 1.25s;
 }
-
-
-/* =========================================================
-   INTRO BACKGROUND
-========================================================= */
 
 .intro-background {
   position: absolute;
@@ -363,7 +338,6 @@ button {
 }
 
 @keyframes introBackgroundAnimation {
-
   0% {
     transform:
       translate3d(0, 0, 0)
@@ -415,11 +389,6 @@ button {
   }
 }
 
-
-/* =========================================================
-   INTRO CONTENT
-========================================================= */
-
 .intro-content {
   position: relative;
 
@@ -432,11 +401,6 @@ button {
 
   color: #fff;
 }
-
-
-/* =========================================================
-   INTRO BRAND
-========================================================= */
 
 .intro-brand {
   position: absolute;
@@ -469,16 +433,13 @@ button {
     clamp(2.8rem, 6vw, 5.5rem);
 
   font-weight: 400;
-
   line-height: 1;
-
   letter-spacing: 0.03em;
 
   color: #fff;
 
   text-shadow:
-    0 5px 30px
-    rgba(0, 0, 0, 0.28);
+    0 5px 30px rgba(0, 0, 0, 0.28);
 }
 
 .intro-brand span {
@@ -488,9 +449,7 @@ button {
 
   font-size: 0.72rem;
   font-weight: 400;
-
   letter-spacing: 0.35em;
-
   text-transform: uppercase;
 
   color:
@@ -498,7 +457,6 @@ button {
 }
 
 @keyframes introBrandAnimation {
-
   0% {
     opacity: 0;
 
@@ -540,11 +498,6 @@ button {
   }
 }
 
-
-/* =========================================================
-   INTRO MESSAGES
-========================================================= */
-
 .intro-message {
   position: absolute;
 
@@ -563,14 +516,12 @@ button {
     serif;
 
   font-weight: 400;
-
   line-height: 1.15;
 
   color: #fff;
 
   text-shadow:
-    0 5px 35px
-    rgba(0, 0, 0, 0.30);
+    0 5px 35px rgba(0, 0, 0, 0.30);
 }
 
 .intro-welcome {
@@ -586,40 +537,27 @@ button {
 }
 
 @keyframes introWelcomeAnimation {
-
   0% {
     opacity: 0;
-
-    transform:
-      translate(-50%, -42%);
-
+    transform: translate(-50%, -42%);
     filter: blur(6px);
   }
 
   18% {
     opacity: 1;
-
-    transform:
-      translate(-50%, -50%);
-
+    transform: translate(-50%, -50%);
     filter: blur(0);
   }
 
   72% {
     opacity: 1;
-
-    transform:
-      translate(-50%, -50%);
-
+    transform: translate(-50%, -50%);
     filter: blur(0);
   }
 
   100% {
     opacity: 0;
-
-    transform:
-      translate(-50%, -58%);
-
+    transform: translate(-50%, -58%);
     filter: blur(2px);
   }
 }
@@ -637,7 +575,6 @@ button {
 }
 
 @keyframes introStrategyAnimation {
-
   0% {
     opacity: 0;
 
@@ -679,11 +616,6 @@ button {
   }
 }
 
-
-/* =========================================================
-   INTRO LINE
-========================================================= */
-
 .intro-line {
   position: absolute;
 
@@ -715,7 +647,6 @@ button {
 }
 
 @keyframes introLineAnimation {
-
   0% {
     width: 0;
     opacity: 0;
@@ -742,14 +673,8 @@ button {
   }
 }
 
-
-/* =========================================================
-   INTRO EXIT
-========================================================= */
-
 .syvare-intro.intro-finished {
   opacity: 0;
-
   visibility: hidden;
 
   pointer-events: none;
@@ -773,17 +698,13 @@ body.intro-ready .site-header {
     scale(1);
 
   transition:
-    opacity 1.25s
-    cubic-bezier(0.22, 1, 0.36, 1),
-
-    transform 1.45s
-    cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1.25s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
 /* =========================================================
    HERO
-   ORIGINAL LAYOUT PRESERVED
 ========================================================= */
 
 .hero-full {
@@ -795,7 +716,6 @@ body.intro-ready .site-header {
   overflow: hidden;
 
   color: #fff;
-
   background: #0b0f1a;
 }
 
@@ -816,11 +736,6 @@ body.intro-ready .site-header {
   cursor: grabbing;
 }
 
-
-/* =========================================================
-   HERO SLIDES
-========================================================= */
-
 .hero-slide {
   position: absolute;
   inset: 0;
@@ -830,8 +745,7 @@ body.intro-ready .site-header {
   pointer-events: none;
 
   transition:
-    opacity 0.75s
-    cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 
   will-change: opacity;
 
@@ -841,7 +755,6 @@ body.intro-ready .site-header {
 
 .hero-slide.active {
   opacity: 1;
-
   pointer-events: auto;
 }
 
@@ -878,11 +791,6 @@ body.intro-ready .site-header {
   background: #050812;
 }
 
-
-/* =========================================================
-   HERO OVERLAY
-========================================================= */
-
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -907,17 +815,10 @@ body.intro-ready .site-header {
     );
 }
 
-
-/* =========================================================
-   HERO TEXT
-   ORIGINAL POSITION PRESERVED
-========================================================= */
-
 .hero-content {
   position: absolute;
 
   left: 7%;
-
   bottom: 17%;
 
   z-index: 10;
@@ -938,9 +839,7 @@ body.intro-ready .site-header {
     clamp(3rem, 5vw, 5.3rem);
 
   font-weight: 500;
-
   line-height: 1.02;
-
   letter-spacing: -0.025em;
 
   color: #fff;
@@ -952,17 +851,11 @@ body.intro-ready .site-header {
   max-width: 580px;
 
   font-size: 1.05rem;
-
   line-height: 1.65;
 
   color:
     rgba(255, 255, 255, 0.90);
 }
-
-
-/* =========================================================
-   HERO BUTTON
-========================================================= */
 
 .btn-hero {
   display: inline-flex;
@@ -975,8 +868,7 @@ body.intro-ready .site-header {
     10px 26px;
 
   border:
-    1px solid
-    rgba(255, 255, 255, 0.52);
+    1px solid rgba(255, 255, 255, 0.52);
 
   border-radius: 999px;
 
@@ -989,7 +881,6 @@ body.intro-ready .site-header {
   font-weight: 600;
 
   letter-spacing: 0.15em;
-
   text-transform: uppercase;
 
   transition:
@@ -1004,17 +895,11 @@ body.intro-ready .site-header {
 
 .btn-hero:hover {
   background: #fff;
-
   color: #111;
 
   transform:
     translateY(-1px);
 }
-
-
-/* =========================================================
-   HERO CONTROLS
-========================================================= */
 
 .hero-controls {
   position: absolute;
@@ -1025,7 +910,6 @@ body.intro-ready .site-header {
   z-index: 30;
 
   display: flex;
-
   align-items: center;
 
   gap: 10px;
@@ -1038,7 +922,6 @@ body.intro-ready .site-header {
 
 .hero-dots {
   display: flex;
-
   align-items: center;
 
   gap: 9px;
@@ -1054,8 +937,7 @@ body.intro-ready .site-header {
     rgba(6, 9, 18, 0.68);
 
   box-shadow:
-    0 10px 28px
-    rgba(0, 0, 0, 0.22);
+    0 10px 28px rgba(0, 0, 0, 0.22);
 
   touch-action: none;
 }
@@ -1069,7 +951,6 @@ body.intro-ready .site-header {
   padding: 0;
 
   border: 0;
-
   border-radius: 999px;
 
   background:
@@ -1109,7 +990,6 @@ body.intro-ready .site-header {
   padding: 0;
 
   border: 0;
-
   border-radius: 50%;
 
   background:
@@ -1122,8 +1002,7 @@ body.intro-ready .site-header {
   cursor: pointer;
 
   box-shadow:
-    0 10px 28px
-    rgba(0, 0, 0, 0.22);
+    0 10px 28px rgba(0, 0, 0, 0.22);
 
   transition:
     background 0.2s ease,
@@ -1140,8 +1019,7 @@ body.intro-ready .site-header {
 
 
 /* =========================================================
-   ABOUT PREVIEW
-   OLD LAYOUT
+   ABOUT / HOME SECTIONS
 ========================================================= */
 
 .hero-text-wrapper {
@@ -1167,11 +1045,12 @@ body.intro-ready .site-header {
     rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 18px 50px
-    rgba(0, 0, 0, 0.07);
+    0 18px 50px rgba(0, 0, 0, 0.07);
 }
 
-.hero-text h2 {
+.hero-text h2,
+.home-services-intro h2,
+.section h2 {
   margin-bottom: 12px;
 
   font-family:
@@ -1184,17 +1063,16 @@ body.intro-ready .site-header {
   color: #1b1b1b;
 }
 
-.hero-text p {
-  margin-bottom: 18px;
-
+.hero-text p,
+.home-services-intro p,
+.section p {
   color: #555;
 }
 
-
-/* =========================================================
-   OUR WORK INTRO
-   OLD LAYOUT
-========================================================= */
+.hero-text p,
+.section p {
+  margin-bottom: 18px;
+}
 
 .home-services-intro {
   max-width: 820px;
@@ -1213,38 +1091,17 @@ body.intro-ready .site-header {
     rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 15px 42px
-    rgba(0, 0, 0, 0.065);
+    0 15px 42px rgba(0, 0, 0, 0.065);
 }
 
 .home-services-intro h2 {
   margin-bottom: 8px;
-
-  font-family:
-    "Playfair Display",
-    serif;
-
-  font-size: 1.9rem;
-  font-weight: 500;
-
-  color: #1b1b1b;
 }
-
-.home-services-intro p {
-  color: #555;
-}
-
-
-/* =========================================================
-   HOME SERVICE BANDS
-   OLD LAYOUT + NEW PERFORMANCE
-========================================================= */
 
 .home-service-band {
   position: relative;
 
   width: 100%;
-
   min-height: 100vh;
 
   overflow: hidden;
@@ -1310,14 +1167,6 @@ body.intro-ready .site-header {
   pointer-events: none;
 }
 
-
-/* =========================================================
-   SERVICE CONTENT
-   IMPORTANT:
-   OLD POSITION / SIZE PRESERVED
-   ONLY GLASS APPEARANCE CHANGED
-========================================================= */
-
 .home-service-content {
   position: sticky;
 
@@ -1326,7 +1175,6 @@ body.intro-ready .site-header {
   z-index: 4;
 
   max-width: 620px;
-
   width: 80%;
 
   margin: 0 auto;
@@ -1335,13 +1183,6 @@ body.intro-ready .site-header {
     24px 26px;
 
   border-radius: 18px;
-
-
-  /* NEW GLASS:
-     almost transparent,
-     neutral,
-     NO blue tint
-  */
 
   background:
     rgba(0, 0, 0, 0.08);
@@ -1357,8 +1198,7 @@ body.intro-ready .site-header {
   color: #eef1ff;
 
   box-shadow:
-    0 15px 40px
-    rgba(0, 0, 0, 0.22);
+    0 15px 40px rgba(0, 0, 0, 0.22);
 }
 
 .home-service-content h3 {
@@ -1369,7 +1209,6 @@ body.intro-ready .site-header {
     serif;
 
   font-size: 1.8rem;
-
   font-weight: 500;
 
   color: #fff;
@@ -1383,12 +1222,6 @@ body.intro-ready .site-header {
   color:
     rgba(238, 241, 255, 0.92);
 }
-
-
-/* =========================================================
-   STANDARD HOMEPAGE SECTIONS
-   OLD LAYOUT
-========================================================= */
 
 .section {
   max-width: 880px;
@@ -1407,27 +1240,7 @@ body.intro-ready .site-header {
     rgba(250, 250, 249, 0.96);
 
   box-shadow:
-    0 15px 42px
-    rgba(0, 0, 0, 0.065);
-}
-
-.section h2 {
-  margin-bottom: 10px;
-
-  font-family:
-    "Playfair Display",
-    serif;
-
-  font-size: 1.9rem;
-  font-weight: 500;
-
-  color: #1b1b1b;
-}
-
-.section p {
-  margin-bottom: 16px;
-
-  color: #555;
+    0 15px 42px rgba(0, 0, 0, 0.065);
 }
 
 
@@ -1442,7 +1255,6 @@ body.intro-ready .site-header {
     8px 20px;
 
   border: none;
-
   border-radius: 999px;
 
   background:
@@ -1454,7 +1266,6 @@ body.intro-ready .site-header {
   font-weight: 500;
 
   letter-spacing: 0.12em;
-
   text-transform: uppercase;
 
   cursor: pointer;
@@ -1493,8 +1304,7 @@ body.intro-ready .site-header {
 
 
 /* =========================================================
-   INNER PAGE BACKGROUND
-   OLD LAYOUT
+   INNER PAGES
 ========================================================= */
 
 .page-bg {
@@ -1511,12 +1321,6 @@ body.intro-ready .site-header {
 
   color: #f5f7ff;
 }
-
-
-/* =========================================================
-   INNER PAGE CONTENT
-   OLD LAYOUT PRESERVED
-========================================================= */
 
 .content-card {
   max-width: 880px;
@@ -1538,8 +1342,7 @@ body.intro-ready .site-header {
   border: none;
 
   box-shadow:
-    0 15px 40px
-    rgba(0, 0, 0, 0.22);
+    0 15px 40px rgba(0, 0, 0, 0.22);
 
   color: #f5f7ff;
 }
@@ -1558,7 +1361,6 @@ body.intro-ready .site-header {
 
 .content-card h1 {
   margin-bottom: 12px;
-
   font-size: 2rem;
 }
 
@@ -1571,7 +1373,6 @@ body.intro-ready .site-header {
 
 .content-card p {
   margin-bottom: 14px;
-
   color: #e2e7f5;
 }
 
@@ -1582,7 +1383,6 @@ body.intro-ready .site-header {
 
 /* =========================================================
    SERVICES PAGE
-   OLD LAYOUT + NEW GLASS
 ========================================================= */
 
 .service-band {
@@ -1618,12 +1418,6 @@ body.intro-ready .site-header {
   pointer-events: none;
 }
 
-
-/*
-   ORIGINAL sticky layout is retained.
-   Only glass colour has changed.
-*/
-
 .service-band-inner {
   position: sticky;
 
@@ -1652,8 +1446,7 @@ body.intro-ready .site-header {
   border: none;
 
   box-shadow:
-    0 15px 40px
-    rgba(0, 0, 0, 0.22);
+    0 15px 40px rgba(0, 0, 0, 0.22);
 }
 
 .service-band h2 {
@@ -1670,13 +1463,12 @@ body.intro-ready .site-header {
 
 .service-band p {
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 
   text-align: center;
 
   max-width: 760px;
-
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .service-band.business {
@@ -1696,7 +1488,7 @@ body.intro-ready .site-header {
 
 
 /* =========================================================
-   CAREERS
+   CAREERS / JOBS
 ========================================================= */
 
 .careers-list,
@@ -1705,19 +1497,23 @@ body.intro-ready .site-header {
   margin:
     14px 0;
 
-  padding-left: 1.35rem;
+  padding-left: 0;
+
+  list-style: none;
 }
 
 .careers-list li,
 .opportunity-list li,
 .service-list li {
   margin-bottom: 8px;
+  list-style: none;
 }
 
-
-/* =========================================================
-   CURRENT OPPORTUNITIES
-========================================================= */
+.careers-list li::marker,
+.opportunity-list li::marker,
+.service-list li::marker {
+  content: "";
+}
 
 .careers-opportunities {
   margin:
@@ -1734,12 +1530,10 @@ body.intro-ready .site-header {
   -webkit-backdrop-filter: blur(12px);
 
   border: none;
-
   border-radius: 24px;
 
   box-shadow:
-    0 15px 40px
-    rgba(0, 0, 0, 0.22);
+    0 15px 40px rgba(0, 0, 0, 0.22);
 }
 
 .careers-opportunities h2 {
@@ -1754,7 +1548,6 @@ body.intro-ready .site-header {
 
 .careers-opportunities p {
   color: #e2e7f5;
-
   margin-bottom: 18px;
 }
 
@@ -1773,11 +1566,6 @@ body.intro-ready .site-header {
 
   color: #111;
 }
-
-
-/* =========================================================
-   JOBS
-========================================================= */
 
 .jobs-wrap {
   max-width: 980px;
@@ -1829,8 +1617,7 @@ body.intro-ready .site-header {
   border: none;
 
   box-shadow:
-    0 15px 40px
-    rgba(0, 0, 0, 0.22);
+    0 15px 40px rgba(0, 0, 0, 0.22);
 
   color: #eef1ff;
 
@@ -1883,8 +1670,7 @@ body.intro-ready .site-header {
   border: none;
 
   box-shadow:
-    0 15px 40px
-    rgba(0, 0, 0, 0.22);
+    0 15px 40px rgba(0, 0, 0, 0.22);
 
   color: #eef1ff;
 }
@@ -1901,7 +1687,7 @@ body.intro-ready .site-header {
 
 
 /* =========================================================
-   CONTACT MAP
+   CONTACT / MAP
 ========================================================= */
 
 .map-options,
@@ -1911,55 +1697,11 @@ body.intro-ready .site-header {
   background: transparent;
 }
 
-
-/* =========================================================
-   MAP ICON
-   IMPORTANT:
-   ONLY THE LOCATION ICON IS RESIZED.
-   NORMAL WEBSITE IMAGES ARE NOT AFFECTED.
-========================================================= */
-
 .map-icon,
 img.map-icon,
-svg.map-icon {
-  width: 32px !important;
-  height: 32px !important;
-
-  min-width: 32px !important;
-  min-height: 32px !important;
-
-  max-width: 32px !important;
-  max-height: 32px !important;
-
-  object-fit: contain !important;
-
-  display: inline-block !important;
-
-  transform: none !important;
-}
-
+svg.map-icon,
 .map-icon img,
-.map-icon svg {
-  width: 32px !important;
-  height: 32px !important;
-
-  min-width: 32px !important;
-  min-height: 32px !important;
-
-  max-width: 32px !important;
-  max-height: 32px !important;
-
-  object-fit: contain !important;
-
-  transform: none !important;
-}
-
-
-/*
-   These selectors cover the case where your HTML
-   did not put .map-icon directly on the icon.
-*/
-
+.map-icon svg,
 .map-options > img,
 .contact-map > img,
 .map-card > img,
@@ -1981,11 +1723,6 @@ svg.map-icon {
 
   transform: none !important;
 }
-
-
-/* =========================================================
-   MAP LINKS
-========================================================= */
 
 .map-links {
   display: flex;
@@ -2030,9 +1767,136 @@ svg.map-icon {
     translateY(-1px);
 }
 
+.contact-card .luxury-contact-links .luxury-link svg {
+  width: 18px !important;
+  height: 18px !important;
+
+  min-width: 18px !important;
+  min-height: 18px !important;
+
+  max-width: 18px !important;
+  max-height: 18px !important;
+
+  flex: 0 0 18px !important;
+
+  display: inline-block;
+
+  transform: none !important;
+}
+
+.contact-card .map-title {
+  margin-top: 30px;
+  margin-bottom: 14px;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 1.35rem;
+  font-weight: 500;
+
+  color:
+    rgba(255, 255, 255, 0.96);
+}
+
+.contact-card .map-buttons {
+  display: flex;
+
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 4px;
+}
+
+.contact-card .map-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 11px;
+
+  padding:
+    9px 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color:
+    rgba(255, 255, 255, 0.92);
+
+  font-family:
+    "Source Sans 3",
+    sans-serif;
+
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-card .map-arrow {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  line-height: 1;
+
+  opacity: 0.7;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.contact-card .map-button:hover {
+  background:
+    rgba(255, 255, 255, 0.13);
+
+  border-color:
+    rgba(255, 255, 255, 0.34);
+
+  color: #fff;
+
+  transform:
+    translateY(-2px);
+}
+
+.contact-card .map-button:hover .map-arrow {
+  opacity: 1;
+
+  transform:
+    translate(2px, -2px);
+}
+
+.contact-card .map-button:active {
+  transform:
+    translateY(0);
+}
+
 
 /* =========================================================
-   REVEAL ANIMATION
+   REVEAL
 ========================================================= */
 
 .reveal {
@@ -2078,6 +1942,798 @@ footer {
 .page-bg footer {
   color:
     rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   UK & GLOBAL MARKETS
+========================================================= */
+
+.markets-section {
+  width:
+    min(1180px, calc(100% - 40px));
+
+  margin:
+    90px auto;
+}
+
+.markets-heading {
+  margin-bottom: 30px;
+
+  text-align: center;
+}
+
+.markets-eyebrow {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+
+  color: #777;
+}
+
+.markets-heading h2 {
+  margin-bottom: 10px;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(2rem, 4vw, 3.15rem);
+
+  font-weight: 500;
+
+  color: #171717;
+}
+
+.markets-heading p {
+  color: #666;
+}
+
+
+/* =========================================================
+   MARKET DASHBOARD
+========================================================= */
+
+.markets-dashboard {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  background:
+    rgba(250, 250, 249, 0.96);
+
+  border:
+    1px solid rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   MARKET TABS
+========================================================= */
+
+.market-tabs {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 24px;
+
+  padding: 18px;
+
+  border-bottom:
+    1px solid rgba(0, 0, 0, 0.06);
+}
+
+.market-tab {
+  position: relative;
+
+  padding:
+    9px 15px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #8b8b8b;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease;
+}
+
+.market-tab:hover,
+.market-tab.active {
+  color: #111;
+}
+
+.market-tab.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 36px;
+  height: 1px;
+
+  transform:
+    translateX(-50%);
+
+  background: #111;
+}
+
+.market-panel {
+  display: none;
+}
+
+.market-panel.active {
+  display: block;
+}
+
+
+/* =========================================================
+   MARKET INSTRUMENTS
+========================================================= */
+
+.market-instrument-row {
+  display: flex;
+
+  overflow-x: auto;
+
+  border-bottom:
+    1px solid rgba(0, 0, 0, 0.06);
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.market-instrument-row::-webkit-scrollbar {
+  display: none;
+}
+
+.market-instrument {
+  position: relative;
+
+  flex:
+    1 0 180px;
+
+  min-height: 74px;
+
+  padding: 15px;
+
+  border: 0;
+
+  border-right:
+    1px solid rgba(0, 0, 0, 0.05);
+
+  background: transparent;
+
+  color: #222;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 0.96rem;
+
+  cursor: pointer;
+
+  transition:
+    background 0.22s ease;
+}
+
+.market-instrument:last-child {
+  border-right: 0;
+}
+
+.market-instrument:hover {
+  background:
+    rgba(0, 0, 0, 0.025);
+}
+
+.market-instrument.active {
+  background:
+    rgba(0, 0, 0, 0.05);
+}
+
+.market-instrument.active::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 35px;
+  height: 1px;
+
+  transform:
+    translateX(-50%);
+
+  background: #111;
+}
+
+.market-instrument small {
+  display: block;
+
+  margin-top: 4px;
+
+  font-family:
+    "Source Sans 3",
+    sans-serif;
+
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: #999;
+}
+
+
+/* =========================================================
+   FX SELECTOR
+========================================================= */
+
+.fx-selector {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 17px;
+
+  padding: 27px;
+
+  border-bottom:
+    1px solid rgba(0, 0, 0, 0.06);
+}
+
+.currency-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.currency-field label {
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: #888;
+}
+
+.currency-field select {
+  min-width: 160px;
+
+  padding:
+    10px 14px;
+
+  border:
+    1px solid rgba(0, 0, 0, 0.10);
+
+  border-radius: 999px;
+
+  outline: none;
+
+  background: #fff;
+
+  color: #222;
+
+  cursor: pointer;
+}
+
+.fx-swap {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  border:
+    1px solid rgba(0, 0, 0, 0.10);
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 0, 0, 0.035);
+
+  color: #222;
+
+  font-size: 1.1rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.fx-swap:hover {
+  transform:
+    rotate(180deg);
+
+  background:
+    rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   MARKET SUMMARY
+========================================================= */
+
+.market-summary {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding:
+    38px 42px 10px;
+}
+
+.market-region {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+
+  color: #888;
+}
+
+.market-summary h3 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(1.9rem, 3vw, 2.8rem);
+
+  font-weight: 500;
+
+  color: #151515;
+}
+
+.market-value-area {
+  text-align: right;
+}
+
+#market-value {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(1.7rem, 3vw, 2.5rem);
+
+  color: #111;
+}
+
+#market-movement {
+  margin-top: 5px;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+#market-movement.positive {
+  color: #287449;
+}
+
+#market-movement.negative {
+  color: #9b3c3c;
+}
+
+
+/* =========================================================
+   MARKET CHART
+========================================================= */
+
+.market-chart-container {
+  position: relative;
+
+  height: 370px;
+
+  margin:
+    10px 42px 0;
+
+  overflow: hidden;
+}
+
+#market-chart {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#market-error,
+.market-error {
+  display: none !important;
+}
+
+
+/* =========================================================
+   SYVARÉ MARKETS — PREMIUM LOADING STATE
+   SINGLE CLEAN LOADER SYSTEM
+========================================================= */
+
+#market-loading {
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 100 !important;
+
+  display: none;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background:
+    rgba(248, 248, 246, 0.34) !important;
+
+  -webkit-backdrop-filter:
+    blur(7px) saturate(0.82) !important;
+
+  backdrop-filter:
+    blur(7px) saturate(0.82) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  outline: 0 !important;
+
+  box-shadow: none !important;
+
+  pointer-events: none !important;
+}
+
+#market-loading[aria-hidden="false"] {
+  display: flex !important;
+}
+
+#market-loading .syvare-market-loader {
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 220px !important;
+  height: 220px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  box-shadow: none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  overflow: visible !important;
+
+  animation:
+    syvareLoaderEntrance
+    0.65s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+#market-loading .syvare-loading-favicon {
+  display: block !important;
+
+  width: 175px !important;
+  height: 175px !important;
+
+  min-width: 175px !important;
+  min-height: 175px !important;
+
+  max-width: 175px !important;
+  max-height: 175px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  outline: 0 !important;
+
+  box-shadow: none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  transform-origin:
+    center center;
+
+  animation:
+    syvareMarketLoadingPulse
+    1.55s
+    cubic-bezier(0.4, 0, 0.2, 1)
+    infinite !important;
+}
+
+@keyframes syvareLoaderEntrance {
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(12px)
+      scale(0.88);
+
+    filter:
+      blur(7px);
+  }
+
+  55% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1.025);
+
+    filter:
+      blur(0);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter:
+      blur(0);
+  }
+}
+
+@keyframes syvareMarketLoadingPulse {
+  0%,
+  100% {
+    opacity: 0.58;
+
+    transform:
+      scale(0.93);
+
+    filter:
+      blur(0.4px);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      scale(1.04);
+
+    filter:
+      blur(0);
+  }
+}
+
+#market-loading-overlay,
+.market-loading-overlay,
+.market-loading-logo,
+.market-loading-logo-image,
+.market-loading-symbol {
+  display: none !important;
+}
+
+
+/* =========================================================
+   MARKET PERIODS
+========================================================= */
+
+.market-periods {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin:
+    23px 0;
+}
+
+.market-periods button {
+  padding:
+    8px 14px;
+
+  border:
+    1px solid transparent;
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 0.71rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.market-periods button:hover {
+  color: #111;
+}
+
+.market-periods button.active {
+  border-color:
+    rgba(0, 0, 0, 0.08);
+
+  background:
+    rgba(0, 0, 0, 0.05);
+
+  color: #111;
+}
+
+
+/* =========================================================
+   CUSTOM MARKET PERIOD
+========================================================= */
+
+.custom-market-period {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+
+  margin:
+    0 30px 27px;
+
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(0, 0, 0, 0.035);
+}
+
+.custom-date-block {
+  display: grid;
+
+  grid-template-columns:
+    auto auto;
+
+  gap: 8px;
+}
+
+.custom-date-block > span {
+  grid-column:
+    1 / -1;
+
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: #888;
+}
+
+.custom-date-block select {
+  padding:
+    9px 12px;
+
+  border:
+    1px solid rgba(0, 0, 0, 0.09);
+
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #222;
+}
+
+.custom-date-separator {
+  padding-bottom: 9px;
+
+  color: #999;
+}
+
+.market-apply-period {
+  padding:
+    10px 19px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: #111;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease;
+}
+
+.market-apply-period:hover {
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   MARKET FOOTER
+========================================================= */
+
+.market-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding:
+    17px 42px 22px;
+
+  border-top:
+    1px solid rgba(0, 0, 0, 0.05);
+
+  color: #999;
+
+  font-size: 0.64rem;
 }
 
 
@@ -2178,6 +2834,47 @@ footer {
     padding:
       28px 25px;
   }
+
+  #market-loading {
+    background:
+      rgba(248, 248, 246, 0.31) !important;
+
+    -webkit-backdrop-filter:
+      blur(6px)
+      saturate(0.85) !important;
+
+    backdrop-filter:
+      blur(6px)
+      saturate(0.85) !important;
+  }
+
+  #market-loading .syvare-market-loader {
+    width:
+      190px !important;
+
+    height:
+      190px !important;
+  }
+
+  #market-loading .syvare-loading-favicon {
+    width:
+      150px !important;
+
+    height:
+      150px !important;
+
+    min-width:
+      150px !important;
+
+    min-height:
+      150px !important;
+
+    max-width:
+      150px !important;
+
+    max-height:
+      150px !important;
+  }
 }
 
 
@@ -2224,9 +2921,6 @@ footer {
       );
   }
 
-
-  /* INTRO */
-
   .intro-background {
     inset: -30px;
   }
@@ -2242,7 +2936,6 @@ footer {
 
   .intro-brand span {
     font-size: 0.62rem;
-
     letter-spacing: 0.26em;
   }
 
@@ -2263,9 +2956,6 @@ footer {
         3.2rem
       );
   }
-
-
-  /* HERO */
 
   .hero-full {
     height:
@@ -2322,9 +3012,6 @@ footer {
     width: 22px;
   }
 
-
-  /* SERVICE BANDS */
-
   .home-service-band {
     min-height: 85vh;
   }
@@ -2340,9 +3027,6 @@ footer {
   .home-service-content h3 {
     font-size: 1.5rem;
   }
-
-
-  /* STANDARD CARDS */
 
   .hero-text,
   .section,
@@ -2368,9 +3052,6 @@ footer {
       24px 18px;
   }
 
-
-  /* MAP ICON */
-
   .map-icon,
   img.map-icon,
   svg.map-icon,
@@ -2393,6 +3074,601 @@ footer {
     max-width: 30px !important;
     max-height: 30px !important;
   }
+
+  .contact-card .map-title {
+    margin-top: 25px;
+
+    font-size: 1.2rem;
+  }
+
+  .contact-card .map-buttons {
+    gap: 8px;
+  }
+
+  .contact-card .map-button {
+    padding:
+      8px 14px;
+
+    font-size: 0.74rem;
+  }
+
+
+  /* =====================================================
+     MOBILE MARKETS FIXES
+  ===================================================== */
+
+  .markets-section {
+    width:
+      calc(100% - 20px);
+
+    margin:
+      42px auto 55px;
+
+    scroll-margin-top:
+      90px;
+  }
+
+  .markets-heading {
+    margin-bottom:
+      22px;
+
+    padding:
+      0 10px;
+  }
+
+  .markets-eyebrow {
+    margin-bottom:
+      7px;
+
+    font-size:
+      0.63rem;
+
+    letter-spacing:
+      0.19em;
+  }
+
+  .markets-heading h2 {
+    margin-bottom:
+      8px;
+
+    font-size:
+      clamp(
+        1.85rem,
+        9vw,
+        2.35rem
+      );
+
+    line-height:
+      1.08;
+  }
+
+  .markets-heading p {
+    max-width:
+      330px;
+
+    margin:
+      0 auto;
+
+    font-size:
+      0.87rem;
+
+    line-height:
+      1.55;
+  }
+
+  .markets-dashboard {
+    width:
+      100%;
+
+    border-radius:
+      18px;
+  }
+
+
+  /* Market tabs */
+
+  .market-tabs {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap:
+      0;
+
+    width:
+      100%;
+
+    padding:
+      0;
+
+    min-height:
+      50px;
+  }
+
+  .market-tab {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+
+    min-width:
+      0;
+
+    min-height:
+      50px;
+
+    padding:
+      8px 4px;
+
+    font-size:
+      0.64rem;
+
+    letter-spacing:
+      0.11em;
+
+    white-space:
+      nowrap;
+  }
+
+  .market-tab.active::after {
+    width:
+      30px;
+  }
+
+
+  /* Instruments */
+
+  .market-instrument-row {
+    width:
+      100%;
+  }
+
+  .market-instrument {
+    flex:
+      1 0 50%;
+
+    min-width:
+      50%;
+
+    min-height:
+      66px;
+
+    padding:
+      12px 8px;
+
+    font-size:
+      0.84rem;
+  }
+
+  .market-instrument small {
+    margin-top:
+      3px;
+
+    font-size:
+      0.52rem;
+
+    letter-spacing:
+      0.10em;
+  }
+
+
+  /* FX */
+
+  .fx-selector {
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      36px
+      minmax(0, 1fr);
+
+    align-items:
+      end;
+
+    gap:
+      7px;
+
+    width:
+      100%;
+
+    padding:
+      16px 10px 18px;
+  }
+
+  .currency-field {
+    min-width:
+      0;
+  }
+
+  .currency-field label {
+    font-size:
+      0.56rem;
+
+    letter-spacing:
+      0.11em;
+  }
+
+  .currency-field select {
+    width:
+      100%;
+
+    min-width:
+      0;
+
+    height:
+      40px;
+
+    padding:
+      7px 10px;
+
+    border-radius:
+      12px;
+
+    font-size:
+      0.82rem;
+  }
+
+  .fx-swap {
+    width:
+      36px;
+
+    height:
+      36px;
+
+    min-width:
+      36px;
+
+    margin-bottom:
+      2px;
+
+    font-size:
+      0.95rem;
+  }
+
+
+  /* Summary */
+
+  .market-summary {
+    display:
+      block;
+
+    padding:
+      24px 16px 8px;
+  }
+
+  .market-region {
+    margin-bottom:
+      6px;
+
+    font-size:
+      0.58rem;
+
+    letter-spacing:
+      0.16em;
+  }
+
+  .market-summary h3 {
+    font-size:
+      1.65rem;
+
+    line-height:
+      1.12;
+  }
+
+  .market-value-area {
+    margin-top:
+      18px;
+
+    text-align:
+      left;
+  }
+
+  #market-value {
+    font-size:
+      1.55rem;
+  }
+
+  #market-movement {
+    margin-top:
+      4px;
+
+    font-size:
+      0.72rem;
+  }
+
+
+  /* Chart */
+
+  .market-chart-container {
+    width:
+      auto;
+
+    height:
+      315px;
+
+    margin:
+      8px 10px 0;
+
+    overflow:
+      hidden;
+  }
+
+  #market-chart {
+    width:
+      100% !important;
+
+    height:
+      100% !important;
+  }
+
+
+  /* Loader */
+
+  #market-loading {
+    background:
+      rgba(248, 248, 246, 0.28) !important;
+
+    -webkit-backdrop-filter:
+      blur(5px)
+      saturate(0.88) !important;
+
+    backdrop-filter:
+      blur(5px)
+      saturate(0.88) !important;
+  }
+
+  #market-loading .syvare-market-loader {
+    width:
+      150px !important;
+
+    height:
+      150px !important;
+  }
+
+  #market-loading .syvare-loading-favicon {
+    width:
+      120px !important;
+
+    height:
+      120px !important;
+
+    min-width:
+      120px !important;
+
+    min-height:
+      120px !important;
+
+    max-width:
+      120px !important;
+
+    max-height:
+      120px !important;
+  }
+
+
+  /* Period controls */
+
+  .market-periods {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(6, minmax(0, 1fr));
+
+    gap:
+      2px;
+
+    width:
+      100%;
+
+    margin:
+      12px 0 16px;
+
+    padding:
+      0 8px;
+
+    overflow:
+      visible;
+  }
+
+  .market-periods button {
+    min-width:
+      0;
+
+    padding:
+      7px 2px;
+
+    font-size:
+      0.60rem;
+
+    white-space:
+      nowrap;
+  }
+
+
+  /* Custom period */
+
+  .custom-market-period {
+    display:
+      grid;
+
+    grid-template-columns:
+      1fr;
+
+    align-items:
+      stretch;
+
+    gap:
+      13px;
+
+    width:
+      auto;
+
+    margin:
+      0 10px 18px;
+
+    padding:
+      16px 12px;
+
+    border-radius:
+      15px;
+  }
+
+  .custom-date-block {
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(0, 1.55fr)
+      minmax(72px, 0.85fr);
+
+    gap:
+      7px;
+
+    width:
+      100%;
+  }
+
+  .custom-date-block > span {
+    grid-column:
+      1 / -1;
+
+    margin-bottom:
+      -1px;
+
+    font-size:
+      0.56rem;
+
+    letter-spacing:
+      0.13em;
+  }
+
+  .custom-date-block select {
+    width:
+      100%;
+
+    min-width:
+      0;
+
+    height:
+      40px;
+
+    padding:
+      7px 9px;
+
+    border-radius:
+      10px;
+
+    font-size:
+      0.78rem;
+  }
+
+  .custom-date-separator {
+    display:
+      none;
+  }
+
+  .market-apply-period {
+    width:
+      100%;
+
+    min-height:
+      42px;
+
+    padding:
+      10px 16px;
+
+    font-size:
+      0.75rem;
+  }
+
+
+  /* Footer */
+
+  .market-footer {
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    gap:
+      4px;
+
+    padding:
+      13px 16px 17px;
+
+    font-size:
+      0.59rem;
+
+    line-height:
+      1.45;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .markets-section {
+    width:
+      calc(100% - 14px);
+  }
+
+  .market-tab {
+    font-size:
+      0.59rem;
+
+    letter-spacing:
+      0.08em;
+  }
+
+  .market-summary {
+    padding-left:
+      13px;
+
+    padding-right:
+      13px;
+  }
+
+  .market-chart-container {
+    height:
+      290px;
+
+    margin-left:
+      6px;
+
+    margin-right:
+      6px;
+  }
+
+  .market-periods {
+    padding:
+      0 4px;
+  }
+
+  .market-periods button {
+    font-size:
+      0.56rem;
+  }
+
+  .custom-market-period {
+    margin-left:
+      7px;
+
+    margin-right:
+      7px;
+  }
 }
 
 
@@ -2403,355 +3679,39 @@ footer {
 @media (prefers-reduced-motion: reduce) {
 
   html {
-    scroll-behavior: auto;
+    scroll-behavior:
+      auto;
   }
 
   .reveal {
-    opacity: 1;
+    opacity:
+      1;
 
-    transform: none;
+    transform:
+      none;
 
-    transition: none;
+    transition:
+      none;
   }
 
   .hero-slide,
   .home-service-band img {
-    transition: none;
-  }
-}
-
-
-/* =========================================================
-   FINAL MAP ICON FAILSAFE
-   KEEP THIS AT THE VERY BOTTOM
-
-   This is intentionally narrow.
-   It will NOT resize your hero/service/background images.
-========================================================= */
-
-main .map-icon,
-main img.map-icon,
-main svg.map-icon,
-main .map-icon img,
-main .map-icon svg {
-  width: 32px !important;
-  height: 32px !important;
-
-  min-width: 32px !important;
-  min-height: 32px !important;
-
-  max-width: 32px !important;
-  max-height: 32px !important;
-
-  object-fit: contain !important;
-
-  transform: none !important;
-}
-/* =========================================================
-   CONTACT PAGE ICON SIZE FIX
-   ONLY affects Get Directions + Mail Us icons
-========================================================= */
-
-.contact-card .luxury-contact-links .luxury-link svg {
-  width: 18px !important;
-  height: 18px !important;
-
-  min-width: 18px !important;
-  min-height: 18px !important;
-
-  max-width: 18px !important;
-  max-height: 18px !important;
-
-  flex: 0 0 18px !important;
-
-  display: inline-block;
-
-  transform: none !important;
-}
-
-/* =========================================================
-   CONTACT PAGE — MAP BUTTONS
-   Google Maps + Apple Maps only
-========================================================= */
-
-.contact-card .map-title {
-  margin-top: 30px;
-  margin-bottom: 14px;
-
-  font-family: "Playfair Display", serif;
-  font-size: 1.35rem;
-  font-weight: 500;
-
-  color: rgba(255, 255, 255, 0.96);
-}
-
-
-/* Button container */
-
-.contact-card .map-buttons {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  gap: 10px;
-
-  margin-top: 4px;
-}
-
-
-/* Individual map button */
-
-.contact-card .map-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 11px;
-
-  padding: 9px 16px;
-
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.06);
-
-  color: rgba(255, 255, 255, 0.92);
-
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-
-  letter-spacing: 0.06em;
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
-}
-
-
-/* Arrow */
-
-.contact-card .map-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 0.9rem;
-  line-height: 1;
-
-  opacity: 0.7;
-
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-}
-
-
-/* Hover */
-
-.contact-card .map-button:hover {
-  background: rgba(255, 255, 255, 0.13);
-
-  border-color: rgba(255, 255, 255, 0.34);
-
-  color: #fff;
-
-  transform: translateY(-2px);
-}
-
-.contact-card .map-button:hover .map-arrow {
-  opacity: 1;
-
-  transform: translate(2px, -2px);
-}
-
-
-/* Click */
-
-.contact-card .map-button:active {
-  transform: translateY(0);
-}
-
-
-/* Mobile */
-
-@media (max-width: 600px) {
-
-  .contact-card .map-title {
-    margin-top: 25px;
-
-    font-size: 1.2rem;
+    transition:
+      none;
   }
 
-  .contact-card .map-buttons {
-    gap: 8px;
+  #market-loading .syvare-market-loader,
+  #market-loading .syvare-loading-favicon {
+    animation:
+      none !important;
+
+    opacity:
+      1 !important;
+
+    transform:
+      none !important;
+
+    filter:
+      none !important;
   }
-
-  .contact-card .map-button {
-    padding: 8px 14px;
-
-    font-size: 0.74rem;
-  }
-}
-/* =========================================================
-   CONTACT PAGE — MAP BUTTONS
-   Google Maps + Apple Maps only
-========================================================= */
-
-.contact-card .map-title {
-  margin-top: 30px;
-  margin-bottom: 14px;
-
-  font-family: "Playfair Display", serif;
-  font-size: 1.35rem;
-  font-weight: 500;
-
-  color: rgba(255, 255, 255, 0.96);
-}
-
-
-/* Button container */
-
-.contact-card .map-buttons {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  gap: 10px;
-
-  margin-top: 4px;
-}
-
-
-/* Individual map button */
-
-.contact-card .map-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 11px;
-
-  padding: 9px 16px;
-
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.06);
-
-  color: rgba(255, 255, 255, 0.92);
-
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-
-  letter-spacing: 0.06em;
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
-}
-
-
-/* Arrow */
-
-.contact-card .map-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 0.9rem;
-  line-height: 1;
-
-  opacity: 0.7;
-
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-}
-
-
-/* Hover */
-
-.contact-card .map-button:hover {
-  background: rgba(255, 255, 255, 0.13);
-
-  border-color: rgba(255, 255, 255, 0.34);
-
-  color: #fff;
-
-  transform: translateY(-2px);
-}
-
-.contact-card .map-button:hover .map-arrow {
-  opacity: 1;
-
-  transform: translate(2px, -2px);
-}
-
-
-/* Click */
-
-.contact-card .map-button:active {
-  transform: translateY(0);
-}
-
-
-/* Mobile */
-
-@media (max-width: 600px) {
-
-  .contact-card .map-title {
-    margin-top: 25px;
-
-    font-size: 1.2rem;
-  }
-
-  .contact-card .map-buttons {
-    gap: 8px;
-  }
-
-  .contact-card .map-button {
-    padding: 8px 14px;
-
-    font-size: 0.74rem;
-  }
-}
-/* =========================================================
-   REMOVE BULLET POINTS
-========================================================= */
-
-.careers-list,
-.opportunity-list,
-.service-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.careers-list li,
-.opportunity-list li,
-.service-list li {
-  list-style: none;
-}
-
-.careers-list li::marker,
-.opportunity-list li::marker,
-.service-list li::marker {
-  content: "";
 }
